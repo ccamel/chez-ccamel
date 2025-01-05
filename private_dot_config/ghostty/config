@@ -1,0 +1,25 @@
+# THEME SETTINGS
+theme = GruvboxDarkHard
+cursor-style = block
+background = 1C2021
+
+# FONT SETTINGS
+font-family = BerkeleyMono Nerd Font
+font-size = 14
+
+
+# WINDOW SETTINGS
+window-padding-balance = true
+window-save-state = always
+window-colorspace = "display-p3"
+adjust-cell-height = 35%
+link-url = true
+macos-titlebar-style = tabs
+
+# MOUSE
+mouse-hide-while-typing = true
+mouse-scroll-multiplier = 2
+
+# SPLITS
+unfocused-split-opacity = 0.5
+
