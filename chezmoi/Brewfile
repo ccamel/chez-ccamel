@@ -103,6 +103,8 @@ brew "ripgrep"
 brew "shellcheck"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Programmatically correct mistyped console commands
+brew "thefuck"
 # Program that allows you to count code, quickly
 brew "tokei"
 # Build, bundle & ship your Rust WASM application to the web
@@ -129,6 +131,7 @@ brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 brew "oven-sh/bun/bun"
 # Convert images into ascii art
 brew "thezoraiz/ascii-image-converter/ascii-image-converter"
+cask "font-fira-code-nerd-font"
 cask "font-iosevka"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
