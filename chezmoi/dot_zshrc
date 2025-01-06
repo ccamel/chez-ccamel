@@ -1,0 +1,126 @@
+# -- Oh My Zsh
+export ZSH=$HOME/.oh-my-zsh
+
+ZSH_THEME="mh"
+COMPLETION_WAITING_DOTS="true"
+HISTFILE=~/.zsh_history
+HISTSIZE=999999999
+SAVEHIST=$HISTSIZE
+
+plugins=(
+  git
+  autopep8
+  aws
+  brew
+  cabal
+  rust
+  cask
+  celery
+  cp
+  docker-compose
+  docker
+  emoji
+  fd
+  flutter
+  gem
+  git-auto-fetch
+  git-extras
+  git-flow
+  git-prompt
+  github
+  gitignore
+  golang
+  grails
+  gulp
+  helm
+  history
+  httpie
+  iterm2
+  kubectl
+  lein
+  macports
+  minikube
+  ng
+  nmap
+  node
+  npm
+  nvm
+  pep8
+  pip
+  pipenv
+  pod
+  postgres
+  pyenv
+  pylint
+  python
+  rebar
+  sbt
+  scala
+  screen
+  sublime
+  tig
+  vault
+  virtualenv
+  vscode
+  yarn
+  zsh-aliases-exa
+)
+
+source $ZSH/oh-my-zsh.sh
+
+export LANG=en_US.UTF-8
+export LC_CTYPE="en_US.UTF-8"
+
+# -- jenv
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+# -- golang
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+# -- SSH Agent
+eval $(ssh-agent)
+
+# -- autojump
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+# -- gpg
+export GPG_TTY=$(tty)
+
+# -- krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+# -- nvm
+export NVM_DIR="$HOME/.nvm"
+mkdir -p $HOME/.nvm
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh" 
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+
+# -- pnpm
+export PNPM_HOME="$HOME/.pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# -- emacs
+export EMACS_HOME="$HOME/.config/emacs"
+export PATH="$EMACS_HOME/bin:$PATH"
+
+# -- brew
+export BREW_HOME="/opt/homebrew/bin"
+export PATH="$BREW_HOME:$PATH"
+export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+
+# -- thefuck
+eval "$(thefuck --alias)"
+
+# -- misc
+
+export PATH="$HOME/.local/bin:$PATH"
+
+unalias buf
+
+# opam configuration
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
