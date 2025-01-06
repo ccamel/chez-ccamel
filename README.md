@@ -1,2 +1,2 @@
 # chez-ccamel
-🗄️ My personal configuration files (dotfiles...) managed by chezmoi
+🗄️ My personal configuration files (dotfiles...) managed by [chezmoi](https://chezmoi.io/)
