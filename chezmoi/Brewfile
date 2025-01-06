@@ -1,0 +1,288 @@
+tap "bufbuild/buf"
+tap "buo/cask-upgrade"
+tap "codeskyblue/tap"
+tap "coursier/formulas"
+tap "git-chglog/git-chglog"
+tap "gowebly/tap"
+tap "homebrew/bundle"
+tap "jandedobbeleer/oh-my-posh"
+tap "jnsahaj/lumen"
+tap "oven-sh/bun"
+tap "thezoraiz/ascii-image-converter"
+# Asciicast to GIF converter
+brew "agg"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Tool for emulating mouse and keyboard events
+brew "cliclick"
+# Programming language for highly scalable real-time systems
+brew "erlang"
+# Command-line tool to interact with exercism.io
+brew "exercism"
+# EXIF and IPTC metadata manipulation library and tools
+brew "exiv2"
+# Identify or delete duplicate files
+brew "fdupes"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@76"
+# Interpreter for PostScript and PDF
+brew "ghostscript"
+# Bootstrap GitHub SSH configuration
+brew "github-keygen"
+# Open-source GitLab command-line tool
+brew "glab"
+# GNU Pretty Good Privacy (PGP) package
+brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# Fast linters runner for Go
+brew "golangci-lint"
+# Command-line Golang template processor
+brew "gomplate"
+# Packet sniffer for displaying and logging HTTP traffic
+brew "httpry"
+# Configurable static site generator
+brew "hugo"
+# Build, launch, and maintain any crypto application with Ignite CLI
+brew "ignite"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
+# Featureful UNIX password cracker
+brew "john"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# JSON parser and validator with a CLI
+brew "jsonlint"
+# Modern load testing tool, using Go and JavaScript
+brew "k6"
+# Kubernetes CLI To Manage Your Clusters In Style!
+brew "k9s"
+# Small memory footprint, flexible web-server
+brew "lighttpd"
+# Make/rake-like build tool using Go
+brew "mage"
+# Utility for directing compilation
+brew "make"
+# Mac App Store command-line interface
+brew "mas"
+# General purpose programming language in the ML family
+brew "ocaml"
+# Password manager
+brew "pass"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Search PDFs for strings matching a regular expression
+brew "pdfgrep"
+# Pinentry for GPG on Mac
+brew "pinentry-mac"
+# Optimizer for PNG files
+brew "pngcrush"
+# Fast, disk space efficient package manager
+brew "pnpm", link: false
+# Python version management
+brew "pyenv"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Python interface to Tcl/Tk
+brew "python-tk@3.10"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
+# Erlang build tool
+brew "rebar3"
+# Perl-powered file rename script with many helpful built-ins
+brew "rename"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
+brew "stow"
+# Program that allows you to count code, quickly
+brew "tokei"
+# Build, bundle & ship your Rust WASM application to the web
+brew "trunk"
+# Command-line interface for Vercel
+brew "vercel-cli"
+# Convert HTML to PDF
+brew "weasyprint"
+# Internet file retriever
+brew "wget"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# The best way of working with Protocol Buffers.
+brew "bufbuild/buf/buf"
+# Launcher for Coursier
+brew "coursier/formulas/coursier"
+# CHANGELOG generator implemented in Go (Golang).
+brew "git-chglog/git-chglog/git-chglog"
+# A next-generation CLI tool that makes it easy to create amazing web applications with Go on the backend, using htmx, hyperscript or Alpine.js and the most popular CSS frameworks on the frontend.
+brew "gowebly/tap/gowebly"
+# Prompt theme engine for any shell
+brew "jandedobbeleer/oh-my-posh/oh-my-posh"
+# Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
+brew "oven-sh/bun/bun"
+# Convert images into ascii art
+brew "thezoraiz/ascii-image-converter/ascii-image-converter"
+cask "font-iosevka"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Vector graphics editor
+cask "inkscape"
+# JetBrains tools manager
+cask "jetbrains-toolbox"
+# Ontology editor
+cask "protege"
+# Web browser focusing on security
+cask "tor-browser"
+# Configurable document editor that supports Markdown
+cask "typora"
+vscode "1yib.rust-bundle"
+vscode "adamvoss.vscode-languagetool"
+vscode "adamvoss.vscode-languagetool-en"
+vscode "adpyke.vscode-sql-formatter"
+vscode "alefragnani.project-manager"
+vscode "alexcvzz.vscode-sqlite"
+vscode "alexkrechik.cucumberautocomplete"
+vscode "almenon.arepl"
+vscode "amauryrabouan.new-vsc-prolog"
+vscode "andrejunges.handlebars"
+vscode "arthurwang.vsc-prolog"
+vscode "astro-build.astro-vscode"
+vscode "batisteo.vscode-django"
+vscode "be5invis.toml"
+vscode "beardedbear.beardedtheme"
+vscode "bierner.markdown-mermaid"
+vscode "bradlc.vscode-tailwindcss"
+vscode "bufbuild.vscode-buf"
+vscode "ciarant.vscode-structurizr"
+vscode "circledev.glsl-canvas"
+vscode "codezombiech.gitignore"
+vscode "cstrap.python-snippets"
+vscode "davidanson.vscode-markdownlint"
+vscode "dbaeumer.vscode-eslint"
+vscode "deerawan.vscode-dash"
+vscode "demystifying-javascript.python-extensions-pack"
+vscode "donjayamanne.git-extension-pack"
+vscode "donjayamanne.githistory"
+vscode "dskwrk.vscode-generate-getter-setter"
+vscode "eamodio.gitlens"
+vscode "editorconfig.editorconfig"
+vscode "eiminsasete.apacheconf-snippets"
+vscode "elmtooling.elm-ls-vscode"
+vscode "erlang-ls.erlang-ls"
+vscode "esbenp.prettier-vscode"
+vscode "figma.figma-vscode-extension"
+vscode "fill-labs.dependi"
+vscode "foxundermoon.shell-format"
+vscode "geekofer.storybook-react-snippets"
+vscode "george-alisson.html-preview-vscode"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "github.github-vscode-theme"
+vscode "github.vscode-github-actions"
+vscode "golang.go"
+vscode "graphql.vscode-graphql"
+vscode "graphql.vscode-graphql-execution"
+vscode "graphql.vscode-graphql-syntax"
+vscode "hancel.google-translate"
+vscode "haskell.haskell"
+vscode "hbenl.vscode-test-explorer"
+vscode "henriiik.vscode-sort"
+vscode "james-yu.latex-workshop"
+vscode "jebbs.plantuml"
+vscode "jinliming2.vscode-go-template"
+vscode "jock.svg"
+vscode "johnreemar.vscode-qwik-snippets"
+vscode "justusadam.language-haskell"
+vscode "kaih2o.python-resource-monitor"
+vscode "kamen.noctis-high-contrast"
+vscode "kevinrose.vsc-python-indent"
+vscode "leavesster.jsonpath"
+vscode "littlefoxteam.vscode-python-test-adapter"
+vscode "lkrms.inifmt"
+vscode "lysnikolaou.pegen-peg"
+vscode "mathematic.vscode-latex"
+vscode "mathiasfrohlich.kotlin"
+vscode "mdgriffith.elm-markup-vscode"
+vscode "mechatroner.rainbow-csv"
+vscode "mfeckies.handlebars-formatter"
+vscode "mintlify.document"
+vscode "mohammadmd.vscode-sassc"
+vscode "mrmlnc.vscode-apache"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-python.debugpy"
+vscode "ms-python.isort"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter"
+vscode "ms-toolsai.jupyter-keymap"
+vscode "ms-toolsai.vscode-jupyter-cell-tags"
+vscode "ms-toolsai.vscode-jupyter-slideshow"
+vscode "ms-vscode-remote.remote-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-ssh-edit"
+vscode "ms-vscode.makefile-tools"
+vscode "ms-vscode.remote-explorer"
+vscode "ms-vscode.test-adapter-converter"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "ms-vsliveshare.vsliveshare-pack"
+vscode "mvakula.vscode-purty"
+vscode "njpwerner.autodocstring"
+vscode "njqdev.vscode-python-typehint"
+vscode "nwolverson.language-purescript"
+vscode "octref.vetur"
+vscode "oderwat.indent-rainbow"
+vscode "openai.openai-chatgpt-adhoc"
+vscode "oxfordturtle.turtle-vscode"
+vscode "pgourlain.erlang"
+vscode "plex.vscode-protolint"
+vscode "pmneo.tsimporter"
+vscode "poeticandroid.vscode-poetry"
+vscode "raczzalan.webgl-glsl-editor"
+vscode "rebornix.prolog"
+vscode "redhat.java"
+vscode "redhat.vscode-commons"
+vscode "redhat.vscode-yaml"
+vscode "rifi2k.format-html-in-php"
+vscode "ritwickdey.liveserver"
+vscode "rust-lang.rust-analyzer"
+vscode "shakram02.bash-beautify"
+vscode "simonguo.vscode-markdown-table-sort"
+vscode "simonsiefke.svg-preview"
+vscode "slevesque.shader"
+vscode "stardog-union.stardog-rdf-grammars"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "stylelint.vscode-stylelint"
+vscode "svelte.svelte-vscode"
+vscode "syler.sass-indented"
+vscode "tamasfe.even-better-toml"
+vscode "thebarkman.vscode-djaneiro"
+vscode "tonybaloney.vscode-pets"
+vscode "trabpukcip.wolf"
+vscode "tumido.crd-snippets"
+vscode "unifiedjs.vscode-mdx"
+vscode "vadimcn.vscode-lldb"
+vscode "visualstudioexptteam.intellicode-api-usage-examples"
+vscode "visualstudioexptteam.vscodeintellicode"
+vscode "vscjava.vscode-gradle"
+vscode "vscjava.vscode-java-debug"
+vscode "vscjava.vscode-java-dependency"
+vscode "vscjava.vscode-java-pack"
+vscode "vscjava.vscode-java-test"
+vscode "vscjava.vscode-maven"
+vscode "vscode-icons-team.vscode-icons"
+vscode "wholroyd.jinja"
+vscode "wushuaibuaa.autocomplete-english-word"
+vscode "xirider.livecode"
+vscode "xoronic.pestfile"
+vscode "yuce.erlang-otp"
+vscode "yuvraj.json-scape-unscape"
+vscode "yzhang.markdown-all-in-one"
+vscode "ziyasal.vscode-open-in-github"
+vscode "zxh404.vscode-proto3"
