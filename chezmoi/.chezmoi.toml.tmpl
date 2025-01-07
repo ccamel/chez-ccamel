@@ -1,3 +1,5 @@
+encryption = "age"
+
 [git]
     autoCommit = true
     autoPush = false
@@ -6,3 +8,7 @@
 
 [edit]
     command = "vim"
+
+[age]
+    identity = "{{ .chezmoi.homeDir }}/key.txt"
+    recipient = "age1hlw723dkdwqrkq8qw23mamrljt5jnzjtz6y66y7rpd975l4r2dlqva39g3"
