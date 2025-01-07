@@ -1,9 +1,9 @@
 #!/bin/sh
 
 echo "🔒 Checking for private key..."
-if [ ! -f "/Users/chris/.config/chezmoi/key.txt" ]; then
+if [ ! -f "$HOME/.config/chezmoi/key.txt" ]; then
     echo "🔓 Decrypting private key..."
-    mkdir -p "/Users/chris/.config/chezmoi"
+    mkdir -p "$HOME/.config/chezmoi"
     chezmoi age decrypt --output "{{ .chezmoi.homeDir }}/.config/chezmoi/key.txt" --passphrase "{{ .chezmoi.sourceDir }}/key.txt.age"
     chmod 600 "{{ .chezmoi.homeDir }}/.config/chezmoi/key.txt"
 fi
