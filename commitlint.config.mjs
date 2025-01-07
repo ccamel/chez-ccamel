@@ -73,7 +73,7 @@ export default {
         ":robot:",
         ":rocket:",
         ":rotating_light:",
-        ":see-no-evil:",
+        ":see_no_evil:",
         ":sparkles:",
         ":speech_balloon:",
         ":tada:",
