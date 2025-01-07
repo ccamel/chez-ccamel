@@ -1,0 +1,23 @@
+[user]
+	{{- $git := include "secrets/git.toml.age" | decrypt | fromToml }}
+	name = {{ $git.name }}
+	email = {{ $git.email }}
+	signingkey = {{ $git.signingkey }}
+
+[commit]
+	gpgsign = true
+
+[gpg]
+	program = gpg
+
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+
+[pull]
+	ff = only
+
+[push]
+	autoSetupRemote = true
