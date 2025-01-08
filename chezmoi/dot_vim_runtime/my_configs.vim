@@ -2,3 +2,6 @@
 
 colorscheme gruvbox
 set number
+
+let g:gitmoji_insert_emoji = v:false
+
