@@ -1,30 +1,28 @@
-{{- $prefix := ":sparkles:" -}}
-
 {{- with .chezmoi.status }}
 
 {{with (print . ) }}{{ end }}
 
 {{- range .Ordinary -}}
-{{ if and (eq .X 'A') (eq .Y '.') -}}{{$prefix}} Add {{ .Path }}
-{{ else if and (eq .X 'D') (eq .Y '.') -}}{{$prefix}} Remove {{ .Path }}
-{{ else if and (eq .X 'M') (eq .Y '.') -}}{{$prefix}} Update {{ .Path }}
-{{ else }}{{$prefix}} {{ .X }} {{ .Y }} Unknown Edits {{ .Path }}
+{{ if and (eq .X 'A') (eq .Y '.') -}}:sparkles: Add {{ .Path }}
+{{ else if and (eq .X 'D') (eq .Y '.') -}}:fire: Remove {{ .Path }}
+{{ else if and (eq .X 'M') (eq .Y '.') -}}:sparkles: Update {{ .Path }}
+{{ else }}:grey_question: {{ .X }} {{ .Y }} Unknown Edits {{ .Path }}
 {{ end }}
 {{- end -}}
 
 {{- range .RenamedOrCopied -}}
-{{ if and (eq .X 'R') (eq .Y '.') }}{{$prefix}} Change attributes of {{ .Path }}
-{{ else if and (eq .X 'C') (eq .Y '.') -}}{{$prefix}} Copy {{ .OrigPath }} to {{ .Path }}
-{{ else }}{{$prefix}} {{ .X }} {{ .Y }} Unknown Edits {{ .Path }}
+{{ if and (eq .X 'R') (eq .Y '.') }}:wrench: Change attributes of {{ .Path }}
+{{ else if and (eq .X 'C') (eq .Y '.') -}}:truck: Copy {{ .OrigPath }} to {{ .Path }}
+{{ else }}:grey_question: {{ .X }} {{ .Y }} Unknown Edits {{ .Path }}
 {{ end }}
 {{- end -}}
 
 {{- range .Unmerged -}}
-{{ fail (print $prefix " unmerged files") }}
+{{ fail (print ":cross_mark: unmerged files") }}
 {{- end -}}
 
 {{- range .Untracked -}}
-{{ fail (print $prefix " untracked files") }}
+{{ fail (print ":cross_mark: untracked files") }}
 {{- end -}}
 
 {{- end -}}
