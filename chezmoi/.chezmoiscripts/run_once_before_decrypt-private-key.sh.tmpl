@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo "🛠️ Running $(basename "$0") "
 echo "🔒 Checking for private key..."
 if [ ! -f "$HOME/.config/chezmoi/key.txt" ]; then
     echo "🔓 Decrypting private key..."
