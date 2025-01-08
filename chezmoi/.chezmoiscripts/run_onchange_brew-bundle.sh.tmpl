@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "🛠️ Running $(basename "$0") with {{ .chezmoi.homeDir }}/.Brewfile (hash: {{ include "dot_Brewfile" | sha256sum }})"
+brew bundle --global
