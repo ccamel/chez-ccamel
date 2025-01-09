@@ -1,6 +1,8 @@
 # chez-ccamel
 
-🗄️ My personal configuration files (dotfiles...) managed by [chezmoi-website]
+🗄️ My personal configuration files (dotfiles...) managed by [chezmoi][chezmoi-website]
+
+<img src="./banner.webp" alt="banner" width="100%">
 
 [![chezmoi][chezmoi-badge]][chezmoi-website]
 [![lint-ci-badge][lint-ci-badge]][lint-ci-workflow]
@@ -9,16 +11,26 @@
 
 Targets macOS and requires the following tools:
 
-- [chezmoi-website]
-- [git-website]
-- [homebrew-website]
+- [chezmoi][chezmoi-website]
+- [git][git-website]
+- [homebrew][homebrew-website]
 
-## Setup
+## Use
+
+### Initial setup
 
 Run the following command:
 
 ```sh
 chezmoi init ccamel/chez-ccamel
+```
+
+### Update
+
+Apply the latest changes from your repo with:
+
+```sh
+chezmoi update -v
 ```
 
 [chezmoi-website]: https://chezmoi.io
