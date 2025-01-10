@@ -112,6 +112,7 @@ export PATH="$EMACS_HOME/bin:$PATH"
 export BREW_HOME="/opt/homebrew/bin"
 export PATH="$BREW_HOME:$PATH"
 export PATH="/opt/homebrew/opt/make/libexec/gnubin:$PATH"
+export HOMEBREW_AUTO_UPDATE_SECS=604800 # 1 week
 
 # -- thefuck
 eval "$(thefuck --alias)"
@@ -120,7 +121,10 @@ eval "$(thefuck --alias)"
 
 export PATH="$HOME/.local/bin:$PATH"
 
+# -- alias
+source ~/.alias
 unalias buf
 
 # opam configuration
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
