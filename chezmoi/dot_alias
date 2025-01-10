@@ -1,0 +1,1 @@
+alias cat="bat --theme TwoDark --style=plain --paging never"
