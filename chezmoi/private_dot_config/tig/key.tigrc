@@ -1,0 +1,4 @@
+bind generic S :source ~/.tigrc
+bind generic P +?git push
+bind status + !?git commit --amend
+

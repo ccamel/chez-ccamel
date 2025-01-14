@@ -1,0 +1,4 @@
+set main-view  = line-number:yes id:yes,color author:abbreviated date:no commit-title:yes,graph,refs,overflow=no
+set blame-view = id:yes,color author:full date:relative-compact line-number:yes,interval=1 text
+set tree-view  = line-number:yes,interval=5 mode file-size id:no,color author:full date:relative-compact file-name
+
