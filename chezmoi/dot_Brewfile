@@ -9,6 +9,9 @@ tap "jandedobbeleer/oh-my-posh"
 tap "jnsahaj/lumen"
 tap "oven-sh/bun"
 tap "thezoraiz/ascii-image-converter"
+tap "tinygo-org/tools"
+# Simple, modern, secure file encryption
+brew "age"
 # Asciicast to GIF converter
 brew "agg"
 # Interpreted, interactive, object-oriented programming language
@@ -63,6 +66,8 @@ brew "jsonlint"
 brew "k6"
 # Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
+# Postgres C API library
+brew "libpq"
 # Small memory footprint, flexible web-server
 brew "lighttpd"
 # Make/rake-like build tool using Go
@@ -85,6 +90,8 @@ brew "pinentry-mac"
 brew "pngcrush"
 # Fast, disk space efficient package manager
 brew "pnpm", link: false
+# Object-relational database system
+brew "postgresql@16"
 # Python version management
 brew "pyenv"
 # Interpreted, interactive, object-oriented programming language
@@ -103,6 +110,8 @@ brew "ripgrep"
 brew "shellcheck"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Modern and pretty fancy file manager for the terminal
+brew "superfile"
 # Programmatically correct mistyped console commands
 brew "thefuck"
 # Program that allows you to count code, quickly
@@ -131,6 +140,8 @@ brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 brew "oven-sh/bun/bun"
 # Convert images into ascii art
 brew "thezoraiz/ascii-image-converter/ascii-image-converter"
+# TinyGo is a Go compiler for small places. Microcontrollers, WebAssembly, and command-line tools. Based on LLVM.
+brew "tinygo-org/tools/tinygo"
 cask "font-fira-code-nerd-font"
 cask "font-iosevka"
 # Terminal emulator that uses platform-native UI and GPU acceleration
@@ -219,6 +230,7 @@ vscode "mintlify.document"
 vscode "mohammadmd.vscode-sassc"
 vscode "mrmlnc.vscode-apache"
 vscode "ms-azuretools.vscode-docker"
+vscode "ms-python.autopep8"
 vscode "ms-python.debugpy"
 vscode "ms-python.isort"
 vscode "ms-python.python"
