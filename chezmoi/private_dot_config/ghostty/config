@@ -1,7 +1,6 @@
 # THEME SETTINGS
-theme = GruvboxDarkHard
+theme = iTerm2 Tango Dark
 cursor-style = block
-background = 1C2021
 
 # FONT SETTINGS
 font-family = BerkeleyMono Nerd Font
