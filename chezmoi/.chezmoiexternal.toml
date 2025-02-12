@@ -10,3 +10,7 @@ url = "https://github.com/bruxisma/gitmoji.vim/archive/master.tar.gz"
 exact = true
 stripComponents = 1
 refreshPeriod = "168h"
+
+[".vim_runtime/colors/256_noir.vim"]
+type = "file"
+url = "https://raw.githubusercontent.com/andreasvc/vim-256noir/e8668a18a4a90272c1cae87e655f8bddc5ac3665/colors/256_noir.vim"
