@@ -1,3 +1,4 @@
+tap "browsh-org/browsh"
 tap "bufbuild/buf"
 tap "buo/cask-upgrade"
 tap "codeskyblue/tap"
@@ -14,8 +15,12 @@ tap "tinygo-org/tools"
 brew "age"
 # Asciicast to GIF converter
 brew "agg"
+# C99 library implementation for communicating with the S3 service
+brew "aws-c-s3"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.12"
+# Official Amazon AWS command-line interface
+brew "awscli"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # Tool for emulating mouse and keyboard events
@@ -74,10 +79,14 @@ brew "lighttpd"
 brew "mage"
 # Utility for directing compilation
 brew "make"
+# Multiple Arcade Machine Emulator
+brew "mame"
 # Mac App Store command-line interface
 brew "mas"
 # General purpose programming language in the ML family
 brew "ocaml"
+# Drop-in replacement for Terraform. Infrastructure as Code Tool
+brew "opentofu"
 # Password manager
 brew "pass"
 # PDF rendering library (based on the xpdf-3.0 code base)
@@ -108,10 +117,18 @@ brew "rename"
 brew "ripgrep"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# SOcket CAT: netcat on steroids
+brew "socat"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
 # Modern and pretty fancy file manager for the terminal
 brew "superfile"
+# Plugin-driven server agent for collecting & reporting metrics
+brew "telegraf"
+# Tool to build, change, and version infrastructure
+brew "terraform"
+# Tool to generate documentation from Terraform modules
+brew "terraform-docs"
 # Programmatically correct mistyped console commands
 brew "thefuck"
 # Program that allows you to count code, quickly
@@ -126,6 +143,8 @@ brew "weasyprint"
 brew "wget"
 # Process YAML, JSON, XML, CSV and properties documents from the CLI
 brew "yq"
+# The modern, text-based browser
+brew "browsh-org/browsh/browsh"
 # The best way of working with Protocol Buffers.
 brew "bufbuild/buf/buf"
 # Launcher for Coursier
@@ -182,6 +201,8 @@ vscode "davidanson.vscode-markdownlint"
 vscode "dbaeumer.vscode-eslint"
 vscode "deerawan.vscode-dash"
 vscode "demystifying-javascript.python-extensions-pack"
+vscode "dhananjaysenday.mcp--inspector"
+vscode "docker.docker"
 vscode "donjayamanne.git-extension-pack"
 vscode "donjayamanne.githistory"
 vscode "dskwrk.vscode-generate-getter-setter"
@@ -205,6 +226,7 @@ vscode "graphql.vscode-graphql"
 vscode "graphql.vscode-graphql-execution"
 vscode "graphql.vscode-graphql-syntax"
 vscode "hancel.google-translate"
+vscode "hashicorp.terraform"
 vscode "haskell.haskell"
 vscode "hbenl.vscode-test-explorer"
 vscode "henriiik.vscode-sort"
@@ -248,12 +270,14 @@ vscode "ms-vscode.test-adapter-converter"
 vscode "ms-vsliveshare.vsliveshare"
 vscode "ms-vsliveshare.vsliveshare-pack"
 vscode "mvakula.vscode-purty"
+vscode "narasimapandiyan.jetbrainsmono"
 vscode "njpwerner.autodocstring"
 vscode "njqdev.vscode-python-typehint"
 vscode "nwolverson.language-purescript"
 vscode "octref.vetur"
 vscode "oderwat.indent-rainbow"
-vscode "openai.openai-chatgpt-adhoc"
+vscode "openai.chatgpt"
+vscode "orta.vscode-jest"
 vscode "oxfordturtle.turtle-vscode"
 vscode "pgourlain.erlang"
 vscode "plex.vscode-protolint"
@@ -261,7 +285,6 @@ vscode "pmneo.tsimporter"
 vscode "poeticandroid.vscode-poetry"
 vscode "raczzalan.webgl-glsl-editor"
 vscode "rebornix.prolog"
-vscode "redhat.java"
 vscode "redhat.vscode-commons"
 vscode "redhat.vscode-yaml"
 vscode "rifi2k.format-html-in-php"
@@ -270,6 +293,7 @@ vscode "rust-lang.rust-analyzer"
 vscode "shakram02.bash-beautify"
 vscode "simonguo.vscode-markdown-table-sort"
 vscode "simonsiefke.svg-preview"
+vscode "skellock.just"
 vscode "slevesque.shader"
 vscode "stardog-union.stardog-rdf-grammars"
 vscode "streetsidesoftware.code-spell-checker"
@@ -289,7 +313,6 @@ vscode "vscjava.vscode-gradle"
 vscode "vscjava.vscode-java-debug"
 vscode "vscjava.vscode-java-dependency"
 vscode "vscjava.vscode-java-pack"
-vscode "vscjava.vscode-java-test"
 vscode "vscjava.vscode-maven"
 vscode "vscode-icons-team.vscode-icons"
 vscode "wholroyd.jinja"
@@ -297,6 +320,7 @@ vscode "wushuaibuaa.autocomplete-english-word"
 vscode "xirider.livecode"
 vscode "xoronic.pestfile"
 vscode "yuce.erlang-otp"
+vscode "yueyu.json-oneline"
 vscode "yuvraj.json-scape-unscape"
 vscode "yzhang.markdown-all-in-one"
 vscode "ziyasal.vscode-open-in-github"
