@@ -6,6 +6,7 @@
 
 [![chezmoi][chezmoi-badge]][chezmoi-website]
 [![lint-ci-badge][lint-ci-badge]][lint-ci-workflow]
+[![commits-badge][commits-badge]][commits-page]
 
 ## Prerequisites
 
@@ -39,3 +40,5 @@ chezmoi update -v
 [homebrew-website]: https://brew.sh/
 [lint-ci-badge]: https://img.shields.io/github/actions/workflow/status/ccamel/chez-ccamel/lint.yml?branch=main&label=lint&style=for-the-badge&logo=github
 [lint-ci-workflow]: https://github.com/ccamel/chez-ccamel/actions/workflows/lint.yml
+[commits-badge]: https://img.shields.io/github/last-commit/ccamel/chez-ccamel/main?style=for-the-badge&logo=github&color=%237dcfff
+[commits-page]: https://github.com/ccamel/chez-ccamel/commits/main
