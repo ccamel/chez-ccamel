@@ -123,7 +123,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # -- alias
 source ~/.alias
 unalias buf
+eval "$(gh copilot alias -- zsh)"
 
 # opam configuration
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
