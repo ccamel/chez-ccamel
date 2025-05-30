@@ -1,4 +1,20 @@
+# Configuration management
 bind generic S :source ~/.tigrc
+
+# Remote operations
 bind generic P +?git push
+
+# Commit operations
 bind status + !?git commit --amend
 
+# Fetch operations
+bind main F !git fetch
+bind main <C-F> ?git fetch --all
+
+# Pull operations
+bind main pU ?git pull --rebase
+bind main pM ?git pull --no-rebase
+bind main pF ?git pull --ff-only
+
+# Browser integration
+bind log o !gh browse -- %(commit)
