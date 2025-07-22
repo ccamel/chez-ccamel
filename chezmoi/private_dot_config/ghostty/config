@@ -1,6 +1,6 @@
 # THEME SETTINGS
 theme = iTerm2 Tango Dark
-cursor-style = block
+cursor-style = "underline"
 
 # FONT SETTINGS
 font-family = BerkeleyMono Nerd Font
