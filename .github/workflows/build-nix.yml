@@ -1,0 +1,33 @@
+name: Build / Nix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "home/**/*.nix"
+      - "hosts/**/*.nix"
+      - "hosts/**/flake.lock"
+      - .github/workflows/build-nix.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - "home/**/*.nix"
+      - "hosts/**/*.nix"
+      - "hosts/**/flake.lock"
+      - .github/workflows/build-nix.yml
+
+jobs:
+  build-nix:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Check forge flake
+        run: nix flake check ./hosts/forge
+
+      - name: Build forge system
+        run: nix build ./hosts/forge#nixosConfigurations.forge.config.system.build.toplevel
