@@ -1,0 +1,5 @@
+creation_rules:
+  - path_regex: ^secrets/users/chris\.yaml$
+    key_groups:
+      - age:
+          - age1d3lzkmtu4r2yd668me48gv726hke4lj5f8nfd8w6z29vfzhs95xs0n72lv
