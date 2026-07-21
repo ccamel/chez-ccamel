@@ -5,13 +5,13 @@ in
 {
   sops = {
     defaultSopsFile = secretFile;
-    secrets."git-work-config".mode = "0400";
+    secrets."git-corp-config".mode = "0400";
   };
 
   programs.git.includes = [
     {
-      condition = "gitdir:${config.home.homeDirectory}/src/work/**";
-      path = config.sops.secrets."git-work-config".path;
+      condition = "gitdir:${config.home.homeDirectory}/src/corp/**";
+      path = config.sops.secrets."git-corp-config".path;
     }
   ];
 }

@@ -2,6 +2,7 @@
   imports = [
     ../../home/common.nix
     ../../home/modules/sops.nix
+    ../../home/modules/git-mine.nix
     ../../home/modules/git-corp.nix
   ];
 
