@@ -1,44 +1,21 @@
 # chez-ccamel
 
-🗄️ My personal configuration files (dotfiles...) managed by [chezmoi][chezmoi-website]
+> 🗄️ My machines. My tools. My environment.
 
 <img src="./banner.webp" alt="banner" width="100%">
 
-[![chezmoi][chezmoi-badge]][chezmoi-website]
-[![lint-ci-badge][lint-ci-badge]][lint-ci-workflow]
+[![powered by Nix][powered-by-nix-badge]][powered-by-nix-link]
+[![lint-nix-badge][lint-nix-badge]][lint-nix-workflow]
+[![build-nix-badge][build-nix-badge]][build-nix-workflow]
 [![commits-badge][commits-badge]][commits-page]
 
-## Prerequisites
-
-Targets macOS and requires the following tools:
-
-- [chezmoi][chezmoi-website]
-- [git][git-website]
-- [homebrew][homebrew-website]
-
-## Use
-
-### Initial setup
-
-Run the following command:
-
-```sh
-chezmoi init ccamel/chez-ccamel
-```
-
-### Update
-
-Apply the latest changes from your repo with:
-
-```sh
-chezmoi update -v
-```
-
-[chezmoi-website]: https://chezmoi.io
-[chezmoi-badge]: https://img.shields.io/badge/Powered%20by-chezmoi-blue.svg?style=for-the-badge
-[git-website]: https://git-scm.com/
-[homebrew-website]: https://brew.sh/
-[lint-ci-badge]: https://img.shields.io/github/actions/workflow/status/ccamel/chez-ccamel/lint.yml?branch=main&label=lint&style=for-the-badge&logo=github
-[lint-ci-workflow]: https://github.com/ccamel/chez-ccamel/actions/workflows/lint.yml
+[powered-by-nix-badge]: https://img.shields.io/badge/Powered_by-Nix-5277C3.svg?style=for-the-badge&logo=nixos&logoColor=white
+[powered-by-nix-link]: https://nixos.org/
+[lint-nix-badge]: https://img.shields.io/github/actions/workflow/status/ccamel/chez-ccamel/lint-nix.yml?branch=main&label=Lint%20%2F%20Nix&style=for-the-badge&logo=github
+[lint-nix-workflow]: https://github.com/ccamel/chez-ccamel/actions/workflows/lint-nix.yml
+[build-nix-badge]: https://img.shields.io/github/actions/workflow/status/ccamel/chez-ccamel/build-nix.yml?branch=main&label=Build%20%2F%20Nix&style=for-the-badge&logo=github
+[build-nix-workflow]: https://github.com/ccamel/chez-ccamel/actions/workflows/build-nix.yml
 [commits-badge]: https://img.shields.io/github/last-commit/ccamel/chez-ccamel/main?style=for-the-badge&logo=github&color=%237dcfff
 [commits-page]: https://github.com/ccamel/chez-ccamel/commits/main
+
+If it's not here, it doesn't exist.

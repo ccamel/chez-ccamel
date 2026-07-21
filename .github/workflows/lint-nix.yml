@@ -1,0 +1,35 @@
+name: Lint / Nix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "nix-config/**/*.nix"
+      - "nix-config/flake.lock"
+      - "nix-config/secrets/**/*.yaml"
+      - "nix-config/.sops.yaml"
+      - .github/workflows/lint-nix.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - "nix-config/**/*.nix"
+      - "nix-config/flake.lock"
+      - "nix-config/secrets/**/*.yaml"
+      - "nix-config/.sops.yaml"
+      - .github/workflows/lint-nix.yml
+jobs:
+  lint-nix:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Check Nix formatting
+        run: nix run nixpkgs#nixfmt-rfc-style -- --check $(git ls-files 'nix-config/**/*.nix')
+
+      - name: Lint Nix files
+        working-directory: nix-config
+        run: nix run nixpkgs#statix -- check .

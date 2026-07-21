@@ -1,0 +1,36 @@
+name: Build / Nix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "nix-config/**/*.nix"
+      - "nix-config/flake.lock"
+      - "nix-config/secrets/**/*.yaml"
+      - "nix-config/.sops.yaml"
+      - .github/workflows/build-nix.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - "nix-config/**/*.nix"
+      - "nix-config/flake.lock"
+      - "nix-config/secrets/**/*.yaml"
+      - "nix-config/.sops.yaml"
+      - .github/workflows/build-nix.yml
+jobs:
+  build-nix:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Check forge flake
+        working-directory: nix-config
+        run: nix flake check .
+
+      - name: Build forge system
+        working-directory: nix-config
+        run: nix build .#nixosConfigurations.forge.config.system.build.toplevel
