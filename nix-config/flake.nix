@@ -29,7 +29,7 @@
         modules = [
           inputs.nixos-wsl.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
-          ./default.nix
+          ./hosts/forge/nixos.nix
         ];
       };
 

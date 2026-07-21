@@ -4,18 +4,19 @@ on:
   push:
     branches: [main]
     paths:
-      - "home/**/*.nix"
-      - "hosts/**/*.nix"
-      - "hosts/**/flake.lock"
+      - "nix-config/**/*.nix"
+      - "nix-config/flake.lock"
+      - "nix-config/secrets/**/*.yaml"
+      - "nix-config/.sops.yaml"
       - .github/workflows/lint-nix.yml
   pull_request:
     branches: [main]
     paths:
-      - "home/**/*.nix"
-      - "hosts/**/*.nix"
-      - "hosts/**/flake.lock"
+      - "nix-config/**/*.nix"
+      - "nix-config/flake.lock"
+      - "nix-config/secrets/**/*.yaml"
+      - "nix-config/.sops.yaml"
       - .github/workflows/lint-nix.yml
-
 jobs:
   lint-nix:
     runs-on: ubuntu-22.04
@@ -27,9 +28,8 @@ jobs:
         uses: cachix/install-nix-action@v31
 
       - name: Check Nix formatting
-        run: |
-          cd hosts/forge
-          nix fmt -- --check
+        run: nix run nixpkgs#nixfmt-rfc-style -- --check $(git ls-files 'nix-config/**/*.nix')
 
       - name: Lint Nix files
+        working-directory: nix-config
         run: nix run nixpkgs#statix -- check .

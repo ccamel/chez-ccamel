@@ -4,18 +4,19 @@ on:
   push:
     branches: [main]
     paths:
-      - "home/**/*.nix"
-      - "hosts/**/*.nix"
-      - "hosts/**/flake.lock"
+      - "nix-config/**/*.nix"
+      - "nix-config/flake.lock"
+      - "nix-config/secrets/**/*.yaml"
+      - "nix-config/.sops.yaml"
       - .github/workflows/build-nix.yml
   pull_request:
     branches: [main]
     paths:
-      - "home/**/*.nix"
-      - "hosts/**/*.nix"
-      - "hosts/**/flake.lock"
+      - "nix-config/**/*.nix"
+      - "nix-config/flake.lock"
+      - "nix-config/secrets/**/*.yaml"
+      - "nix-config/.sops.yaml"
       - .github/workflows/build-nix.yml
-
 jobs:
   build-nix:
     runs-on: ubuntu-22.04
@@ -27,7 +28,9 @@ jobs:
         uses: cachix/install-nix-action@v31
 
       - name: Check forge flake
-        run: nix flake check ./hosts/forge
+        working-directory: nix-config
+        run: nix flake check .
 
       - name: Build forge system
-        run: nix build ./hosts/forge#nixosConfigurations.forge.config.system.build.toplevel
+        working-directory: nix-config
+        run: nix build .#nixosConfigurations.forge.config.system.build.toplevel

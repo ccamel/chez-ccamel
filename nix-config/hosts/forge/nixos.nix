@@ -25,10 +25,7 @@
     extraSpecialArgs = { inherit inputs; };
     sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
     users.chris = {
-      imports = [
-        ../../home/users/chris.nix
-        ../../home/platforms/linux.nix
-      ];
+      imports = [ ./home.nix ];
     };
   };
 
