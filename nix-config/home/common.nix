@@ -19,6 +19,14 @@
       enable = true;
       enableCompletion = true;
       autosuggestion.enable = true;
+      oh-my-zsh = {
+        enable = true;
+        theme = "mh";
+        plugins = [
+          "git"
+          "history"
+        ];
+      };
       history = {
         path = "$HOME/.zsh_history";
         size = 999999999;
