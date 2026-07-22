@@ -68,8 +68,11 @@
       };
       history = {
         path = "$HOME/.zsh_history";
-        size = 999999999;
-        save = 999999999;
+        size = 100000;
+        save = 100000;
+        share = true;
+        ignoreDups = true;
+        expireDuplicatesFirst = true;
       };
     };
   };
