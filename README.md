@@ -19,3 +19,24 @@
 [commits-page]: https://github.com/ccamel/chez-ccamel/commits/main
 
 If it's not here, it doesn't exist.
+
+## Bootstrap
+
+Clone the repository using an ephemeral Git shell:
+
+```sh
+mkdir -p ~/src/mine
+cd ~/src/mine
+
+nix shell nixpkgs#git \
+  --command git clone https://github.com/ccamel/chez-ccamel.git
+```
+
+Apply the system configuration:
+
+```sh
+sudo nixos-rebuild switch \
+  --flake ~/src/mine/chez-ccamel/nix-config#forge
+```
+
+That's it.
