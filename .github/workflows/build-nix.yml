@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "nix-config/**/*.nix"
+      - "nix-config/assets/**/*.pem"
       - "nix-config/flake.lock"
       - "nix-config/secrets/**/*.yaml"
       - "nix-config/.sops.yaml"
@@ -13,6 +14,7 @@ on:
     branches: [main]
     paths:
       - "nix-config/**/*.nix"
+      - "nix-config/assets/**/*.pem"
       - "nix-config/flake.lock"
       - "nix-config/secrets/**/*.yaml"
       - "nix-config/.sops.yaml"
