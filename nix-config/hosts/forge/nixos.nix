@@ -10,6 +10,14 @@
     "flakes"
   ];
 
+  programs.nh = {
+    enable = true;
+    clean = {
+      enable = true;
+      extraArgs = "--keep-since 14d --keep 5";
+    };
+  };
+
   programs.zsh.enable = true;
 
   programs.gnupg.agent = {
