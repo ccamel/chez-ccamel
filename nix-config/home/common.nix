@@ -25,6 +25,9 @@
       initContent = ''
         export GPG_TTY="$(tty)"
         export EDITOR="vim"
+
+        bindkey '^[[1;5D' backward-word
+        bindkey '^[[1;5C' forward-word
       '';
     };
 
