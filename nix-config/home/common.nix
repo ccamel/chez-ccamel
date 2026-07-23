@@ -28,6 +28,9 @@
       ignoreDups = true;
       expireDuplicatesFirst = true;
     };
+    initContent = ''
+      export GPG_TTY="$(tty)"
+    '';
   };
 
 }

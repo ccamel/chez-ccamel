@@ -12,6 +12,11 @@
 
   programs.zsh.enable = true;
 
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-tty;
+  };
+
   users.users.chris = {
     isNormalUser = true;
     home = "/home/chris";
