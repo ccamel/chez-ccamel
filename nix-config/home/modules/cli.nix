@@ -36,12 +36,12 @@
   programs.zsh.initContent = ''
     toolbox() {
       if (( $# != 1 )); then
-        print -u2 "usage: toolbox <devops>"
+        print -u2 "usage: toolbox <agentic|devops|agentic-devops>"
         return 2
       fi
 
       case "$1" in
-        devops) ;;
+        agentic|devops|agentic-devops) ;;
         *)
           print -u2 "unknown toolbox: $1"
           return 2

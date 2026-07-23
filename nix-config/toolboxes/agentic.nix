@@ -1,0 +1,12 @@
+{
+  pkgs,
+  omp,
+  herdr,
+}:
+[
+  pkgs.codex
+  pkgs.gemini-cli
+  pkgs.github-copilot-cli
+  omp
+  herdr
+]

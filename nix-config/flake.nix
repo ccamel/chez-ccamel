@@ -39,15 +39,27 @@
       };
 
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
-      devShells.x86_64-linux.devops =
+      devShells.x86_64-linux =
         let
           pkgs = import nixpkgs {
             system = "x86_64-linux";
             config.allowUnfree = true;
           };
+          omp = pkgs.callPackage ./packages/omp.nix { };
+          herdr = pkgs.callPackage ./packages/herdr.nix { };
+          devopsPackages = import ./toolboxes/devops.nix { inherit pkgs; };
+          agenticPackages = import ./toolboxes/agentic.nix { inherit pkgs omp herdr; };
         in
-        pkgs.mkShell {
-          packages = import ./toolboxes/devops.nix { inherit pkgs; };
+        {
+          devops = pkgs.mkShell {
+            packages = devopsPackages;
+          };
+          agentic = pkgs.mkShell {
+            packages = agenticPackages;
+          };
+          agentic-devops = pkgs.mkShell {
+            packages = agenticPackages ++ devopsPackages;
+          };
         };
 
       checks.x86_64-linux.forge = self.nixosConfigurations.forge.config.system.build.toplevel;
