@@ -26,6 +26,15 @@
         export GPG_TTY="$(tty)"
         export EDITOR="vim"
 
+        take() {
+          if (( $# != 1 )); then
+            print -u2 "usage: take <directory>"
+            return 2
+          fi
+
+          mkdir -p -- "$1" && cd -- "$1"
+        }
+
         bindkey '^[[1;5D' backward-word
         bindkey '^[[1;5C' forward-word
       '';
