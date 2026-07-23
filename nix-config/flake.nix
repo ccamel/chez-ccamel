@@ -39,6 +39,17 @@
       };
 
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
+      devShells.x86_64-linux.devops =
+        let
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+        in
+        pkgs.mkShell {
+          packages = import ./toolboxes/devops.nix { inherit pkgs; };
+        };
+
       checks.x86_64-linux.forge = self.nixosConfigurations.forge.config.system.build.toplevel;
     };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs = {
     direnv = {
@@ -32,6 +32,25 @@
       enableZshIntegration = true;
     };
   };
+
+  programs.zsh.initContent = ''
+    toolbox() {
+      if (( $# < 1 )); then
+        print -u2 "usage: toolbox <devops> [nix develop arguments...]"
+        return 2
+      fi
+
+      case "$1" in
+        devops) ;;
+        *)
+          print -u2 "unknown toolbox: $1"
+          return 2
+          ;;
+      esac
+
+      nix develop "${config.home.homeDirectory}/src/mine/chez-ccamel/nix-config#$1" "''${@:2}"
+    }
+  '';
 
   home.packages = with pkgs; [
     # Search and navigation
