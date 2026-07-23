@@ -35,8 +35,8 @@
 
   programs.zsh.initContent = ''
     toolbox() {
-      if (( $# < 1 )); then
-        print -u2 "usage: toolbox <devops> [nix print-dev-env arguments...]"
+      if (( $# != 1 )); then
+        print -u2 "usage: toolbox <devops>"
         return 2
       fi
 
@@ -48,9 +48,9 @@
           ;;
       esac
 
-      local dev_env
-      dev_env="$(nix print-dev-env "${config.home.homeDirectory}/src/mine/chez-ccamel/nix-config#$1" "''${@:2}")" || return $?
-      eval "$dev_env"
+      nix develop \
+        "${config.home.homeDirectory}/src/mine/chez-ccamel/nix-config#$1" \
+        --command zsh
     }
   '';
 

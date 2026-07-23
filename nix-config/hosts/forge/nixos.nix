@@ -6,7 +6,6 @@
   networking.hostName = "forge";
   security.pki.certificateFiles = [ ../../assets/zscaler-root-ca.pem ];
 
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
