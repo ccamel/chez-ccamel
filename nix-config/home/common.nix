@@ -30,6 +30,7 @@
     };
     initContent = ''
       export GPG_TTY="$(tty)"
+      export EDITOR="vim"
     '';
   };
 
