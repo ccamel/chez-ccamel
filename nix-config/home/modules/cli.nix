@@ -11,6 +11,8 @@
       enableZshIntegration = true;
     };
 
+    nix-index-database.comma.enable = true;
+
     bat = {
       enable = true;
       config = {
@@ -35,9 +37,6 @@
     # Search and navigation
     ripgrep
     fd
-
-    # Nix tooling
-    comma
 
     # Files and output
     eza

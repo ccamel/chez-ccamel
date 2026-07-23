@@ -1,10 +1,11 @@
-{ config, ... }:
+{ config, inputs, ... }:
 {
   imports = [
     ../../home/common.nix
     ../../home/modules/sops.nix
     ../../home/modules/git-mine.nix
     ../../home/modules/git-corp.nix
+    inputs.nix-index-database.homeModules.nix-index
   ];
 
   home = {
