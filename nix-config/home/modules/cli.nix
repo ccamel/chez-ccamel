@@ -6,6 +6,11 @@
       nix-direnv.enable = true;
     };
 
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     bat = {
       enable = true;
       config = {
@@ -30,6 +35,9 @@
     # Search and navigation
     ripgrep
     fd
+
+    # Nix tooling
+    comma
 
     # Files and output
     eza
