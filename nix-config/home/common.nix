@@ -10,16 +10,9 @@
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
     shellAliases.cat = "bat --style=plain --paging=never";
 
-    oh-my-zsh = {
-      enable = true;
-      theme = "mh";
-      plugins = [
-        "git"
-        "history"
-      ];
-    };
     history = {
       path = "$HOME/.zsh_history";
       size = 100000;
@@ -32,6 +25,17 @@
       export GPG_TTY="$(tty)"
       export EDITOR="vim"
     '';
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      add_newline = false;
+      format = "$directory$git_branch$git_status$nix_shell$character";
+      directory.truncation_length = 0;
+      nix_shell.format = "via [$symbol$state( \\($name\\))]($style) ";
+    };
   };
 
 }
