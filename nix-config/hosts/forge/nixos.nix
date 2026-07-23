@@ -10,24 +10,26 @@
     "flakes"
   ];
 
-  programs.nh = {
-    enable = true;
-    clean = {
+  programs = {
+    nh = {
       enable = true;
-      extraArgs = "--keep-since 14d --keep 5";
+      clean = {
+        enable = true;
+        extraArgs = "--keep-since 14d --keep 5";
+      };
     };
-  };
 
-  programs.zsh.enable = true;
+    zsh.enable = true;
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    settings = {
-      default-cache-ttl-ssh = 3600;
-      max-cache-ttl-ssh = 3600;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      settings = {
+        default-cache-ttl-ssh = 3600;
+        max-cache-ttl-ssh = 3600;
+      };
+      pinentryPackage = pkgs.pinentry-tty;
     };
-    pinentryPackage = pkgs.pinentry-tty;
   };
 
   users.users.chris = {
