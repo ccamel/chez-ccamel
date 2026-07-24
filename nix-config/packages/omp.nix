@@ -1,7 +1,9 @@
 {
-  lib,
-  stdenvNoCC,
   fetchurl,
+  lib,
+  makeWrapper,
+  stdenv,
+  stdenvNoCC,
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "omp";
@@ -14,9 +16,14 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   dontUnpack = true;
 
+  nativeBuildInputs = [ makeWrapper ];
+
   installPhase = ''
     runHook preInstall
-    install -Dm755 "$src" "$out/bin/omp"
+    install -Dm755 "$src" "$out/libexec/omp"
+    makeWrapper "$out/libexec/omp" "$out/bin/omp" \
+      --set NIX_LD "${lib.fileContents "${stdenv.cc}/nix-support/dynamic-linker"}" \
+      --set NIX_LD_LIBRARY_PATH "${lib.makeLibraryPath [ stdenv.cc.cc ]}"
     runHook postInstall
   '';
 

@@ -49,17 +49,19 @@
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           devopsPackages = import ./toolboxes/devops.nix { inherit pkgs; };
           agenticPackages = import ./toolboxes/agentic.nix { inherit pkgs omp herdr; };
+          mkToolbox =
+            packages:
+            pkgs.mkShell {
+              inherit packages;
+              shellHook = ''
+                export SHELL="${pkgs.zsh}/bin/zsh"
+              '';
+            };
         in
         {
-          devops = pkgs.mkShell {
-            packages = devopsPackages;
-          };
-          agentic = pkgs.mkShell {
-            packages = agenticPackages;
-          };
-          agentic-devops = pkgs.mkShell {
-            packages = agenticPackages ++ devopsPackages;
-          };
+          devops = mkToolbox devopsPackages;
+          agentic = mkToolbox agenticPackages;
+          agentic-devops = mkToolbox (agenticPackages ++ devopsPackages);
         };
 
       checks.x86_64-linux.forge = self.nixosConfigurations.forge.config.system.build.toplevel;

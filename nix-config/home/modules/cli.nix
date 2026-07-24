@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 {
+  xdg.configFile."herdr/config.toml".text = ''
+    [terminal]
+    default_shell = "${pkgs.zsh}/bin/zsh"
+  '';
+
   programs = {
     direnv = {
       enable = true;

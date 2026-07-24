@@ -21,6 +21,7 @@
     };
 
     zsh.enable = true;
+    nix-ld.enable = true;
 
     gnupg.agent = {
       enable = true;
