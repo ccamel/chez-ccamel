@@ -50,7 +50,7 @@
       esac
 
       nix develop \
-        "${config.home.homeDirectory}/src/mine/chez-ccamel/nix-config#$1" \
+        "$CHEZ_CCAMEL_ROOT/nix-config#$1" \
         --command zsh
     }
   '';

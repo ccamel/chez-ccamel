@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,6 +32,13 @@
 
   outputs =
     { self, nixpkgs, ... }@inputs:
+    let
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
+      forEachSystem = nixpkgs.lib.genAttrs supportedSystems;
+    in
     {
       nixosConfigurations.forge = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -38,11 +50,24 @@
         ];
       };
 
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
-      devShells.x86_64-linux =
+      darwinConfigurations.tinymac = inputs.nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs; };
+        modules = [
+          inputs.home-manager.darwinModules.home-manager
+          ./hosts/tinymac/darwin.nix
+        ];
+      };
+
+      formatter = forEachSystem (
+        system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style
+      );
+
+      devShells = forEachSystem (
+        system:
         let
           pkgs = import nixpkgs {
-            system = "x86_64-linux";
+            inherit system;
             config.allowUnfree = true;
           };
           omp = pkgs.callPackage ./packages/omp.nix { };
@@ -62,8 +87,12 @@
           devops = mkToolbox devopsPackages;
           agentic = mkToolbox agenticPackages;
           agentic-devops = mkToolbox (agenticPackages ++ devopsPackages);
-        };
+        }
+      );
 
-      checks.x86_64-linux.forge = self.nixosConfigurations.forge.config.system.build.toplevel;
+      checks = {
+        x86_64-linux.forge = self.nixosConfigurations.forge.config.system.build.toplevel;
+        aarch64-darwin.tinymac = self.darwinConfigurations.tinymac.config.system.build.toplevel;
+      };
     };
 }

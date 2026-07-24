@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -15,6 +15,5 @@
     unzip
   ];
 
-  xdg.configFile."nvim".source =
-    config.lib.file.mkOutOfStoreSymlink "/home/chris/src/mine/chez-ccamel/nix-config/home/modules/neovim/config";
+  xdg.configFile."nvim".source = ./config;
 }
