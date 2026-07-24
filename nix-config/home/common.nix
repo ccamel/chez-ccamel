@@ -14,10 +14,10 @@
       syntaxHighlighting.enable = true;
       shellAliases = {
         cat = "bat --style=plain --paging=never";
-        ls = "eza";
-        ll = "eza -l";
-        la = "eza -la";
-        lt = "eza --tree";
+        ls = "eza --icons";
+        ll = "eza --icons -l";
+        la = "eza --icons -la";
+        lt = "eza --icons --tree";
       };
 
       history = {
