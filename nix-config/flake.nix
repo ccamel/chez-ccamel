@@ -72,8 +72,9 @@
           };
           omp = pkgs.callPackage ./packages/omp.nix { };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
+          rtk = pkgs.callPackage ./packages/rtk.nix { };
           devopsPackages = import ./toolboxes/devops.nix { inherit pkgs; };
-          agenticPackages = import ./toolboxes/agentic.nix { inherit pkgs omp herdr; };
+          agenticPackages = import ./toolboxes/agentic.nix { inherit pkgs omp herdr rtk; };
           mkToolbox =
             packages:
             pkgs.mkShell {

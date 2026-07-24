@@ -2,11 +2,13 @@
   pkgs,
   omp,
   herdr,
+  rtk,
 }:
 [
   pkgs.codex
   pkgs.gemini-cli
   pkgs.github-copilot-cli
+  rtk
   omp
   herdr
 ]
