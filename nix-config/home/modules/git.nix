@@ -1,5 +1,13 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
+  xdg.configFile = {
+    "tig/config".text = ''
+      source ${config.xdg.configHome}/tig/color.tigrc
+      source ${config.xdg.configHome}/tig/common.tigrc
+    '';
+    "tig/color.tigrc".source = ./tig/color.tigrc;
+    "tig/common.tigrc".source = ./tig/common.tigrc;
+  };
   programs = {
     delta = {
       enable = true;
