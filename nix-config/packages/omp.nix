@@ -31,26 +31,28 @@ stdenvNoCC.mkDerivation (finalAttrs: {
 
   nativeBuildInputs = lib.optional (stdenv.hostPlatform.system == "x86_64-linux") patchelf;
 
-  installPhase =
-    ''
-      runHook preInstall
-      install -Dm755 "$src" "$out/bin/omp"
-    ''
-    + lib.optionalString (stdenv.hostPlatform.system == "x86_64-linux") ''
-      patchelf --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" --set-rpath "${
-        lib.makeLibraryPath [ stdenv.cc.cc ]
-      }" "$out/bin/omp"
-    ''
-    + ''
-      runHook postInstall
-    '';
+  installPhase = ''
+    runHook preInstall
+    install -Dm755 "$src" "$out/bin/omp"
+  ''
+  + lib.optionalString (stdenv.hostPlatform.system == "x86_64-linux") ''
+    patchelf --set-interpreter "${stdenv.cc.bintools.dynamicLinker}" --set-rpath "${
+      lib.makeLibraryPath [ stdenv.cc.cc ]
+    }" "$out/bin/omp"
+  ''
+  + ''
+    runHook postInstall
+  '';
 
   meta = {
     description = "Terminal-first AI coding agent";
     homepage = "https://github.com/can1357/oh-my-pi";
     license = lib.licenses.mit;
     mainProgram = "omp";
-    platforms = [ "x86_64-linux" "aarch64-darwin" ];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-darwin"
+    ];
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
   };
 })

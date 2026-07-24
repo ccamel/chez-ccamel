@@ -37,7 +37,10 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     homepage = "https://github.com/ogulcancelik/herdr";
     license = lib.licenses.agpl3Plus;
     mainProgram = "herdr";
-    platforms = [ "x86_64-linux" "aarch64-darwin" ];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-darwin"
+    ];
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
   };
 })

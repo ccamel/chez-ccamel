@@ -40,7 +40,10 @@ stdenvNoCC.mkDerivation {
     homepage = "https://github.com/rtk-ai/rtk";
     license = lib.licenses.asl20;
     mainProgram = "rtk";
-    platforms = [ "x86_64-linux" "aarch64-darwin" ];
+    platforms = [
+      "x86_64-linux"
+      "aarch64-darwin"
+    ];
     sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
   };
 }
