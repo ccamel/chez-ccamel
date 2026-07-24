@@ -49,6 +49,7 @@
         search_mode = "fuzzy";
         filter_mode = "global";
         style = "compact";
+        inline_height = 8;
       };
     };
 
