@@ -6,6 +6,11 @@
   networking.hostName = "forge";
   security.pki.certificateFiles = [ ../../assets/zscaler-root-ca.pem ];
 
+  environment.sessionVariables = {
+    SSL_CERT_FILE = "/etc/ssl/certs/ca-certificates.crt";
+    NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt";
+  };
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
