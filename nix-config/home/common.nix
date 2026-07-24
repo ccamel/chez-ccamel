@@ -12,7 +12,13 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      shellAliases.cat = "bat --style=plain --paging=never";
+      shellAliases = {
+        cat = "bat --style=plain --paging=never";
+        ls = "eza";
+        ll = "eza -l";
+        la = "eza -la";
+        lt = "eza --tree";
+      };
 
       history = {
         path = "$HOME/.zsh_history";
