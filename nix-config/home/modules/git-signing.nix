@@ -6,7 +6,7 @@
 }:
 {
   sops.secrets."git-mine-signing-key" = {
-    sopsFile = ../../secrets/personal.yaml;
+    sopsFile = ../../secrets/git-mine.yaml;
     mode = "0400";
   };
 
