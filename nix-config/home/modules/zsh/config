@@ -13,6 +13,12 @@ take() {
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
+zvm_atuin_bindings() {
+  bindkey -M viins '^R' atuin-search-viins
+  bindkey -M vicmd '^R' atuin-search-vicmd
+}
+zvm_after_init_commands+=(zvm_atuin_bindings)
+
 toolbox() {
   if (( $# != 1 )); then
     print -u2 "usage: toolbox <agentic|devops|agentic-devops>"
