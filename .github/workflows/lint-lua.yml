@@ -1,0 +1,35 @@
+name: Lint / Lua
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.lua"
+      - stylua.toml
+      - .luacheckrc
+      - justfile
+      - nix-config/flake.nix
+      - nix-config/flake.lock
+      - .github/workflows/lint-lua.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/*.lua"
+      - stylua.toml
+      - .luacheckrc
+      - justfile
+      - nix-config/flake.nix
+      - nix-config/flake.lock
+      - .github/workflows/lint-lua.yml
+jobs:
+  lint-lua:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Check Lua
+        run: nix run --inputs-from ./nix-config nixpkgs#just -- check-lua

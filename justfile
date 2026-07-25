@@ -12,18 +12,24 @@ switch host=`hostname -s`:
 check-fmt:
     git ls-files -z -- '*.nix' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style -- --check
 
+# Check formatting and linting of tracked Lua files.
+check-lua:
+    git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#stylua -- --check
+    git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#lua51Packages.luacheck --
+
 # Verify both tracked secrets decrypt successfully.
 check-secrets:
     cd nix-config && sops --decrypt secrets/git-mine.yaml > /dev/null
     cd nix-config && sops --decrypt --input-type binary --output-type binary secrets/git-corp-bundle > /dev/null
 
-# Run Nix checks; secret validation is explicit via check-secrets.
-check: check-fmt
+# Run repository checks; secret validation is explicit via check-secrets.
+check: check-fmt check-lua
     cd nix-config && nix flake check . && nix run --inputs-from . nixpkgs#statix -- check .
 
 # Format tracked Nix files.
 fmt:
     git ls-files -z -- '*.nix' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style --
+    git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#stylua --
 
 # Update all flake inputs.
 update:
