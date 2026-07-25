@@ -4,3 +4,4 @@ result
 result-*
 .direnv/
 .env
+__pycache__/

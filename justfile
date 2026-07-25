@@ -39,6 +39,10 @@ update:
 update-input input:
     nix flake update --flake ./nix-config "{{input}}"
 
+# Update one managed binary resource.
+update-resource resource:
+    python3 scripts/update-resource.py "{{resource}}"
+
 # Show resolved flake metadata.
 metadata:
     nix flake metadata ./nix-config

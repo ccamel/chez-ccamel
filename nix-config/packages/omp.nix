@@ -6,15 +6,19 @@
   stdenvNoCC,
 }:
 let
+  # managed by update-package
+  version = "17.1.3";
   source =
     {
       x86_64-linux = {
-        url = "https://github.com/can1357/oh-my-pi/releases/download/v17.0.9/omp-linux-x64";
-        hash = "sha256-SFzDAdb9/ya6tdOrRasTdjSnO3Gy7XqRxshUWEL/TAk=";
+        url = "https://github.com/can1357/oh-my-pi/releases/download/v${version}/omp-linux-x64";
+        # managed by update-package
+        hash = "sha256-F6fi4cScvAkSnin79IzevRpUXQU/XK1ylcGJi26qQi4=";
       };
       aarch64-darwin = {
-        url = "https://github.com/can1357/oh-my-pi/releases/download/v17.0.9/omp-darwin-arm64";
-        hash = "sha256-3RQwukgJpV9Nby9kYhHO5RU1+WGetmcPG/z3SEwjuTE=";
+        url = "https://github.com/can1357/oh-my-pi/releases/download/v${version}/omp-darwin-arm64";
+        # managed by update-package
+        hash = "sha256-8MArnxQmZoqq/7a5PFWYa6DU5ruXYsmjeOHPfzbSLX4=";
       };
     }
     .${stdenv.hostPlatform.system}
@@ -22,7 +26,7 @@ let
 in
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "omp";
-  version = "17.0.9";
+  version = version;
 
   src = fetchurl source;
 
