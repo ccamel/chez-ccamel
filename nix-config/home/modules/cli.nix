@@ -55,6 +55,7 @@
     dust
     procs
     which
+    just
 
     age
     gnupg
