@@ -31,6 +31,7 @@
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
     backupFileExtension = "hm-pre-nix";
+    sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
     users.chris = {
       imports = [ ./home.nix ];
     };

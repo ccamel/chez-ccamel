@@ -5,9 +5,19 @@
   ...
 }:
 {
-  sops = {
-    defaultSopsFile = ../../secrets/corp.yaml;
-    secrets."git-mine-signing-key".mode = "0400";
+  sops.secrets."git-mine-signing-key" = {
+    sopsFile = ../../secrets/personal.yaml;
+    mode = "0400";
+  };
+
+  programs.gpg = {
+    enable = true;
+    publicKeys = [
+      {
+        source = ./git-mine-public.asc;
+        trust = "ultimate";
+      }
+    ];
   };
 
   home.activation.importMineSigningKey = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

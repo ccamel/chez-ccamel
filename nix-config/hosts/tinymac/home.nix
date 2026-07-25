@@ -2,6 +2,8 @@
 {
   imports = [
     ../../home/common.nix
+    ../../home/modules/sops.nix
+    ../../home/modules/git-signing.nix
     ../../home/modules/git-mine.nix
     inputs.nix-index-database.homeModules.nix-index
   ];

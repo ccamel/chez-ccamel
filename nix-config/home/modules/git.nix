@@ -21,6 +21,7 @@
         pull.ff = "only";
         push.autoSetupRemote = true;
         tig.bind.status = "+ !git commit --amend";
+        user.useConfigOnly = true;
       };
     };
 
