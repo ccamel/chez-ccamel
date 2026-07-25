@@ -59,9 +59,7 @@
         ];
       };
 
-      formatter = forEachSystem (
-        system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style
-      );
+      formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       devShells = forEachSystem (
         system:
@@ -74,7 +72,14 @@
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           rtk = pkgs.callPackage ./packages/rtk.nix { };
           devopsPackages = import ./toolboxes/devops.nix { inherit pkgs; };
-          agenticPackages = import ./toolboxes/agentic.nix { inherit pkgs omp herdr rtk; };
+          agenticPackages = import ./toolboxes/agentic.nix {
+            inherit
+              pkgs
+              omp
+              herdr
+              rtk
+              ;
+          };
           mkToolbox =
             packages:
             pkgs.mkShell {
