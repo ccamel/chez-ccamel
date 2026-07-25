@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./modules/cli.nix
@@ -9,6 +9,13 @@
   programs = {
     zsh = {
       enable = true;
+      plugins = [
+        {
+          name = "zsh-vi-mode";
+          src = pkgs.zsh-vi-mode;
+          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        }
+      ];
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
@@ -67,6 +74,11 @@
         format = "$directory$git_branch$git_status$nix_shell$character";
         directory.truncation_length = 0;
         nix_shell.format = "via [$symbol$state( \\($name\\))]($style) ";
+        character = {
+          success_symbol = "[INSERT](bold green)";
+          error_symbol = "[INSERT](bold red)";
+          vimcmd_symbol = "[NORMAL](bold yellow)";
+        };
       };
     };
   };
