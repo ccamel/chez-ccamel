@@ -34,27 +34,6 @@
     };
   };
 
-  programs.zsh.initContent = ''
-    toolbox() {
-      if (( $# != 1 )); then
-        print -u2 "usage: toolbox <agentic|devops|agentic-devops>"
-        return 2
-      fi
-
-      case "$1" in
-        agentic|devops|agentic-devops) ;;
-        *)
-          print -u2 "unknown toolbox: $1"
-          return 2
-          ;;
-      esac
-
-      nix develop \
-        "$CHEZ_CCAMEL_ROOT/nix-config#$1" \
-        --command zsh
-    }
-  '';
-
   home.packages = with pkgs; [
     # Search and navigation
     ripgrep

@@ -1,0 +1,33 @@
+export GPG_TTY="$(tty)"
+export EDITOR="vim"
+
+take() {
+  if (( $# != 1 )); then
+    print -u2 "usage: take <directory>"
+    return 2
+  fi
+
+  mkdir -p -- "$1" && cd -- "$1"
+}
+
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+
+toolbox() {
+  if (( $# != 1 )); then
+    print -u2 "usage: toolbox <agentic|devops|agentic-devops>"
+    return 2
+  fi
+
+  case "$1" in
+    agentic|devops|agentic-devops) ;;
+    *)
+      print -u2 "unknown toolbox: $1"
+      return 2
+      ;;
+  esac
+
+  nix develop \
+    "$CHEZ_CCAMEL_ROOT/nix-config#$1" \
+    --command zsh
+}
