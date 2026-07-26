@@ -76,6 +76,8 @@ def latest_release_tag(repository: str) -> str:
         f"https://api.github.com/repos/{repository}/releases/latest",
         headers={"User-Agent": "chez-ccamel-update-resource"},
     )
+    print(f"Fetching latest release for {repository}...", flush=True)
+
 
     try:
         with urlopen(request) as response:  # noqa: S310: GitHub API URL is constructed above.
@@ -91,18 +93,18 @@ def latest_release_tag(repository: str) -> str:
 
 
 def prefetch_hash(url: str) -> str:
+    print(f"Prefetching {url}...", flush=True)
     try:
         result = subprocess.run(
             ["nix", "store", "prefetch-file", "--json", url],
             check=True,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=sys.stdout,
             text=True,
         )
         payload = json.loads(result.stdout)
     except subprocess.CalledProcessError as error:
-        raise UpdateError(
-            f"could not prefetch {url}: {error.stderr.strip() or error}"
-        ) from error
+        raise UpdateError(f"could not prefetch {url}: {error}") from error
     except json.JSONDecodeError as error:
         raise UpdateError(f"nix returned invalid JSON while prefetching {url}: {error}") from error
 
@@ -210,13 +212,15 @@ def run_post_update_checks(resource: Resource) -> int:
         for description, command in commands:
             print(f"Running {description}...", flush=True)
             try:
-                subprocess.run(command, check=True, cwd=ROOT)
+                subprocess.run(command, check=True, cwd=ROOT, stdout=sys.stdout, stderr=sys.stderr)
             except subprocess.CalledProcessError as error:
                 failed = True
                 print(f"{description} failed: {error}", file=sys.stderr)
     finally:
         subprocess.run(
             ["git", "--no-pager", "diff", "--", resource.file.as_posix()],
+            stdout=sys.stdout,
+            stderr=sys.stderr,
             check=False,
             cwd=ROOT,
         )
@@ -233,6 +237,8 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     resource = RESOURCES[args.resource]
+    print(f"Updating {args.resource}...", flush=True)
+
 
     try:
         update = collect_update(resource)
@@ -245,6 +251,7 @@ def main() -> int:
     for line in update.output:
         print(line, flush=True)
 
+    print(f"Writing {package_file}...", flush=True)
     package_file.write_text(updated)
     return run_post_update_checks(resource)
 
