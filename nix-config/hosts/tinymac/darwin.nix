@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -8,6 +8,8 @@
   };
 
   users.users.chris.home = "/Users/chris";
+
+  fonts.packages = [ pkgs.nerd-fonts.proggy-clean-tt ];
 
   nix.settings.experimental-features = [
     "nix-command"
