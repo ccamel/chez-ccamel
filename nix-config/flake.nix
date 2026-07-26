@@ -89,18 +89,19 @@
           devopsPackages = map (descriptor: descriptor.package toolboxArgs) devopsToolbox;
           agenticPackages = map (descriptor: descriptor.package toolboxArgs) agenticToolbox;
           mkToolbox =
-            packages:
+            name: packages:
             pkgs.mkShell {
               inherit packages;
               shellHook = ''
                 export SHELL="${pkgs.zsh}/bin/zsh"
+                export TOOLBOX_NAME="${name}"
               '';
             };
         in
         {
-          devops = mkToolbox devopsPackages;
-          agentic = mkToolbox agenticPackages;
-          agentic-devops = mkToolbox (agenticPackages ++ devopsPackages);
+          devops = mkToolbox "devops" devopsPackages;
+          agentic = mkToolbox "agentic" agenticPackages;
+          agentic-devops = mkToolbox "agentic-devops" (agenticPackages ++ devopsPackages);
         }
       );
 

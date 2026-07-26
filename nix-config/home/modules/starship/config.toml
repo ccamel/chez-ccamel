@@ -1,7 +1,7 @@
 add_newline = true
 
 format = """
-$directory$git_branch$git_status$nix_shell
+$directory$git_branch$git_status$env_var
 $character"""
 
 # ====================== DIRECTORY ======================
@@ -20,10 +20,10 @@ style = "bold #CC8800"
 format = "[$all_status$ahead_behind]($style) "
 style = "bold #FF5555"
 
-# ====================== NIX ======================
-[nix_shell]
-format = "via [❄️ $state( \\($name\\))]($style) "
-style = "bold #00BBFF"
+# ====================== TOOLBOX ======================
+[env_var.TOOLBOX_NAME]
+format = "via [❄️ $env_value]($style) "
+style = "bold blue"
 
 # ====================== CHARACTER (VI MODE) ======================
 [character]
