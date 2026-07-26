@@ -1,6 +1,12 @@
 export GPG_TTY="$(tty)"
 export EDITOR="vim"
 
+zstyle ':completion:*' matcher-list \
+  '' \
+  'm:{a-zA-Z}={A-Za-z}' \
+  'r:|[._-]=* r:|=*' \
+  'l:|=* r:|=*'
+
 take() {
   if (( $# != 1 )); then
     print -u2 "usage: take <directory>"
