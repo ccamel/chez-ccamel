@@ -17,13 +17,22 @@ check-lua:
     git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#stylua -- --check
     git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#lua51Packages.luacheck --
 
+# Generate README tool tables from curated Nix metadata.
+generate-readme:
+    python3 scripts/generate-readme.py
+
+# Verify generated README tool tables are current.
+check-readme:
+    python3 scripts/generate-readme.py --check
+
+
 # Verify both tracked secrets decrypt successfully.
 check-secrets:
     cd nix-config && sops --decrypt secrets/git-mine.yaml > /dev/null
     cd nix-config && sops --decrypt --input-type binary --output-type binary secrets/git-corp-bundle > /dev/null
 
 # Run repository checks; secret validation is explicit via check-secrets.
-check: check-fmt check-lua
+check: check-fmt check-lua check-readme
     cd nix-config && nix flake check . && nix run --inputs-from . nixpkgs#statix -- check .
 
 # Format tracked Nix files.

@@ -60,6 +60,7 @@
       };
 
       formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      readmeDocumentation = import ./readme-metadata.nix;
 
       devShells = forEachSystem (
         system:
@@ -73,8 +74,9 @@
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
           rtk = pkgs.callPackage ./packages/rtk.nix { };
           livediff = pkgs.callPackage ./packages/livediff.nix { };
-          devopsPackages = import ./toolboxes/devops.nix { inherit pkgs; };
-          agenticPackages = import ./toolboxes/agentic.nix {
+          devopsToolbox = import ./toolboxes/devops.nix;
+          agenticToolbox = import ./toolboxes/agentic.nix;
+          toolboxArgs = {
             inherit
               pkgs
               omp
@@ -84,6 +86,8 @@
               livediff
               ;
           };
+          devopsPackages = map (descriptor: descriptor.package toolboxArgs) devopsToolbox;
+          agenticPackages = map (descriptor: descriptor.package toolboxArgs) agenticToolbox;
           mkToolbox =
             packages:
             pkgs.mkShell {
