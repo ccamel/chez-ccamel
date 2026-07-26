@@ -6,18 +6,18 @@
   stdenvNoCC,
 }:
 let
-  # managed by update-package
+  # managed by update-resource
   version = "17.1.3";
   source =
     {
       x86_64-linux = {
         url = "https://github.com/can1357/oh-my-pi/releases/download/v${version}/omp-linux-x64";
-        # managed by update-package
+        # managed by update-resource
         hash = "sha256-F6fi4cScvAkSnin79IzevRpUXQU/XK1ylcGJi26qQi4=";
       };
       aarch64-darwin = {
         url = "https://github.com/can1357/oh-my-pi/releases/download/v${version}/omp-darwin-arm64";
-        # managed by update-package
+        # managed by update-resource
         hash = "sha256-8MArnxQmZoqq/7a5PFWYa6DU5ruXYsmjeOHPfzbSLX4=";
       };
     }

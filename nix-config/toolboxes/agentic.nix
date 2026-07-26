@@ -2,6 +2,7 @@
   pkgs,
   omp,
   herdr,
+  herd,
   rtk,
 }:
 [
@@ -11,4 +12,5 @@
   rtk
   omp
   herdr
+  herd
 ]

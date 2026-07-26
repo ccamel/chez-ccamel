@@ -70,6 +70,7 @@
           };
           omp = pkgs.callPackage ./packages/omp.nix { };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
+          herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
           rtk = pkgs.callPackage ./packages/rtk.nix { };
           devopsPackages = import ./toolboxes/devops.nix { inherit pkgs; };
           agenticPackages = import ./toolboxes/agentic.nix {
@@ -77,6 +78,7 @@
               pkgs
               omp
               herdr
+              herd
               rtk
               ;
           };

@@ -4,18 +4,18 @@
   fetchurl,
 }:
 let
-  # managed by update-package
+  # managed by update-resource
   version = "0.7.5";
   source =
     {
       x86_64-linux = {
         url = "https://github.com/ogulcancelik/herdr/releases/download/v${version}/herdr-linux-x86_64";
-        # managed by update-package
+        # managed by update-resource
         hash = "sha256-PcgyiAc+TC08Z5ow576XvMqRQcb9F9u7khkULpXFklM=";
       };
       aarch64-darwin = {
         url = "https://github.com/ogulcancelik/herdr/releases/download/v${version}/herdr-macos-aarch64";
-        # managed by update-package
+        # managed by update-resource
         hash = "sha256-NzUFRrABJVWUO5Lq+WJmXeTiZDlbrrRCJ7gBXo/1sNY=";
       };
     }

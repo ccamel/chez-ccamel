@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Update managed binary resources from their latest GitHub release."""
+"""Update managed resources from their upstream source."""
 
 from __future__ import annotations
 
+from collections.abc import Mapping
 import argparse
 import json
 import subprocess
@@ -14,7 +15,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent.parent
-MARKER = "# managed by update-package"
+MARKER = "# managed by update-resource"
 SYSTEMS = ("x86_64-linux", "aarch64-darwin")
 
 
@@ -23,15 +24,30 @@ class UpdateError(Exception):
 
 
 @dataclass(frozen=True)
-class Resource:
+class GitHubReleaseResource:
     repository: str
     file: Path
     assets: tuple[tuple[str, str], ...]
 
 
-RESOURCES = MappingProxyType(
+@dataclass(frozen=True)
+class FetchUrlResource:
+    url: str
+    file: Path
+
+
+Resource = GitHubReleaseResource | FetchUrlResource
+
+
+@dataclass(frozen=True)
+class ResourceUpdate:
+    values: tuple[tuple[str, str], ...]
+    output: tuple[str, ...]
+
+
+RESOURCES: Mapping[str, Resource] = MappingProxyType(
     {
-        "omp": Resource(
+        "omp": GitHubReleaseResource(
             repository="can1357/oh-my-pi",
             file=Path("nix-config/packages/omp.nix"),
             assets=(
@@ -39,13 +55,17 @@ RESOURCES = MappingProxyType(
                 ("aarch64-darwin", "omp-darwin-arm64"),
             ),
         ),
-        "herdr": Resource(
+        "herdr": GitHubReleaseResource(
             repository="ogulcancelik/herdr",
             file=Path("nix-config/packages/herdr.nix"),
             assets=(
                 ("x86_64-linux", "herdr-linux-x86_64"),
                 ("aarch64-darwin", "herdr-macos-aarch64"),
             ),
+        ),
+        "herd": FetchUrlResource(
+            url="https://gist.githubusercontent.com/ccamel/46a021372c326f31fdb3b5a55b238214/raw/herd",
+            file=Path("nix-config/packages/herd.nix"),
         ),
     }
 )
@@ -93,6 +113,42 @@ def prefetch_hash(url: str) -> str:
     return resource_hash
 
 
+def release_update(resource: GitHubReleaseResource) -> ResourceUpdate:
+    tag = latest_release_tag(resource.repository)
+    urls = tuple(
+        (
+            system,
+            f"https://github.com/{resource.repository}/releases/download/{tag}/{asset}",
+        )
+        for system, asset in resource.assets
+    )
+    if tuple(system for system, _ in urls) != SYSTEMS:
+        raise UpdateError(f"{resource.repository} has unsupported asset system ordering")
+
+    hashes = tuple(prefetch_hash(url) for _, url in urls)
+    return ResourceUpdate(
+        values=(("version", tag.removeprefix("v")), *(("hash", resource_hash) for resource_hash in hashes)),
+        output=(
+            f"Tag: {tag}",
+            *(f"{system} URL: {url}\n{system} hash: {resource_hash}" for (system, url), resource_hash in zip(urls, hashes, strict=True)),
+        ),
+    )
+
+
+def fetchurl_update(resource: FetchUrlResource) -> ResourceUpdate:
+    resource_hash = prefetch_hash(resource.url)
+    return ResourceUpdate(
+        values=(("hash", resource_hash),),
+        output=(f"URL: {resource.url}", f"Hash: {resource_hash}"),
+    )
+
+
+def collect_update(resource: Resource) -> ResourceUpdate:
+    if isinstance(resource, GitHubReleaseResource):
+        return release_update(resource)
+    return fetchurl_update(resource)
+
+
 def replacement_line(line: str, name: str, value: str) -> str | None:
     stripped = line.strip()
     prefix = f'{name} = "'
@@ -105,46 +161,47 @@ def replacement_line(line: str, name: str, value: str) -> str | None:
     return f'{indentation}{name} = "{value}";{newline}'
 
 
-def update_marked_values(contents: str, version: str, hashes: tuple[str, str]) -> str:
+def update_marked_values(contents: str, values: tuple[tuple[str, str], ...]) -> str:
     lines = contents.splitlines(keepends=True)
     markers = [index for index, line in enumerate(lines) if line.strip() == MARKER]
-    if len(markers) != 3:
-        raise UpdateError(f"expected exactly three {MARKER!r} markers, found {len(markers)}")
+    if len(markers) != len(values):
+        raise UpdateError(f"expected exactly {len(values)} {MARKER!r} markers, found {len(markers)}")
 
-    version_marker, *hash_markers = markers
-    if version_marker + 1 >= len(lines):
-        raise UpdateError("version marker is not followed by an assignment")
-
-    replacement = replacement_line(lines[version_marker + 1], "version", version)
-    if replacement is None:
-        raise UpdateError('version marker must be followed by version = "...";')
-    lines[version_marker + 1] = replacement
-
-    if len(hash_markers) != 2:
-        raise UpdateError("expected exactly two hash markers")
-    for marker, resource_hash in zip(hash_markers, hashes, strict=True):
+    for marker, (name, value) in zip(markers, values, strict=True):
         if marker + 1 >= len(lines):
-            raise UpdateError("hash marker is not followed by an assignment")
-        replacement = replacement_line(lines[marker + 1], "hash", resource_hash)
+            raise UpdateError(f"{name} marker is not followed by an assignment")
+        replacement = replacement_line(lines[marker + 1], name, value)
         if replacement is None:
-            raise UpdateError('hash marker must be followed by hash = "...";')
+            raise UpdateError(f'{name} marker must be followed by {name} = "...";')
         lines[marker + 1] = replacement
 
     return "".join(lines)
 
 
-def run_post_update_checks(resource: Resource) -> int:
-    expression = (
+def build_expression(resource: Resource) -> str:
+    return (
         "let "
         "flake = builtins.getFlake (toString ./nix-config); "
         "pkgs = import flake.inputs.nixpkgs { system = builtins.currentSystem; }; "
-        f"in pkgs.callPackage ./{resource.file.as_posix()} {{ }}"
+        f"package = import ./{resource.file.as_posix()}; "
+        "arguments = builtins.functionArgs package; "
+        "in pkgs.callPackage package ("
+        "(pkgs.lib.optionalAttrs (arguments ? omp) { "
+        "omp = pkgs.callPackage ./nix-config/packages/omp.nix { }; "
+        "}) // "
+        "(pkgs.lib.optionalAttrs (arguments ? herdr) { "
+        "herdr = pkgs.callPackage ./nix-config/packages/herdr.nix { }; "
+        "})"
+        ")"
     )
+
+
+def run_post_update_checks(resource: Resource) -> int:
     commands = (
         ("formatting", ["just", "fmt"]),
         (
             "targeted Nix build",
-            ["nix", "build", "--no-link", "--impure", "--expr", expression],
+            ["nix", "build", "--no-link", "--impure", "--expr", build_expression(resource)],
         ),
     )
     failed = False
@@ -178,29 +235,15 @@ def main() -> int:
     resource = RESOURCES[args.resource]
 
     try:
-        tag = latest_release_tag(resource.repository)
-        version = tag.removeprefix("v")
-        urls = tuple(
-            (
-                system,
-                f"https://github.com/{resource.repository}/releases/download/{tag}/{asset}",
-            )
-            for system, asset in resource.assets
-        )
-        hashes = tuple(prefetch_hash(url) for _, url in urls)
-        if tuple(system for system, _ in urls) != SYSTEMS:
-            raise UpdateError(f"{args.resource} has unsupported asset system ordering")
-
+        update = collect_update(resource)
         package_file = ROOT / resource.file
-        updated = update_marked_values(package_file.read_text(), version, hashes)
+        updated = update_marked_values(package_file.read_text(), update.values)
     except (OSError, UpdateError) as error:
         print(f"update-resource: {error}", file=sys.stderr)
         return 1
 
-    print(f"Tag: {tag}", flush=True)
-    for (system, url), resource_hash in zip(urls, hashes, strict=True):
-        print(f"{system} URL: {url}", flush=True)
-        print(f"{system} hash: {resource_hash}", flush=True)
+    for line in update.output:
+        print(line, flush=True)
 
     package_file.write_text(updated)
     return run_post_update_checks(resource)
