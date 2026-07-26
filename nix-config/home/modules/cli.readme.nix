@@ -71,4 +71,10 @@
     url = "https://curl.se/";
     visibility = "public";
   }
+  {
+    name = "ImageMagick";
+    description = "Command-line toolkit for image manipulation.";
+    url = "https://imagemagick.org/";
+    visibility = "public";
+  }
 ]

@@ -45,6 +45,7 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [Ghostty](https://ghostty.org/) | Terminal emulator. |
 | [Git](https://git-scm.com/) | Distributed version control system. |
 | [GitHub CLI](https://cli.github.com/) | GitHub's command-line interface. |
+| [ImageMagick](https://imagemagick.org/) | Command-line toolkit for image manipulation. |
 | [jq](https://jqlang.org/) | Command-line JSON processor. |
 | [Neovim](https://neovim.io/) | Editor built around LazyVim. |
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | Fast recursive text search. |

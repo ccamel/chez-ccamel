@@ -43,6 +43,7 @@
     eza
     tree
     file
+    imagemagick
 
     # Data and HTTP
     jq
