@@ -24,7 +24,7 @@ let
 in
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "herdr";
-  version = version;
+  inherit version;
 
   src = fetchurl source;
 

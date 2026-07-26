@@ -26,7 +26,7 @@ let
 in
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "omp";
-  version = version;
+  inherit version;
 
   src = fetchurl source;
 
