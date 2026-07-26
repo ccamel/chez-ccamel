@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration for forge (on WSL2)";
+  description = "NixOS and nix-darwin configurations for multiple hosts and environments";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
