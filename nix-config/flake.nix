@@ -72,6 +72,7 @@
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
           rtk = pkgs.callPackage ./packages/rtk.nix { };
+          livediff = pkgs.callPackage ./packages/livediff.nix { };
           devopsPackages = import ./toolboxes/devops.nix { inherit pkgs; };
           agenticPackages = import ./toolboxes/agentic.nix {
             inherit
@@ -80,6 +81,7 @@
               herdr
               herd
               rtk
+              livediff
               ;
           };
           mkToolbox =

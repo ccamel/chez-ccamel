@@ -4,12 +4,14 @@
   herdr,
   herd,
   rtk,
+  livediff,
 }:
 [
   pkgs.codex
   pkgs.gemini-cli
   pkgs.github-copilot-cli
   rtk
+  livediff
   omp
   herdr
   herd
