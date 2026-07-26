@@ -31,17 +31,18 @@ fmt:
     git ls-files -z -- '*.nix' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style --
     git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#stylua --
 
-# Update all flake inputs.
+# Update all flake inputs and managed binary resources.
 update:
-    nix flake update --flake ./nix-config
+    just update-input
+    just update-resource
 
-# Update one flake input.
-update-input input:
-    nix flake update --flake ./nix-config "{{input}}"
+# Update all flake inputs, or one when specified.
+update-input input='':
+    if test -n "{{input}}"; then nix flake update --flake ./nix-config "{{input}}"; else nix flake update --flake ./nix-config; fi
 
-# Update one managed binary resource.
-update-resource resource:
-    python3 scripts/update-resource.py "{{resource}}"
+# Update all managed binary resources, or one when specified.
+update-resource resource='':
+    if test -n "{{resource}}"; then python3 scripts/update-resource.py "{{resource}}"; else for resource in omp herdr herd; do python3 scripts/update-resource.py "$resource"; done; fi
 
 # Show resolved flake metadata.
 metadata:
