@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  # HerdR's embedded terminal does not apply bold ANSI colours as bright variants.
+  home.sessionVariables.EZA_COLORS = "di=94";
 
   programs = {
     direnv = {

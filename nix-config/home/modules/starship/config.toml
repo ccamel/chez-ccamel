@@ -23,7 +23,7 @@ style = "bold #FF5555"
 # ====================== TOOLBOX ======================
 [env_var.TOOLBOX_NAME]
 format = "via [❄️ $env_value]($style) "
-style = "bold blue"
+style = "bold bright-blue"
 
 # ====================== CHARACTER (VI MODE) ======================
 [character]
