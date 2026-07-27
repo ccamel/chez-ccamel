@@ -29,7 +29,7 @@ check-readme:
 # Verify both tracked secrets decrypt successfully.
 check-secrets:
     cd nix-config && sops --decrypt secrets/git-mine.yaml > /dev/null
-    cd nix-config && sops --decrypt --input-type binary --output-type binary secrets/git-corp-bundle > /dev/null
+    cd nix-config && sops --decrypt secrets/git-corp.yaml > /dev/null
 
 # Run repository checks; secret validation is explicit via check-secrets.
 check: check-fmt check-lua check-readme
@@ -59,7 +59,7 @@ metadata:
 
 # Edit one supported secret.
 edit-secret secret:
-    case "{{secret}}" in git-mine.yaml) cd nix-config && sops secrets/git-mine.yaml ;; git-corp-bundle) cd nix-config && sops --input-type binary --output-type binary secrets/git-corp-bundle ;; *) echo "invalid secret '{{secret}}'; expected git-mine.yaml or git-corp-bundle" >&2; exit 1 ;; esac
+    case "{{secret}}" in git-mine.yaml) cd nix-config && sops secrets/git-mine.yaml ;; git-corp.yaml) cd nix-config && sops secrets/git-corp.yaml ;; *) echo "invalid secret '{{secret}}'; expected git-mine.yaml or git-corp.yaml" >&2; exit 1 ;; esac
 
 # Remove ignored build artifacts.
 clean:
