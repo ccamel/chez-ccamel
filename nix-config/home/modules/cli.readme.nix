@@ -60,6 +60,12 @@
     visibility = "public";
   }
   {
+    name = "Python";
+    description = "General-purpose programming language.";
+    url = "https://www.python.org/";
+    visibility = "public";
+  }
+  {
     name = "yq";
     description = "Portable command-line YAML processor.";
     url = "https://github.com/mikefarah/yq";

@@ -48,6 +48,7 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [ImageMagick](https://imagemagick.org/) | Command-line toolkit for image manipulation. |
 | [jq](https://jqlang.org/) | Command-line JSON processor. |
 | [Neovim](https://neovim.io/) | Editor built around LazyVim. |
+| [Python](https://www.python.org/) | General-purpose programming language. |
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | Fast recursive text search. |
 | [Starship](https://starship.rs/) | Cross-shell prompt. |
 | [Tig](https://jonas.github.io/tig/) | Text-mode interface for Git. |

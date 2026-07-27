@@ -47,9 +47,12 @@
     file
     imagemagick
 
-    # Data and HTTP
+    # Data and scripting
     jq
     yq-go
+    python3
+
+    # HTTP
     curl
     wget
 
