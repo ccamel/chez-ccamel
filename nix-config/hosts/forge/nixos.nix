@@ -2,6 +2,10 @@
 {
   wsl.enable = true;
   wsl.defaultUser = "chris";
+  virtualisation.docker = {
+    enable = true;
+    package = pkgs.docker_29;
+  };
 
   networking.hostName = "forge";
   security.pki.certificateFiles = [ ../../assets/zscaler-root-ca.pem ];
@@ -43,7 +47,10 @@
     isNormalUser = true;
     home = "/home/chris";
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "wheel"
+      "docker"
+    ];
   };
 
   home-manager = {
