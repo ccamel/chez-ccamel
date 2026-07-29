@@ -48,6 +48,12 @@
     visibility = "public";
   }
   {
+    name = "Glow";
+    description = "Terminal markdown reader.";
+    url = "https://github.com/charmbracelet/glow";
+    visibility = "public";
+  }
+  {
     name = "ripgrep";
     description = "Fast recursive text search.";
     url = "https://github.com/BurntSushi/ripgrep";

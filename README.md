@@ -45,6 +45,7 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [Ghostty](https://ghostty.org/) | Terminal emulator. |
 | [Git](https://git-scm.com/) | Distributed version control system. |
 | [GitHub CLI](https://cli.github.com/) | GitHub's command-line interface. |
+| [Glow](https://github.com/charmbracelet/glow) | Terminal markdown reader. |
 | [ImageMagick](https://imagemagick.org/) | Command-line toolkit for image manipulation. |
 | [jq](https://jqlang.org/) | Command-line JSON processor. |
 | [lazydocker](https://github.com/jesseduffield/lazydocker) | Terminal UI for Docker. |

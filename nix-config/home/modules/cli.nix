@@ -45,6 +45,7 @@
     eza
     tree
     file
+    glow
     imagemagick
 
     # Data and scripting
