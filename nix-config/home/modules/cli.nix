@@ -62,6 +62,7 @@
     procs
     which
     just
+    lazydocker
 
     age
     gnupg

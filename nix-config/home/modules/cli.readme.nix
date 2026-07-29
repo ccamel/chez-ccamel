@@ -30,6 +30,12 @@
     visibility = "public";
   }
   {
+    name = "lazydocker";
+    description = "Terminal UI for Docker.";
+    url = "https://github.com/jesseduffield/lazydocker";
+    visibility = "public";
+  }
+  {
     name = "Dust";
     description = "Intuitive disk usage analyzer.";
     url = "https://github.com/bootandy/dust";
