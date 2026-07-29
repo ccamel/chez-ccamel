@@ -1,0 +1,8 @@
+onboarding = false
+
+[experimental]
+pane_history = false
+
+[theme]
+name = "vesper"
+auto_switch = false

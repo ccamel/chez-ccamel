@@ -63,6 +63,15 @@
     };
   }
   {
+    package = { shepherdr, ... }: shepherdr;
+    documentation = {
+      name = "shepherdr";
+      description = "Herdr plugin for auditable delegated coding agents.";
+      url = "https://github.com/afogel/shepherdr";
+      visibility = "public";
+    };
+  }
+  {
     package = { herd, ... }: herd;
     documentation = {
       name = "Herd";

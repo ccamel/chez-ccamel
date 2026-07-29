@@ -1,0 +1,46 @@
+id = "afogel.shepherdr"
+name = "shepherdr"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Shepherd delegated coding agents into visible, auditable herdr panes you can watch, resume, and take over"
+platforms = ["linux", "macos"]
+
+[[actions]]
+id = "second-opinion"
+title = "Second opinion (codex reviews this diff)"
+contexts = ["workspace", "pane"]
+command = ["shepherdr", "action", "second-opinion"]
+
+[[actions]]
+id = "resume-last"
+title = "Resume last dispatch (reopen newest session, headed)"
+contexts = ["workspace", "pane"]
+command = ["shepherdr", "action", "resume-last"]
+
+[[actions]]
+id = "noop"
+title = "Noop"
+contexts = ["workspace"]
+command = ["shepherdr", "action", "noop"]
+
+[[panes]]
+id = "board"
+title = "Workers board"
+placement = "overlay"
+command = ["shepherdr", "board"]
+
+[[events]]
+on = "worktree.created"
+command = ["shepherdr", "event", "worktree-created"]
+
+[[keys.command]]
+key = "prefix+r"
+type = "plugin_action"
+command = "afogel.shepherdr.second-opinion"
+description = "codex second opinion on the focused diff"
+
+[[keys.command]]
+key = "prefix+shift+r"
+type = "plugin_action"
+command = "afogel.shepherdr.resume-last"
+description = "resume the newest resumable dispatch in a headed pane"

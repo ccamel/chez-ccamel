@@ -71,6 +71,7 @@
           };
           omp = pkgs.callPackage ./packages/omp.nix { };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
+          shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
           rtk = pkgs.callPackage ./packages/rtk.nix { };
           livediff = pkgs.callPackage ./packages/livediff.nix { };
@@ -81,6 +82,7 @@
               pkgs
               omp
               herdr
+              shepherdr
               herd
               rtk
               livediff
