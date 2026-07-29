@@ -8,7 +8,7 @@
 
   programs.git.includes = [
     {
-      path = config.sops.secrets."git-corp-config".path;
+      inherit (config.sops.secrets."git-corp-config") path;
     }
   ];
 }
