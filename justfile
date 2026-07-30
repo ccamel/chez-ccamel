@@ -25,7 +25,6 @@ generate-readme:
 check-readme:
     python3 scripts/generate-readme.py --check
 
-
 # Verify both tracked secrets decrypt successfully.
 check-secrets:
     cd nix-config && sops --decrypt secrets/git-mine.yaml > /dev/null

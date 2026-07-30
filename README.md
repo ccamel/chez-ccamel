@@ -84,6 +84,7 @@ Infrastructure and platform engineering.
 <!-- BEGIN_GENERATED_DEVOPS -->
 | Tool | Description |
 | --- | --- |
+| [gcloud](https://cloud.google.com/sdk/gcloud) | Google Cloud command-line interface. |
 | [Helm](https://helm.sh/) | Kubernetes package manager. |
 | [Helmfile](https://helmfile.readthedocs.io/) | Declarative Helm chart deployment tool. |
 | [k9s](https://k9scli.io/) | Terminal UI for Kubernetes. |

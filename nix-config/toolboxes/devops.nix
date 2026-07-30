@@ -45,6 +45,15 @@
     };
   }
   {
+    package = { pkgs, ... }: pkgs.google-cloud-sdk;
+    documentation = {
+      name = "gcloud";
+      description = "Google Cloud command-line interface.";
+      url = "https://cloud.google.com/sdk/gcloud";
+      visibility = "public";
+    };
+  }
+  {
     package = { pkgs, ... }: pkgs.terraform;
     documentation = {
       name = "Terraform";
