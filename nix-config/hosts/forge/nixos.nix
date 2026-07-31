@@ -2,6 +2,7 @@
 {
   wsl.enable = true;
   wsl.defaultUser = "chris";
+  wsl.interop.register = true;
   virtualisation.docker = {
     enable = true;
     package = pkgs.docker_29;

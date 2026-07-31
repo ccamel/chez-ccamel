@@ -5,3 +5,18 @@
 
 vim.opt.shell = "zsh"
 vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+
+if vim.fn.has("wsl") == 1 then
+  vim.g.clipboard = {
+    name = "WSL",
+    copy = {
+      ["+"] = { "clip.exe" },
+      ["*"] = { "clip.exe" },
+    },
+    paste = {
+      ["+"] = { "powershell.exe", "-NoProfile", "-NoLogo", "-Command", "Get-Clipboard" },
+      ["*"] = { "powershell.exe", "-NoProfile", "-NoLogo", "-Command", "Get-Clipboard" },
+    },
+    cache_enabled = 0,
+  }
+end
