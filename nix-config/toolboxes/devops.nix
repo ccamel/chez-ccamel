@@ -45,7 +45,11 @@
     };
   }
   {
-    package = { pkgs, ... }: pkgs.google-cloud-sdk;
+    package =
+      { pkgs, ... }:
+      pkgs.google-cloud-sdk.withExtraComponents (
+        with pkgs.google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
+      );
     documentation = {
       name = "gcloud";
       description = "Google Cloud command-line interface.";
