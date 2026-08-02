@@ -32,7 +32,7 @@ check-secrets:
 
 # Run repository checks; secret validation is explicit via check-secrets.
 check: check-fmt check-lua check-readme
-    cd nix-config && nix flake check . && nix run --inputs-from . nixpkgs#statix -- check .
+    cd nix-config && nix flake check --all-systems . && nix run --inputs-from . nixpkgs#statix -- check .
 
 # Format tracked Nix files.
 fmt:
