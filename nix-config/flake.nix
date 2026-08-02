@@ -60,7 +60,7 @@
       };
 
       formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
-      readmeDocumentation = import ./readme-metadata.nix;
+      lib.readmeDocumentation = import ./readme-metadata.nix;
 
       devShells = forEachSystem (
         system:

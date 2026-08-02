@@ -1,8 +1,10 @@
 { inputs, pkgs, ... }:
 {
-  wsl.enable = true;
-  wsl.defaultUser = "chris";
-  wsl.interop.register = true;
+  wsl = {
+    enable = true;
+    defaultUser = "chris";
+    interop.register = true;
+  };
   virtualisation.docker = {
     enable = true;
     package = pkgs.docker_29;

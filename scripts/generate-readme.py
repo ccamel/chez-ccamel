@@ -25,7 +25,7 @@ class GenerationError(Exception):
 
 def evaluate_metadata(repository_root: Path) -> Any:
     result = subprocess.run(
-        ["nix", "eval", "--json", "./nix-config#readmeDocumentation"],
+        ["nix", "eval", "--json", "./nix-config#lib.readmeDocumentation"],
         cwd=repository_root,
         capture_output=True,
         text=True,
