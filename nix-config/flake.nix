@@ -90,20 +90,27 @@
           };
           devopsPackages = map (descriptor: descriptor.package toolboxArgs) devopsToolbox;
           agenticPackages = map (descriptor: descriptor.package toolboxArgs) agenticToolbox;
+          herdrOmpIntegrationHook = ''
+            mkdir -p "$HOME/.omp/agent/extensions"
+            herdr integration install omp
+          '';
           mkToolbox =
-            name: packages:
+            name: packages: shellHook:
             pkgs.mkShell {
               inherit packages;
               shellHook = ''
                 export SHELL="${pkgs.zsh}/bin/zsh"
                 export TOOLBOX_NAME="${name}"
+                ${shellHook}
               '';
             };
         in
         {
-          devops = mkToolbox "devops" devopsPackages;
-          agentic = mkToolbox "agentic" agenticPackages;
-          agentic-devops = mkToolbox "agentic-devops" (agenticPackages ++ devopsPackages);
+          devops = mkToolbox "devops" devopsPackages "";
+          agentic = mkToolbox "agentic" agenticPackages herdrOmpIntegrationHook;
+          agentic-devops = mkToolbox "agentic-devops" (
+            agenticPackages ++ devopsPackages
+          ) herdrOmpIntegrationHook;
         }
       );
 
