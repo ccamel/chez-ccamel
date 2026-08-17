@@ -11,7 +11,7 @@ let
   src = fetchurl {
     url = "https://gist.githubusercontent.com/ccamel/46a021372c326f31fdb3b5a55b238214/raw/herd";
     # managed by update-resource
-    hash = "sha256-kkEejxQva3n7FM2FIZZEDeOP+pfq1gf9cMWaFmOE92k=";
+    hash = "sha256-GzzvNsf59ckYiMIb5JG2/LcrKpIikTV+5ojL3FfOuCE=";
   };
 in
 writeShellApplication {
