@@ -95,4 +95,10 @@
     url = "https://imagemagick.org/";
     visibility = "public";
   }
+  {
+    name = "ExifTool";
+    description = "Command-line toolkit for metadata manipulation.";
+    url = "https://exiftool.org/";
+    visibility = "public";
+  }
 ]

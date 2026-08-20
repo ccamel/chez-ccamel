@@ -39,6 +39,7 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [curl](https://curl.se/) | Command-line HTTP client. |
 | [direnv](https://direnv.net/) | Directory-scoped environment variables. |
 | [Dust](https://github.com/bootandy/dust) | Intuitive disk usage analyzer. |
+| [ExifTool](https://exiftool.org/) | Command-line toolkit for metadata manipulation. |
 | [eza](https://eza.rocks/) | Modern replacement for ls. |
 | [fd](https://github.com/sharkdp/fd) | Fast, user-friendly file finder. |
 | [fzf](https://github.com/junegunn/fzf) | Fuzzy finder for the command line. |

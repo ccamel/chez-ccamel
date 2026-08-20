@@ -47,7 +47,7 @@
     file
     glow
     imagemagick
-
+    exiftool
     # Data and scripting
     jq
     yq-go
