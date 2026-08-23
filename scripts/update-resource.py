@@ -80,7 +80,7 @@ def latest_release_tag(repository: str) -> str:
 
 
     try:
-        with urlopen(request) as response:  # noqa: S310: GitHub API URL is constructed above.
+        with urlopen(request) as response:  # noqa: S310  # GitHub API URL is constructed above.
             payload = json.load(response)
     except (HTTPError, URLError, OSError, json.JSONDecodeError) as error:
         raise UpdateError(f"could not fetch the latest release for {repository}: {error}") from error
