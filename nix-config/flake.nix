@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-codex.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
@@ -69,6 +70,11 @@
             inherit system;
             config.allowUnfree = true;
           };
+          codexPkgs = import inputs.nixpkgs-codex {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
           omp = pkgs.callPackage ./packages/omp.nix { };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
@@ -87,6 +93,9 @@
               rtk
               livediff
               ;
+            codex = codexPkgs.codex;
+            geminiCli = codexPkgs.gemini-cli;
+            githubCopilotCli = codexPkgs.github-copilot-cli;
           };
           devopsPackages = map (descriptor: descriptor.package toolboxArgs) devopsToolbox;
           agenticPackages = map (descriptor: descriptor.package toolboxArgs) agenticToolbox;

@@ -55,6 +55,14 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
                 ("aarch64-darwin", "omp-darwin-arm64"),
             ),
         ),
+        "rtk": GitHubReleaseResource(
+            repository="rtk-ai/rtk",
+            file=Path("nix-config/packages/rtk.nix"),
+            assets=(
+                ("x86_64-linux", "rtk-x86_64-unknown-linux-musl.tar.gz"),
+                ("aarch64-darwin", "rtk-aarch64-apple-darwin.tar.gz"),
+            ),
+        ),
         "herdr": GitHubReleaseResource(
             repository="ogulcancelik/herdr",
             file=Path("nix-config/packages/herdr.nix"),

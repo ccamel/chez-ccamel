@@ -1,6 +1,6 @@
 [
   {
-    package = { pkgs, ... }: pkgs.codex;
+    package = { codex, ... }: codex;
     documentation = {
       name = "Codex";
       description = "OpenAI coding agent.";
@@ -9,7 +9,7 @@
     };
   }
   {
-    package = { pkgs, ... }: pkgs.gemini-cli;
+    package = { geminiCli, ... }: geminiCli;
     documentation = {
       name = "Gemini CLI";
       description = "Google AI coding agent.";
@@ -18,7 +18,7 @@
     };
   }
   {
-    package = { pkgs, ... }: pkgs.github-copilot-cli;
+    package = { githubCopilotCli, ... }: githubCopilotCli;
     documentation = {
       name = "GitHub Copilot CLI";
       description = "GitHub Copilot coding agent.";
