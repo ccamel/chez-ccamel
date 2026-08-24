@@ -3,6 +3,12 @@
   # HerdR's embedded terminal does not apply bold ANSI colours as bright variants.
   home.sessionVariables.EZA_COLORS = "di=94";
 
+  home.sessionPath = [
+    "$HOME/.local/bin"
+  ];
+
+  home.file.".local/bin/.keep".text = "";
+
   programs = {
     direnv = {
       enable = true;
