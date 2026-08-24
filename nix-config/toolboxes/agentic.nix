@@ -9,11 +9,11 @@
     };
   }
   {
-    package = { geminiCli, ... }: geminiCli;
+    package = { antigravityCli, ... }: antigravityCli;
     documentation = {
-      name = "Gemini CLI";
-      description = "Google AI coding agent.";
-      url = "https://github.com/google-gemini/gemini-cli";
+      name = "Antigravity CLI";
+      description = "Google's terminal-native agentic coding CLI.";
+      url = "https://antigravity.google/product/antigravity-cli";
       visibility = "public";
     };
   }

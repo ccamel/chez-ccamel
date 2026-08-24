@@ -94,7 +94,7 @@
               livediff
               ;
             inherit (codexPkgs) codex;
-            geminiCli = codexPkgs.gemini-cli;
+            antigravityCli = codexPkgs.antigravity-cli;
             githubCopilotCli = codexPkgs.github-copilot-cli;
           };
           devopsPackages = map (descriptor: descriptor.package toolboxArgs) devopsToolbox;
