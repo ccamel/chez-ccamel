@@ -1,13 +1,45 @@
 { config, pkgs, ... }:
 {
-  # HerdR's embedded terminal does not apply bold ANSI colours as bright variants.
-  home.sessionVariables.EZA_COLORS = "di=94";
+  home = {
+    # HerdR's embedded terminal does not apply bold ANSI colours as bright variants.
+    sessionVariables.EZA_COLORS = "di=94";
+    sessionPath = [ "$HOME/.local/bin" ];
+    file.".local/bin/.keep".text = "";
 
-  home.sessionPath = [
-    "$HOME/.local/bin"
-  ];
+    packages = with pkgs; [
+      # Search and navigation
+      ripgrep
+      fd
 
-  home.file.".local/bin/.keep".text = "";
+      # Files and output
+      eza
+      tree
+      file
+      glow
+      imagemagick
+      exiftool
+      # Data and scripting
+      jq
+      yq-go
+      python3
+
+      # HTTP
+      curl
+      wget
+
+      # System
+      btop
+      dust
+      procs
+      which
+      just
+      lazydocker
+
+      age
+      gnupg
+      sops
+    ];
+  };
 
   programs = {
     direnv = {
@@ -42,37 +74,4 @@
     };
   };
 
-  home.packages = with pkgs; [
-    # Search and navigation
-    ripgrep
-    fd
-
-    # Files and output
-    eza
-    tree
-    file
-    glow
-    imagemagick
-    exiftool
-    # Data and scripting
-    jq
-    yq-go
-    python3
-
-    # HTTP
-    curl
-    wget
-
-    # System
-    btop
-    dust
-    procs
-    which
-    just
-    lazydocker
-
-    age
-    gnupg
-    sops
-  ];
 }

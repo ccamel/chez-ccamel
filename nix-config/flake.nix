@@ -93,7 +93,7 @@
               rtk
               livediff
               ;
-            codex = codexPkgs.codex;
+            inherit (codexPkgs) codex;
             geminiCli = codexPkgs.gemini-cli;
             githubCopilotCli = codexPkgs.github-copilot-cli;
           };
