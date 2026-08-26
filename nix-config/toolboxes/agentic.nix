@@ -54,6 +54,15 @@
     };
   }
   {
+    package = { qmd, ... }: qmd;
+    documentation = {
+      name = "QMD";
+      description = "On-device search engine for markdown notes, meeting transcripts, and knowledge bases.";
+      url = "https://github.com/tobi/qmd";
+      visibility = "public";
+    };
+  }
+  {
     package = { herdr, ... }: herdr;
     documentation = {
       name = "HerdR";

@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-codex.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     omp.url = "github:can1357/oh-my-pi";
+    qmd.url = "github:tobi/qmd";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
@@ -33,7 +34,11 @@
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
     let
       supportedSystems = [
         "x86_64-linux"
@@ -77,6 +82,7 @@
           };
 
           inherit (inputs.omp.packages.${system}) omp;
+          inherit (inputs.qmd.packages.${system}) qmd;
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
@@ -93,6 +99,7 @@
               herd
               rtk
               livediff
+              qmd
               ;
             inherit (codexPkgs) codex;
             antigravityCli = codexPkgs.antigravity-cli;

@@ -74,6 +74,7 @@ The terminal-native tools I've chosen for agentic software engineering.
 | [HerdR](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
 | [Livediff](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
 | [OMP](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
+| [QMD](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
 | [rtk](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
 | [shepherdr](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
 <!-- END_GENERATED_AGENTIC -->
