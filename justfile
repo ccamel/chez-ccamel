@@ -10,7 +10,7 @@ switch host=`hostname -s`:
 
 # Check formatting of tracked Nix files.
 check-fmt:
-    git ls-files -z -- '*.nix' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style -- --check
+    git ls-files -z -- '*.nix' | while IFS= read -r -d '' file; do if test -f "$file"; then printf '%s\0' "$file"; fi; done | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style -- --check
 
 # Check formatting and linting of tracked Lua files.
 check-lua:
@@ -36,7 +36,7 @@ check: check-fmt check-lua check-readme
 
 # Format tracked Nix files.
 fmt:
-    git ls-files -z -- '*.nix' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style --
+    git ls-files -z -- '*.nix' | while IFS= read -r -d '' file; do if test -f "$file"; then printf '%s\0' "$file"; fi; done | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style --
     git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#stylua --
 
 # Update all flake inputs and managed binary resources.
