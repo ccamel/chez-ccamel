@@ -1,10 +1,14 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
+let
+  ompUndoRedo = pkgs.callPackage ../../../packages/omp-undo-redo.nix { };
+in
 {
   imports = [ inputs.omp.homeManagerModules.default ];
 
   programs.omp = {
     enable = true;
     settings = {
+      extensions = [ "${ompUndoRedo}" ];
       symbolPreset = "nerd";
       theme.dark = "titanium";
       setupVersion = 2;
