@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-codex.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    omp.url = "github:can1357/oh-my-pi";
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
@@ -75,7 +76,7 @@
             config.allowUnfree = true;
           };
 
-          omp = pkgs.callPackage ./packages/omp.nix { };
+          inherit (inputs.omp.packages.${system}) omp;
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
