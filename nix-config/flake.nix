@@ -107,9 +107,24 @@
           };
           devopsPackages = map (descriptor: descriptor.package toolboxArgs) devopsToolbox;
           agenticPackages = map (descriptor: descriptor.package toolboxArgs) agenticToolbox;
-          herdrOmpIntegrationHook = ''
-            mkdir -p "$HOME/.omp/agent/extensions"
+          ompConfig = (pkgs.formats.yaml { }).generate "omp-config.yml" (
+            import ./toolboxes/omp.nix { inherit pkgs; }
+          );
+          herdrShellHook = ''
+            configHome="''${XDG_CONFIG_HOME:-$HOME/.config}"
+            dataHome="''${XDG_DATA_HOME:-$HOME/.local/share}"
+            ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/config.toml} "$configHome/herdr/config.toml"
+            ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/herdr-plugin.toml} "$dataHome/herdr/plugins/shepherdr/herdr-plugin.toml"
+            herdr plugin link "$dataHome/herdr/plugins/shepherdr" --enabled
+          '';
+          ompShellHook = ''
+            ${pkgs.coreutils}/bin/mkdir -p "$HOME/.omp/agent/extensions"
+            ${pkgs.coreutils}/bin/install -m 600 ${ompConfig} "$HOME/.omp/agent/config.yml"
             herdr integration install omp
+          '';
+          agenticShellHook = ''
+            ${herdrShellHook}
+            ${ompShellHook}
           '';
           mkToolbox =
             name: packages: shellHook:
@@ -124,10 +139,8 @@
         in
         {
           devops = mkToolbox "devops" devopsPackages "";
-          agentic = mkToolbox "agentic" agenticPackages herdrOmpIntegrationHook;
-          agentic-devops = mkToolbox "agentic-devops" (
-            agenticPackages ++ devopsPackages
-          ) herdrOmpIntegrationHook;
+          agentic = mkToolbox "agentic" agenticPackages agenticShellHook;
+          agentic-devops = mkToolbox "agentic-devops" (agenticPackages ++ devopsPackages) agenticShellHook;
         }
       );
 
