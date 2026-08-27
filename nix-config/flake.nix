@@ -87,6 +87,7 @@
             src = inputs.qmd;
           };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
+          herdrAnnotate = pkgs.callPackage ./packages/herdr-annotate.nix { };
           shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
           rtk = pkgs.callPackage ./packages/rtk.nix { };
@@ -98,6 +99,7 @@
               pkgs
               omp
               herdr
+              herdrAnnotate
               shepherdr
               herd
               rtk
@@ -118,6 +120,11 @@
             dataHome="''${XDG_DATA_HOME:-$HOME/.local/share}"
             ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/config.toml} "$configHome/herdr/config.toml"
             ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/herdr-plugin.toml} "$dataHome/herdr/plugins/shepherdr/herdr-plugin.toml"
+            ${pkgs.coreutils}/bin/rm -rf "$dataHome/herdr/plugins/annotate"
+            ${pkgs.coreutils}/bin/mkdir -p "$dataHome/herdr/plugins"
+            ${pkgs.coreutils}/bin/cp -R ${herdrAnnotate} "$dataHome/herdr/plugins/annotate"
+            ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/annotate"
+            herdr plugin link "$dataHome/herdr/plugins/annotate" --enabled
             herdr plugin link "$dataHome/herdr/plugins/shepherdr" --enabled
           '';
           ompShellHook = ''

@@ -72,6 +72,15 @@
     };
   }
   {
+    package = { herdrAnnotate, ... }: herdrAnnotate;
+    documentation = {
+      name = "HerdR Annotate";
+      description = "Annotate terminal selections and copy them as agent context.";
+      url = "https://github.com/plannotator/herdr-annotate";
+      visibility = "public";
+    };
+  }
+  {
     package = { shepherdr, ... }: shepherdr;
     documentation = {
       name = "shepherdr";

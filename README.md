@@ -72,6 +72,7 @@ The terminal-native tools I've chosen for agentic software engineering.
 | [GitHub Copilot CLI](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
 | [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
 | [HerdR](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
+| [HerdR Annotate](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
 | [Livediff](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
 | [OMP](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
 | [QMD](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
