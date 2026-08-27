@@ -82,7 +82,10 @@
           };
 
           inherit (inputs.omp.packages.${system}) omp;
-          inherit (inputs.qmd.packages.${system}) qmd;
+          qmd = pkgs.callPackage ./packages/qmd.nix {
+            upstreamQmd = inputs.qmd.packages.${system}.qmd;
+            src = inputs.qmd;
+          };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
