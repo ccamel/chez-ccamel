@@ -11,12 +11,28 @@ let
 
   # Bun ships its own root store and ignores the system one, so a TLS-intercepting
   # proxy breaks `bun install` inside the sandbox. Nix bind-mounts the daemon's
-  # `ssl-cert-file` here for fixed-output derivations, so this hands Bun exactly the
-  # trust the host is configured with: the Zscaler-augmented bundle on forge, the
-  # plain roots elsewhere. `NIX_SSL_CERT_FILE` is deliberately `/no-cert-file.crt`
-  # in the sandbox, so the literal path is the only reliable handle. node_modules
-  # stays content-addressed, so every host still produces identical output.
+  # `ssl-cert-file` here for fixed-output derivations. `NIX_SSL_CERT_FILE` is
+  # deliberately `/no-cert-file.crt` in the sandbox, so the literal path is the
+  # reliable handle. node_modules includes platform-native binaries, so its
+  # fixed-output hash is intentionally platform-specific.
   hostCaBundle = "/etc/ssl/certs/ca-certificates.crt";
+
+  nodeModulesHashes = {
+    x86_64-linux = "sha256-jvq2TO0SxEV1BHyT6C32VQ916wMTM/D1nsV2rNcJQSo=";
+    aarch64-darwin = "sha256-9vvR3KLmBc+4bfyWEyyM8FHWg+DfiDzUlwqUlm3NFc8=";
+  };
+  targetPlatform =
+    {
+      x86_64-linux = {
+        os = "linux";
+        cpu = "x64";
+      };
+      aarch64-darwin = {
+        os = "darwin";
+        cpu = "arm64";
+      };
+    }
+    .${stdenvNoCC.hostPlatform.system};
 
   nodeModules = stdenvNoCC.mkDerivation {
     pname = "qmd-node-modules";
@@ -39,6 +55,8 @@ let
       bun install \
         --backend copyfile \
         --network-concurrency 4 \
+        --os ${targetPlatform.os} \
+        --cpu ${targetPlatform.cpu} \
         --frozen-lockfile \
         --ignore-scripts \
         --no-progress \
@@ -51,7 +69,7 @@ let
     '';
 
     dontFixup = true;
-    outputHash = "sha256-jvq2TO0SxEV1BHyT6C32VQ916wMTM/D1nsV2rNcJQSo=";
+    outputHash = nodeModulesHashes.${stdenvNoCC.hostPlatform.system};
     outputHashAlgo = "sha256";
     outputHashMode = "recursive";
   };
