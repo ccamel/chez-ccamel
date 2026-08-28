@@ -9,6 +9,15 @@
     };
   }
   {
+    package = { pkgs, ... }: pkgs.claude-code;
+    documentation = {
+      name = "Claude Code";
+      description = "Anthropic's agentic coding CLI.";
+      url = "https://docs.anthropic.com/en/docs/claude-code/overview";
+      visibility = "public";
+    };
+  }
+  {
     package = { antigravityCli, ... }: antigravityCli;
     documentation = {
       name = "Antigravity CLI";

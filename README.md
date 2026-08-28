@@ -68,6 +68,7 @@ The terminal-native tools I've chosen for agentic software engineering.
 | Tool | Description |
 | --- | --- |
 | [Antigravity CLI](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
+| [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding CLI. |
 | [Codex](https://openai.com/codex/) | OpenAI coding agent. |
 | [GitHub Copilot CLI](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
 | [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
