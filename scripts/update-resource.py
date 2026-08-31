@@ -189,7 +189,7 @@ def build_expression(resource: Resource) -> str:
         "arguments = builtins.functionArgs package; "
         "in pkgs.callPackage package ("
         "(pkgs.lib.optionalAttrs (arguments ? omp) { "
-        "omp = pkgs.callPackage ./nix-config/packages/omp.nix { }; "
+        "omp = flake.inputs.omp.packages.${builtins.currentSystem}.omp; "
         "}) // "
         "(pkgs.lib.optionalAttrs (arguments ? herdr) { "
         "herdr = pkgs.callPackage ./nix-config/packages/herdr.nix { }; "
