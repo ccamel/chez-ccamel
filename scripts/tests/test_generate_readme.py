@@ -4,6 +4,7 @@ import importlib.util
 import tempfile
 import unittest
 from pathlib import Path
+from typing import Any
 from unittest.mock import patch
 
 
@@ -23,10 +24,19 @@ def item(name: str, description: str, visibility: str = "public") -> dict[str, s
     }
 
 
-def metadata() -> dict[str, list[dict[str, str]]]:
+def metadata() -> dict[str, Any]:
     return {
         "core": [item("beta", "Beta | description"), item("Alpha", "Alpha", "public"), item("Hidden", "Hidden", "private")],
-        "agentic": [item("Agent", "Agent")],
+        "agentic": {
+            "description": "Agentic context",
+            "groups": [
+                {
+                    "name": "Harnesses",
+                    "description": "Harness context",
+                    "items": [item("Agent", "Agent")],
+                }
+            ],
+        },
         "devops": [item("DevOps", "DevOps")],
     }
 
@@ -64,6 +74,48 @@ class GenerateReadmeTest(unittest.TestCase):
             ),
         )
         self.assertNotIn("Hidden", table)
+
+    def test_render_tables_groups_agentic_components(self) -> None:
+        grouped_metadata = metadata()
+        grouped_metadata["agentic"]["groups"].append(
+            {
+                "name": "Extensions",
+                "description": "Extension context",
+                "items": [item("Extension", "Extension")],
+            }
+        )
+
+        self.assertEqual(
+            GENERATOR.render_tables(grouped_metadata)["agentic"],
+            "\n".join(
+                (
+                    "Agentic context",
+                    "",
+                    "#### Harnesses",
+                    "",
+                    "Harness context",
+                    "",
+                    "| Component | Role |",
+                    "| --- | --- |",
+                    "| [Agent](https://example.invalid/Agent) | Agent |",
+                    "",
+                    "#### Extensions",
+                    "",
+                    "Extension context",
+                    "",
+                    "| Component | Role |",
+                    "| --- | --- |",
+                    "| [Extension](https://example.invalid/Extension) | Extension |",
+                )
+            ),
+        )
+
+    def test_rejects_agentic_group_without_public_components(self) -> None:
+        grouped_metadata = metadata()
+        grouped_metadata["agentic"]["groups"][0]["items"] = [item("Hidden", "Hidden", "private")]
+
+        with self.assertRaisesRegex(GENERATOR.GenerationError, "agentic group 'Harnesses' metadata"):
+            GENERATOR.render_tables(grouped_metadata)
 
     def test_replacement_preserves_all_manual_text(self) -> None:
         tables = {"core": "core table", "agentic": "agentic table", "devops": "devops table"}

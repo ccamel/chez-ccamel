@@ -1,6 +1,7 @@
 [
   {
     package = { codex, ... }: codex;
+    readmeGroup = "Coding agents";
     documentation = {
       name = "Codex";
       description = "OpenAI coding agent.";
@@ -10,6 +11,7 @@
   }
   {
     package = { pkgs, ... }: pkgs.claude-code;
+    readmeGroup = "Coding agents";
     documentation = {
       name = "Claude Code";
       description = "Anthropic's agentic coding CLI.";
@@ -19,6 +21,7 @@
   }
   {
     package = { antigravityCli, ... }: antigravityCli;
+    readmeGroup = "Coding agents";
     documentation = {
       name = "Antigravity CLI";
       description = "Google's terminal-native agentic coding CLI.";
@@ -28,6 +31,7 @@
   }
   {
     package = { githubCopilotCli, ... }: githubCopilotCli;
+    readmeGroup = "Coding agents";
     documentation = {
       name = "GitHub Copilot CLI";
       description = "GitHub Copilot coding agent.";
@@ -37,6 +41,7 @@
   }
   {
     package = { rtk, ... }: rtk;
+    readmeGroup = "Operating tools";
     documentation = {
       name = "rtk";
       description = "Command-output optimizer.";
@@ -46,6 +51,7 @@
   }
   {
     package = { livediff, ... }: livediff;
+    readmeGroup = "Operating tools";
     documentation = {
       name = "Livediff";
       description = "Watch file diffs live in the terminal.";
@@ -55,6 +61,7 @@
   }
   {
     package = { omp, ... }: omp;
+    readmeGroup = "Harnesses";
     documentation = {
       name = "OMP";
       description = "Terminal-first AI coding agent.";
@@ -80,6 +87,7 @@
   }
   {
     package = { qmd, ... }: qmd;
+    readmeGroup = "Operating tools";
     documentation = {
       name = "QMD";
       description = "On-device search engine for markdown notes, meeting transcripts, and knowledge bases.";
@@ -89,6 +97,7 @@
   }
   {
     package = { herdr, ... }: herdr;
+    readmeGroup = "Harnesses";
     documentation = {
       name = "HerdR";
       description = "Terminal-native multiplexer for AI coding agents.";
@@ -98,6 +107,7 @@
   }
   {
     package = { herdrAnnotate, ... }: herdrAnnotate;
+    readmeGroup = "Extensions and integrations";
     documentation = {
       name = "HerdR Annotate";
       description = "Annotate terminal selections and copy them as agent context.";
@@ -107,6 +117,7 @@
   }
   {
     package = { shepherdr, ... }: shepherdr;
+    readmeGroup = "Extensions and integrations";
     documentation = {
       name = "shepherdr";
       description = "Herdr plugin for auditable delegated coding agents.";
@@ -116,6 +127,7 @@
   }
   {
     package = { herd, ... }: herd;
+    readmeGroup = "Operating tools";
     documentation = {
       name = "Herd";
       description = "Coordinate multiple AI coding agents.";

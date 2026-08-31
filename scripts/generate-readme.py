@@ -16,6 +16,8 @@ from typing import Any
 
 SECTIONS = ("core", "agentic", "devops")
 FIELDS = frozenset(("name", "description", "url", "visibility"))
+GROUP_FIELDS = frozenset(("name", "description", "items"))
+AGENTIC_FIELDS = frozenset(("description", "groups"))
 VISIBILITIES = frozenset(("public", "private"))
 
 
@@ -41,40 +43,75 @@ def evaluate_metadata(repository_root: Path) -> Any:
         raise GenerationError(f"Nix evaluation did not return valid JSON: {error}") from error
 
 
-def validate_metadata(metadata: Any) -> dict[str, list[dict[str, str]]]:
+def validate_items(section: str, items: Any) -> list[dict[str, str]]:
+    if not isinstance(items, list):
+        raise GenerationError(f"{section} metadata must be a list")
+
+    names: set[str] = set()
+    public_items = 0
+    validated_items: list[dict[str, str]] = []
+    for index, item in enumerate(items):
+        if not isinstance(item, dict) or set(item) != FIELDS:
+            raise GenerationError(f"{section} item {index} must contain exactly {sorted(FIELDS)}")
+        if any(not isinstance(item[field], str) for field in FIELDS):
+            raise GenerationError(f"{section} item {index} fields must all be strings")
+        if item["visibility"] not in VISIBILITIES:
+            raise GenerationError(
+                f"{section} item {index} has unsupported visibility {item['visibility']!r}"
+            )
+        if item["name"] in names:
+            raise GenerationError(f"{section} metadata contains duplicate name {item['name']!r}")
+
+        names.add(item["name"])
+        public_items += item["visibility"] == "public"
+        validated_items.append(item)
+
+    if not public_items:
+        raise GenerationError(f"{section} metadata must contain at least one public item")
+    return validated_items
+
+
+def validate_agentic_section(metadata: Any) -> dict[str, Any]:
+    if not isinstance(metadata, dict) or set(metadata) != AGENTIC_FIELDS:
+        raise GenerationError("agentic metadata must contain exactly description and groups")
+    if not isinstance(metadata["description"], str):
+        raise GenerationError("agentic description must be a string")
+    if not isinstance(metadata["groups"], list):
+        raise GenerationError("agentic groups must be a list")
+
+    names: set[str] = set()
+    groups: list[dict[str, Any]] = []
+    for index, group in enumerate(metadata["groups"]):
+        if not isinstance(group, dict) or set(group) != GROUP_FIELDS:
+            raise GenerationError(f"agentic group {index} must contain exactly {sorted(GROUP_FIELDS)}")
+        if not isinstance(group["name"], str) or not isinstance(group["description"], str):
+            raise GenerationError(f"agentic group {index} name and description must be strings")
+        if group["name"] in names:
+            raise GenerationError(f"agentic metadata contains duplicate group {group['name']!r}")
+
+        names.add(group["name"])
+        groups.append(
+            {
+                "name": group["name"],
+                "description": group["description"],
+                "items": validate_items(f"agentic group {group['name']!r}", group["items"]),
+            }
+        )
+
+    if not groups:
+        raise GenerationError("agentic metadata must contain at least one group")
+    return {"description": metadata["description"], "groups": groups}
+
+
+def validate_metadata(metadata: Any) -> dict[str, Any]:
     if not isinstance(metadata, dict) or set(metadata) != set(SECTIONS):
         raise GenerationError("metadata must contain only core, agentic, and devops sections")
 
-    validated: dict[str, list[dict[str, str]]] = {}
-    for section in SECTIONS:
-        items = metadata[section]
-        if not isinstance(items, list):
-            raise GenerationError(f"{section} metadata must be a list")
-
-        names: set[str] = set()
-        public_items = 0
-        validated_items: list[dict[str, str]] = []
-        for index, item in enumerate(items):
-            if not isinstance(item, dict) or set(item) != FIELDS:
-                raise GenerationError(f"{section} item {index} must contain exactly {sorted(FIELDS)}")
-            if any(not isinstance(item[field], str) for field in FIELDS):
-                raise GenerationError(f"{section} item {index} fields must all be strings")
-            if item["visibility"] not in VISIBILITIES:
-                raise GenerationError(
-                    f"{section} item {index} has unsupported visibility {item['visibility']!r}"
-                )
-            if item["name"] in names:
-                raise GenerationError(f"{section} metadata contains duplicate name {item['name']!r}")
-
-            names.add(item["name"])
-            public_items += item["visibility"] == "public"
-            validated_items.append(item)
-
-        if not public_items:
-            raise GenerationError(f"{section} metadata must contain at least one public item")
-        validated[section] = validated_items
-
-    return validated
+    return {
+        "core": validate_items("core", metadata["core"]),
+        "agentic": validate_agentic_section(metadata["agentic"]),
+        "devops": validate_items("devops", metadata["devops"]),
+    }
 
 
 def escape_table_cell(value: str) -> str:
@@ -87,9 +124,11 @@ def escape_table_cell(value: str) -> str:
     )
 
 
-def render_table(items: list[dict[str, str]]) -> str:
+def render_table(
+    items: list[dict[str, str]], name_heading: str = "Tool", description_heading: str = "Description"
+) -> str:
     public_items = (item for item in items if item["visibility"] == "public")
-    rows = ["| Tool | Description |", "| --- | --- |"]
+    rows = [f"| {name_heading} | {description_heading} |", "| --- | --- |"]
     for item in sorted(public_items, key=lambda item: item["name"].casefold()):
         name = escape_table_cell(item["name"]).replace("[", "\\[").replace("]", "\\]")
         url = item["url"].replace("\\", "\\\\").replace(")", "\\)")
@@ -98,8 +137,29 @@ def render_table(items: list[dict[str, str]]) -> str:
     return "\n".join(rows)
 
 
+def render_agentic_section(section: dict[str, Any]) -> str:
+    rows = [section["description"]]
+    for group in section["groups"]:
+        rows.extend(
+            [
+                "",
+                f"#### {group['name']}",
+                "",
+                group["description"],
+                "",
+                render_table(group["items"], "Component", "Role"),
+            ]
+        )
+    return "\n".join(rows)
+
+
 def render_tables(metadata: Any) -> dict[str, str]:
-    return {section: render_table(items) for section, items in validate_metadata(metadata).items()}
+    validated = validate_metadata(metadata)
+    return {
+        "core": render_table(validated["core"]),
+        "agentic": render_agentic_section(validated["agentic"]),
+        "devops": render_table(validated["devops"]),
+    }
 
 
 def marker_matches(readme: str) -> dict[str, tuple[re.Match[str], re.Match[str]]]:

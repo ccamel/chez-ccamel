@@ -60,25 +60,52 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [Zsh](https://www.zsh.org/) | Interactive shell with vi-mode editing. |
 <!-- END_GENERATED_CORE -->
 
-### Agentic
-
-The terminal-native tools I've chosen for agentic software engineering.
+### Agentic development
 
 <!-- BEGIN_GENERATED_AGENTIC -->
-| Tool | Description |
+My terminal-native playground for building software alongside a small herd of AI agents.
+
+#### Harnesses
+
+The control plane for agent sessions, tool access, configuration, and observable work.
+
+| Component | Role |
+| --- | --- |
+| [HerdR](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
+| [OMP](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
+
+#### Coding agents
+
+The interchangeable specialist CLIs run within the wider workflow.
+
+| Component | Role |
 | --- | --- |
 | [Antigravity CLI](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
 | [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding CLI. |
 | [Codex](https://openai.com/codex/) | OpenAI coding agent. |
 | [GitHub Copilot CLI](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
-| [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
-| [HerdR](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
+
+#### Extensions and integrations
+
+Harness capabilities installed declaratively with the toolbox.
+
+| Component | Role |
+| --- | --- |
 | [HerdR Annotate](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
+| [OMP Undo/Redo](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
+| [Ponytail](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
+| [shepherdr](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
+
+#### Operating tools
+
+Tools for coordination, context, inspection, and efficient terminal output.
+
+| Component | Role |
+| --- | --- |
+| [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
 | [Livediff](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
-| [OMP](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
 | [QMD](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
 | [rtk](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
-| [shepherdr](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
 <!-- END_GENERATED_AGENTIC -->
 
 ### DevOps
