@@ -124,13 +124,13 @@
             ${pkgs.coreutils}/bin/mkdir -p "$dataHome/herdr/plugins"
             ${pkgs.coreutils}/bin/cp -R ${herdrAnnotate} "$dataHome/herdr/plugins/annotate"
             ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/annotate"
-            herdr plugin link "$dataHome/herdr/plugins/annotate" --enabled
-            herdr plugin link "$dataHome/herdr/plugins/shepherdr" --enabled
+            herdr plugin link "$dataHome/herdr/plugins/annotate" --enabled >/dev/null
+            herdr plugin link "$dataHome/herdr/plugins/shepherdr" --enabled >/dev/null
           '';
           ompShellHook = ''
             ${pkgs.coreutils}/bin/mkdir -p "$HOME/.omp/agent/extensions"
             ${pkgs.coreutils}/bin/install -m 600 ${ompConfig} "$HOME/.omp/agent/config.yml"
-            herdr integration install omp
+            herdr integration install omp >/dev/null
           '';
           agenticShellHook = ''
             ${herdrShellHook}
