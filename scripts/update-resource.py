@@ -47,14 +47,6 @@ class ResourceUpdate:
 
 RESOURCES: Mapping[str, Resource] = MappingProxyType(
     {
-        "omp": GitHubReleaseResource(
-            repository="can1357/oh-my-pi",
-            file=Path("nix-config/packages/omp.nix"),
-            assets=(
-                ("x86_64-linux", "omp-linux-x64"),
-                ("aarch64-darwin", "omp-darwin-arm64"),
-            ),
-        ),
         "rtk": GitHubReleaseResource(
             repository="rtk-ai/rtk",
             file=Path("nix-config/packages/rtk.nix"),

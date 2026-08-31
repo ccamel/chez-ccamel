@@ -50,7 +50,7 @@ update-input input='':
 
 # Update all managed binary resources, or one when specified.
 update-resource resource='':
-    if test -n "{{resource}}"; then python3 scripts/update-resource.py "{{resource}}"; else for resource in omp herdr herd; do python3 scripts/update-resource.py "$resource"; done; fi
+    if test -n "{{resource}}"; then python3 scripts/update-resource.py "{{resource}}"; else for resource in herdr herd; do python3 scripts/update-resource.py "$resource"; done; fi
 
 # Show resolved flake metadata.
 metadata:
