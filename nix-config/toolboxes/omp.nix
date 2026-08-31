@@ -1,9 +1,13 @@
 { pkgs }:
 let
   ompUndoRedo = pkgs.callPackage ../packages/omp-undo-redo.nix { };
+  ponytail = pkgs.callPackage ../packages/ponytail.nix { };
 in
 {
-  extensions = [ "${ompUndoRedo}" ];
+  extensions = [
+    "${ompUndoRedo}"
+    "${ponytail}"
+  ];
   symbolPreset = "nerd";
   theme.dark = "titanium";
   setupVersion = 2;
