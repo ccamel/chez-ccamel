@@ -63,6 +63,22 @@
     };
   }
   {
+    package =
+      { pkgs, ... }:
+      pkgs.vscode-langservers-extracted.overrideAttrs (old: {
+        postInstall = (old.postInstall or "") + ''
+          cp json-language-features/server/dist/node/*.js \
+            "$out/lib/extensions/json-language-features/server/dist/node/"
+        '';
+      });
+  }
+  {
+    package = { pkgs, ... }: pkgs.yaml-language-server;
+  }
+  {
+    package = { pkgs, ... }: pkgs.marksman;
+  }
+  {
     package = { qmd, ... }: qmd;
     documentation = {
       name = "QMD";
