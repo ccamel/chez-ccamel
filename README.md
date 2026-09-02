@@ -92,6 +92,7 @@ Harness capabilities installed declaratively with the toolbox.
 | Component | Role |
 | --- | --- |
 | [HerdR Annotate](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
+| [HerdR Remote](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
 | [OMP Undo/Redo](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
 | [Ponytail](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
 | [shepherdr](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |

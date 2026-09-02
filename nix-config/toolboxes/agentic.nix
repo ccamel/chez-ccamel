@@ -116,6 +116,16 @@
     };
   }
   {
+    package = { herdrRemote, ... }: herdrRemote;
+    readmeGroup = "Extensions and integrations";
+    documentation = {
+      name = "HerdR Remote";
+      description = "Monitor and approve HerdR agents from a phone, menu bar, or Telegram.";
+      url = "https://github.com/dcolinmorgan/herdr-remote";
+      visibility = "public";
+    };
+  }
+  {
     package = { shepherdr, ... }: shepherdr;
     readmeGroup = "Extensions and integrations";
     documentation = {

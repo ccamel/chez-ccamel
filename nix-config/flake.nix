@@ -88,6 +88,7 @@
           };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           herdrAnnotate = pkgs.callPackage ./packages/herdr-annotate.nix { };
+          herdrRemote = pkgs.callPackage ./packages/herdr-remote.nix { };
           shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
           rtk = pkgs.callPackage ./packages/rtk.nix { };
@@ -100,6 +101,7 @@
               omp
               herdr
               herdrAnnotate
+              herdrRemote
               shepherdr
               herd
               rtk
@@ -126,6 +128,13 @@
             ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/annotate"
             herdr plugin link "$dataHome/herdr/plugins/annotate" --enabled >/dev/null
             herdr plugin link "$dataHome/herdr/plugins/shepherdr" --enabled >/dev/null
+            ${pkgs.coreutils}/bin/rm -rf "$configHome/herdr/plugins/github/herdr.push"
+            ${pkgs.coreutils}/bin/rm -rf "$configHome/herdr/plugins/github/herdr-remote.relay"
+            ${pkgs.coreutils}/bin/rm -rf "$dataHome/herdr/plugins/herdr-push"
+            ${pkgs.coreutils}/bin/rm -rf "$dataHome/herdr/plugins/herdr-remote"
+            ${pkgs.coreutils}/bin/cp -R ${herdrRemote} "$dataHome/herdr/plugins/herdr-remote"
+            ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/herdr-remote"
+            herdr plugin link "$dataHome/herdr/plugins/herdr-remote" --enabled >/dev/null
           '';
           ompShellHook = ''
             ${pkgs.coreutils}/bin/mkdir -p "$HOME/.omp/agent/extensions"
