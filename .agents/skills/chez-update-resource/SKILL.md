@@ -1,6 +1,6 @@
 ---
 name: chez-update-resource
-description: Update the latest chez-ccamel resources managed by scripts/update-resource.py, including OMP, HerdR, and Herd versions or hashes, and repair their upstream mappings when release metadata changes. Use for latest managed resource bumps or updater failures; do not use for historical pins, ordinary nixpkgs input updates, or unrelated tool additions.
+description: Update the latest chez-ccamel resources managed by scripts/update-resource.py and repair their upstream mappings when release metadata changes. Use for managed resource updates or updater failures; do not use for historical pins or ordinary nixpkgs input updates.
 ---
 
 # Update a managed chez-ccamel resource
@@ -9,7 +9,7 @@ description: Update the latest chez-ccamel resources managed by scripts/update-r
 
 Require one supported resource name. Read `RESOURCES` in `scripts/update-resource.py` and the target Nix package before changing anything.
 
-Accept only `omp`, `herdr`, or `herd`. This skill handles latest releases, not historical pins, ordinary nixpkgs input updates, or unrelated tool additions.
+Accept only resource names in `RESOURCES`. This skill handles latest releases, branch tips, registry metadata, and native fixed-output hashes; it does not update ordinary flake inputs.
 
 ## Workflow
 
@@ -18,7 +18,7 @@ Accept only `omp`, `herdr`, or `herd`. This skill handles latest releases, not h
 3. Never hand-edit assignments immediately following `# managed by update-resource`.
 4. Treat the script's printed diff, `just fmt`, and targeted Nix build as part of the command result. Review them before continuing.
 
-`GitHubReleaseResource` updates the `version` and hashes in `SYSTEMS` order: `x86_64-linux`, then `aarch64-darwin`. `FetchUrlResource` updates only its hash.
+`GitHubReleaseResource` updates the version and hashes in `SYSTEMS` order. Source archives resolve a revision and Nix-derived unpacked hash; npm resources retain registry integrity; QMD refreshes only the current system hash.
 
 ## Failure handling
 
