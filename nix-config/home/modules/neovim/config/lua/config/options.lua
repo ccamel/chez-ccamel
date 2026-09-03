@@ -14,8 +14,20 @@ if vim.fn.has("wsl") == 1 then
       ["*"] = { "clip.exe" },
     },
     paste = {
-      ["+"] = { "powershell.exe", "-NoProfile", "-NoLogo", "-Command", "Get-Clipboard" },
-      ["*"] = { "powershell.exe", "-NoProfile", "-NoLogo", "-Command", "Get-Clipboard" },
+      ["+"] = {
+        "powershell.exe",
+        "-NoProfile",
+        "-NoLogo",
+        "-Command",
+        "[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new(); Get-Clipboard",
+      },
+      ["*"] = {
+        "powershell.exe",
+        "-NoProfile",
+        "-NoLogo",
+        "-Command",
+        "[Console]::OutputEncoding = [System.Text.UTF8Encoding]::new(); Get-Clipboard",
+      },
     },
     cache_enabled = 0,
   }
