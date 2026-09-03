@@ -18,7 +18,9 @@ let
   hostCaBundle = "/etc/ssl/certs/ca-certificates.crt";
 
   nodeModulesHashes = {
+    # managed by update-resource
     x86_64-linux = "sha256-jvq2TO0SxEV1BHyT6C32VQ916wMTM/D1nsV2rNcJQSo=";
+    # managed by update-resource
     aarch64-darwin = "sha256-9vvR3KLmBc+4bfyWEyyM8FHWg+DfiDzUlwqUlm3NFc8=";
   };
   targetPlatform =

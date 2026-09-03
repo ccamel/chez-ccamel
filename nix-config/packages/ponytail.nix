@@ -4,6 +4,7 @@
   stdenvNoCC,
 }:
 let
+  # managed by update-resource
   version = "4.9.0";
 in
 stdenvNoCC.mkDerivation {
@@ -12,6 +13,7 @@ stdenvNoCC.mkDerivation {
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@dietrichgebert/ponytail/-/ponytail-${version}.tgz";
+    # managed by update-resource
     hash = "sha512-OSdybtBZ3uDd5m/+zyz4h8/+BVBR9nGFhqTDmQkQb1v7k4Vfc1qql78naY64UjocdBPqR94htZEkKu2wpKTJaw==";
   };
 
