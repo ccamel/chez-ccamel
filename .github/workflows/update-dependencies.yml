@@ -28,10 +28,10 @@ jobs:
         run: test "$(uname -m)" = arm64
 
       - name: Update flake inputs
-        run: just update-input
+        run: nix shell --inputs-from ./nix-config nixpkgs#just -c just update-input
 
       - name: Refresh Darwin QMD dependencies
-        run: just update-resource qmd
+        run: nix shell --inputs-from ./nix-config nixpkgs#just -c just update-resource qmd
 
       - name: Create Darwin update patch
         run: git diff --binary -- nix-config/flake.lock nix-config/packages/qmd.nix > qmd-darwin.patch
@@ -63,10 +63,10 @@ jobs:
         uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31
 
       - name: Refresh managed resources
-        run: just update-resource
+        run: nix shell --inputs-from ./nix-config nixpkgs#just -c just update-resource
 
       - name: Refresh Neovim resolver lock
-        run: just update-neovim
+        run: nix shell --inputs-from ./nix-config nixpkgs#just -c just update-neovim
 
       - name: Create GitHub App token
         id: app-token
