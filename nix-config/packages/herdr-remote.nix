@@ -6,12 +6,15 @@
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "herdr-remote";
+  # managed by update-resource
   version = "0.8.0";
 
   src = fetchFromGitHub {
     owner = "dcolinmorgan";
     repo = "herdr-remote";
+    # managed by update-resource
     rev = "1f5bd32b5121af92c21c9a3b123b10d508f29365";
+    # managed by update-resource
     hash = "sha256-mTHcGe806gLnDdBo/K4QJlIDA8IkFWk2LYbQeuaELig=";
   };
 

@@ -19,20 +19,36 @@ on:
       - "nix-config/secrets/**/*.yaml"
       - "nix-config/.sops.yaml"
       - .github/workflows/build-nix.yml
+
+permissions:
+  contents: read
+
 jobs:
   build-nix:
-    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-22.04
+            name: forge
+            target: .#nixosConfigurations.forge.config.system.build.toplevel
+          - runner: macos-14
+            name: tinymac
+            target: .#darwinConfigurations.tinymac.config.system.build.toplevel
+    runs-on: ${{ matrix.runner }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Install Nix
-        uses: cachix/install-nix-action@v31
+        uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31
 
-      - name: Check forge flake
+      - name: Check ${{ matrix.name }} flake
         working-directory: nix-config
         run: nix flake check .
 
-      - name: Build forge system
+      - name: Build ${{ matrix.name }} system
         working-directory: nix-config
-        run: nix build .#nixosConfigurations.forge.config.system.build.toplevel
+        run: nix build ${{ matrix.target }}

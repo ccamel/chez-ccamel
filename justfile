@@ -39,19 +39,23 @@ fmt:
     git ls-files -z -- '*.nix' | while IFS= read -r -d '' file; do if test -f "$file"; then printf '%s\0' "$file"; fi; done | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style --
     git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#stylua --
 
-# Update all flake inputs and managed binary resources.
+# Update all flake inputs, managed resources, and Neovim's resolver lock.
 update:
     just update-input
     just update-resource
+    just update-neovim
 
 # Update all flake inputs, or one when specified.
 update-input input='':
     if test -n "{{input}}"; then nix flake update --flake ./nix-config "{{input}}"; else nix flake update --flake ./nix-config; fi
 
-# Update all managed binary resources, or one when specified.
-update-resource resource='':
-    if test -n "{{resource}}"; then python3 scripts/update-resource.py "{{resource}}"; else for resource in herdr herd; do python3 scripts/update-resource.py "$resource"; done; fi
+# Update every managed resource, or selected resources.
+update-resource *resources:
+    python3 scripts/update-resource.py {{resources}}
 
+# Refresh Lazy-managed Neovim plugins without touching user state.
+update-neovim:
+    tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT; mkdir -p "$tmp/config" "$tmp/data"; cp -R nix-config/home/modules/neovim/config "$tmp/config/nvim"; XDG_CONFIG_HOME="$tmp/config" XDG_DATA_HOME="$tmp/data" nix run --inputs-from ./nix-config nixpkgs#neovim -- --headless "+Lazy! sync" +qa; cp "$tmp/config/nvim/lazy-lock.json" nix-config/home/modules/neovim/config/lazy-lock.json
 # Show resolved flake metadata.
 metadata:
     nix flake metadata ./nix-config

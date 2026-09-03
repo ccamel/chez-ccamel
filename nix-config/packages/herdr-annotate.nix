@@ -7,13 +7,16 @@
 }:
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "herdr-annotate";
-  version = "0.2.0-unstable-2026-08-27";
+  # managed by update-resource
+  version = "0.3.0-unstable-2026-08-31";
 
   src = fetchFromGitHub {
     owner = "plannotator";
     repo = "herdr-annotate";
-    rev = "026c1d8f35807edaabe241185879fccc5b43a1f3";
-    hash = "sha256-sqlvucnGvSNWTswtaG8Zs3BzoP/LXqY85zCALR7V3EU=";
+    # managed by update-resource
+    rev = "bccf884b874f5f39ccbef1bb6ac67625c5fb5d54";
+    # managed by update-resource
+    hash = "sha256-h3ibUCd2uLtQENU0IRNJzefZH2pnK13mzCoHmGc1EeU=";
   };
 
   dontBuild = true;
