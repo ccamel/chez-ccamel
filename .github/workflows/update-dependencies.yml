@@ -84,6 +84,20 @@ jobs:
         with:
           token: ${{ steps.app-token.outputs.token }}
           branch: automation/dependency-updates
+          add-paths: |
+            .github/workflows/lint-skills.yml
+            nix-config/flake.lock
+            nix-config/home/modules/neovim/config/lazy-lock.json
+            nix-config/packages/rtk.nix
+            nix-config/packages/herdr.nix
+            nix-config/packages/herd.nix
+            nix-config/packages/livediff.nix
+            nix-config/packages/herdr-remote.nix
+            nix-config/packages/herdr-annotate.nix
+            nix-config/packages/shepherdr.nix
+            nix-config/packages/omp-undo-redo.nix
+            nix-config/packages/ponytail.nix
+            nix-config/packages/qmd.nix
           delete-branch: true
           commit-message: ":arrow_up: Update managed dependencies"
           title: ":arrow_up: Update managed dependencies"
