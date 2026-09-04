@@ -55,9 +55,10 @@ jobs:
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
         with:
           name: qmd-darwin-patch
+          path: ${{ runner.temp }}/qmd-darwin
 
       - name: Apply Darwin update patch
-        run: git apply qmd-darwin.patch
+        run: git apply "$RUNNER_TEMP/qmd-darwin/qmd-darwin.patch"
 
       - name: Install Nix
         uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31
