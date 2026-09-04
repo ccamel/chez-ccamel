@@ -511,7 +511,7 @@ def run_post_update_checks(resource: Resource) -> int:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("resources", nargs="*", choices=RESOURCES, help="resource to update")
+    parser.add_argument("resources", nargs="*", choices=tuple(RESOURCES), help="resource to update")
     return parser.parse_args()
 
 

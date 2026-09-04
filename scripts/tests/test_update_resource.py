@@ -146,6 +146,8 @@ class UpdateResourceTest(unittest.TestCase):
             UPDATER.update_marked_values(marked(("hash", HASH), ("version", "1")), (("version", "2"), ("hash", HASH)))
 
     def test_argumentless_command_enumerates_every_resource_in_order(self) -> None:
+        with patch.object(sys, "argv", ["update-resource.py"]):
+            self.assertEqual(UPDATER.parse_args().resources, [])
         with patch.object(sys, "argv", ["update-resource.py"]), patch.object(UPDATER, "update_resource", return_value=0) as update_resource:
             self.assertEqual(UPDATER.main(), 0)
         self.assertEqual([call.args[0] for call in update_resource.call_args_list], list(UPDATER.RESOURCES))
