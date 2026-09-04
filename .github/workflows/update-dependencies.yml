@@ -87,6 +87,8 @@ jobs:
           commit-message: ":arrow_up: Update managed dependencies"
           title: ":arrow_up: Update managed dependencies"
           body: |
-            Generated dependency update. Review and merge manually.
+            Yo, bro!
+
+            Here's your fresh batch of managed dependency updates. Take it for a spin, give it a once-over, then hit merge when it vibes.
           assignees: ccamel
           reviewers: ccamel
