@@ -86,6 +86,7 @@ jobs:
           branch: automation/dependency-updates
           add-paths: |
             .github/workflows/lint-skills.yml
+            nix-config/flake.nix
             nix-config/flake.lock
             nix-config/home/modules/neovim/config/lazy-lock.json
             nix-config/packages/rtk.nix

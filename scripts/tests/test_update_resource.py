@@ -108,6 +108,19 @@ class UpdateResourceTest(unittest.TestCase):
         with self.assertRaisesRegex(UPDATER.UpdateError, "ordered"):
             UPDATER.update_qmd_hash(marked(("aarch64-darwin", HASH), ("x86_64-linux", HASH)), "x86_64-linux", HASH)
 
+    def test_omp_release_updates_its_flake_input_and_lock(self) -> None:
+        resource = UPDATER.FlakeInputReleaseResource("can1357/oh-my-pi", "omp", Path("nix-config/flake.nix"))
+        original = '    omp.url = "github:can1357/oh-my-pi/v18.0.11";\n'
+        with patch.object(UPDATER, "latest_release_tag", return_value="v18.1.10"):
+            update = UPDATER.flake_input_release_update(resource)
+        self.assertEqual(update.values, (("tag", "v18.1.10"),))
+        self.assertEqual(UPDATER.update_flake_input(original, resource, "v18.1.10"), '    omp.url = "github:can1357/oh-my-pi/v18.1.10";\n')
+        with patch.object(UPDATER.subprocess, "run") as run:
+            UPDATER.sync_flake_input(resource)
+        run.assert_called_once_with(["nix", "flake", "update", "--flake", "./nix-config", "omp"], check=True, cwd=UPDATER.ROOT, stdout=UPDATER.sys.stdout, stderr=UPDATER.sys.stderr)
+        with self.assertRaisesRegex(UPDATER.UpdateError, "omp input pin, found 0"):
+            UPDATER.update_flake_input("", resource, "v18.1.10")
+
     def test_skills_lint_tools_collects_and_replaces_all_pins(self) -> None:
         resource = UPDATER.SkillsLintToolsResource(Path("lint-skills.yml"))
         node_index = [{"version": "v24.2.1"}, {"version": "v24.10.0"}, {"version": "v25.0.0"}, {"version": "v24.11.0-rc.1"}]
