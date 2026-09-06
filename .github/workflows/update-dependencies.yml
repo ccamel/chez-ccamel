@@ -63,8 +63,11 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31
 
-      - name: Refresh managed resources
-        run: nix shell --inputs-from ./nix-config nixpkgs#just -c just update-resource
+      - name: Refresh Nix-managed resources
+        run: |
+          nix shell --inputs-from ./nix-config nixpkgs#just -c just update-resource \
+            rtk omp herdr herd livediff herdr-remote herdr-annotate shepherdr \
+            omp-undo-redo ponytail qmd
 
       - name: Refresh Neovim resolver lock
         run: nix shell --inputs-from ./nix-config nixpkgs#just -c just update-neovim
@@ -85,7 +88,6 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           branch: automation/dependency-updates
           add-paths: |
-            .github/workflows/lint-skills.yml
             nix-config/flake.nix
             nix-config/flake.lock
             nix-config/home/modules/neovim/config/lazy-lock.json
