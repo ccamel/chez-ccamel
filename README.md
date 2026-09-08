@@ -116,6 +116,7 @@ Infrastructure and platform engineering.
 <!-- BEGIN_GENERATED_DEVOPS -->
 | Tool | Description |
 | --- | --- |
+| [dnsutils](https://www.isc.org/bind/) | DNS tools like dig and nslookup. |
 | [gcloud](https://cloud.google.com/sdk/gcloud) | Google Cloud command-line interface. |
 | [Helm](https://helm.sh/) | Kubernetes package manager. |
 | [Helmfile](https://helmfile.readthedocs.io/) | Declarative Helm chart deployment tool. |
@@ -125,6 +126,7 @@ Infrastructure and platform engineering.
 | [Terraform](https://www.terraform.io/) | Infrastructure as code tool. |
 | [Terragrunt](https://terragrunt.gruntwork.io/) | Terraform orchestration and DRY configuration tool. |
 | [Trivy](https://trivy.dev/) | Cloud-native vulnerability and misconfiguration scanner. |
+| [whois](https://github.com/rfc1036/whois) | Client for the WHOIS directory service. |
 <!-- END_GENERATED_DEVOPS -->
 
 ## Bootstrap

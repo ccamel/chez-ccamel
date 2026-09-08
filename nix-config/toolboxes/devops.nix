@@ -82,6 +82,24 @@
     };
   }
   {
+    package = { pkgs, ... }: pkgs.dnsutils;
+    documentation = {
+      name = "dnsutils";
+      description = "DNS tools like dig and nslookup.";
+      url = "https://www.isc.org/bind/";
+      visibility = "public";
+    };
+  }
+  {
+    package = { pkgs, ... }: pkgs.whois;
+    documentation = {
+      name = "whois";
+      description = "Client for the WHOIS directory service.";
+      url = "https://github.com/rfc1036/whois";
+      visibility = "public";
+    };
+  }
+  {
     package = { pkgs, ... }: pkgs.trivy;
     documentation = {
       name = "Trivy";
