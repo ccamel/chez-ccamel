@@ -70,14 +70,7 @@ class SkillsLintToolsResource:
     file: Path
 
 
-@dataclass(frozen=True)
-class FlakeInputReleaseResource:
-    repository: str
-    input: str
-    file: Path
-
-
-Resource = GitHubReleaseResource | FetchUrlResource | GitHubSourceResource | NpmResource | QmdResource | SkillsLintToolsResource | FlakeInputReleaseResource
+Resource = GitHubReleaseResource | FetchUrlResource | GitHubSourceResource | NpmResource | QmdResource | SkillsLintToolsResource
 
 
 @dataclass(frozen=True)
@@ -104,10 +97,13 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
                 ("aarch64-darwin", "apm-darwin-arm64.tar.gz"),
             ),
         ),
-        "omp": FlakeInputReleaseResource(
+        "omp": GitHubReleaseResource(
             repository="can1357/oh-my-pi",
-            input="omp",
-            file=Path("nix-config/flake.nix"),
+            file=Path("nix-config/packages/omp.nix"),
+            assets=(
+                ("x86_64-linux", "omp-linux-x64"),
+                ("aarch64-darwin", "omp-darwin-arm64"),
+            ),
         ),
         "herdr": GitHubReleaseResource(
             repository="ogulcancelik/herdr",
@@ -483,25 +479,6 @@ def update_skills_lint_tools(contents: str, values: tuple[tuple[str, str], ...])
     return replace_once(contents, r"^        run: npx skill-check@[0-9][^ ]* check --no-security-scan \.agents/skills$", f"        run: npx skill-check@{pins['skill-check']} check --no-security-scan .agents/skills", "skill-check")
 
 
-def flake_input_release_update(resource: FlakeInputReleaseResource) -> ResourceUpdate:
-    tag = latest_release_tag(resource.repository)
-    if not re.fullmatch(r"v[0-9][0-9A-Za-z.-]*", tag):
-        raise UpdateError(f"latest release for {resource.repository} has an invalid tag: {tag!r}")
-    return ResourceUpdate(values=(("tag", tag),), output=(f"Tag: {tag}",))
-
-
-def update_flake_input(contents: str, resource: FlakeInputReleaseResource, tag: str) -> str:
-    pattern = rf'^    {re.escape(resource.input)}\.url = "github:{re.escape(resource.repository)}/v[^\"]+";$'
-    return replace_once(contents, pattern, f'    {resource.input}.url = "github:{resource.repository}/{tag}";', f"{resource.input} input")
-
-
-def sync_flake_input(resource: FlakeInputReleaseResource) -> None:
-    try:
-        subprocess.run(["nix", "flake", "update", "--flake", "./nix-config", resource.input], check=True, cwd=ROOT, stdout=sys.stdout, stderr=sys.stderr)
-    except subprocess.CalledProcessError as error:
-        raise UpdateError(f"could not update flake input {resource.input}: {error}") from error
-
-
 def collect_update(resource: Resource) -> ResourceUpdate:
     if isinstance(resource, GitHubReleaseResource):
         return release_update(resource)
@@ -513,9 +490,7 @@ def collect_update(resource: Resource) -> ResourceUpdate:
         return npm_update(resource)
     if isinstance(resource, QmdResource):
         return qmd_update(resource)
-    if isinstance(resource, SkillsLintToolsResource):
-        return skills_lint_tools_update(resource)
-    return flake_input_release_update(resource)
+    return skills_lint_tools_update(resource)
 
 
 def apply_update(resource: Resource, update: ResourceUpdate) -> str:
@@ -524,19 +499,16 @@ def apply_update(resource: Resource, update: ResourceUpdate) -> str:
         return update_qmd_hash(contents, update.values[0][0], update.values[0][1])
     if isinstance(resource, SkillsLintToolsResource):
         return update_skills_lint_tools(contents, update.values)
-    if isinstance(resource, FlakeInputReleaseResource):
-        return update_flake_input(contents, resource, update.values[0][1])
     return update_marked_values(contents, update.values)
 
 
 def run_post_update_checks(resource: Resource) -> int:
     if isinstance(resource, SkillsLintToolsResource):
         return 0
-    commands = (("formatting", ["just", "fmt"]),)
-    if isinstance(resource, FlakeInputReleaseResource):
-        commands += (("flake validation", ["nix", "flake", "check", "./nix-config"]),)
-    else:
-        commands += (("targeted Nix build", ["nix", "build", "--no-link", "--impure", "--expr", build_expression(ROOT / resource.file)]),)
+    commands = (
+        ("formatting", ["just", "fmt"]),
+        ("targeted Nix build", ["nix", "build", "--no-link", "--impure", "--expr", build_expression(ROOT / resource.file)]),
+    )
     failed = False
 
     try:
@@ -578,16 +550,8 @@ def update_resource(name: str) -> int:
         print(line, flush=True)
 
     package_file = ROOT / resource.file
-    original = package_file.read_text()
     print(f"Writing {package_file}...", flush=True)
     package_file.write_text(updated)
-    if isinstance(resource, FlakeInputReleaseResource):
-        try:
-            sync_flake_input(resource)
-        except UpdateError as error:
-            package_file.write_text(original)
-            print(f"update-resource: {error}", file=sys.stderr)
-            return 1
     return run_post_update_checks(resource)
 
 

@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-codex.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    omp.url = "github:can1357/oh-my-pi/v18.1.15";
     qmd.url = "github:tobi/qmd";
 
     nixos-wsl = {
@@ -81,7 +80,7 @@
             config.allowUnfree = true;
           };
 
-          inherit (inputs.omp.packages.${system}) omp;
+          omp = pkgs.callPackage ./packages/omp.nix { };
           qmd = pkgs.callPackage ./packages/qmd.nix {
             upstreamQmd = inputs.qmd.packages.${system}.qmd;
             src = inputs.qmd;
