@@ -8,15 +8,15 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "herdr-annotate";
   # managed by update-resource
-  version = "0.3.0-unstable-2026-09-07";
+  version = "0.3.0-unstable-2026-09-08";
 
   src = fetchFromGitHub {
     owner = "plannotator";
     repo = "herdr-annotate";
     # managed by update-resource
-    rev = "53b6e3211a4103c3de9d361eb3f3bacc7426d23b";
+    rev = "bfe0de8af9912b90a8a89a07a58a7b9b0dcfea88";
     # managed by update-resource
-    hash = "sha256-2KOSud8fRsPC8q13tg+OOkgg+HkdoGLdjWxpZgo2Rbo=";
+    hash = "sha256-+fvhp6goKaYX8WsI0oGeTYkpfX/wnGFkmyCzR0WqdB4=";
   };
 
   dontBuild = true;

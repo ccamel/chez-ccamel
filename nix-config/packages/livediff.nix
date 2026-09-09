@@ -5,19 +5,19 @@
 }:
 let
   # managed by update-resource
-  version = "3.2.0";
+  version = "3.3.0";
   source =
     {
       x86_64-linux = {
         url = "https://github.com/SoCkEt7/Livediff/releases/download/v${version}/livediff-v${version}-x86_64-unknown-linux-musl.tar.gz";
         # managed by update-resource
-        hash = "sha256-5rn6eUWVLEwWMG0WsHgl7lrzoFZcG3jQd1Bt3Td+kcY=";
+        hash = "sha256-S/489JENGNIQsylIOoubqYdEUwT887rsnfpf+TqwPW0=";
         directory = "livediff-v${version}-x86_64-unknown-linux-musl";
       };
       aarch64-darwin = {
         url = "https://github.com/SoCkEt7/Livediff/releases/download/v${version}/livediff-v${version}-aarch64-apple-darwin.tar.gz";
         # managed by update-resource
-        hash = "sha256-AAlizuU/z/twkv23vrWO3KfvMTS3pN2BxUStV1n7z58=";
+        hash = "sha256-La/ecgvdC2bGtEvU6L+F1jkRrt5YHHV2ylKJUrwAGQE=";
         directory = "livediff-v${version}-aarch64-apple-darwin";
       };
     }

@@ -5,7 +5,7 @@
 }:
 let
   # managed by update-resource
-  version = "1.6.1";
+  version = "1.6.2";
 in
 stdenvNoCC.mkDerivation {
   pname = "omp-undo-redo";
@@ -14,7 +14,7 @@ stdenvNoCC.mkDerivation {
   src = fetchurl {
     url = "https://registry.npmjs.org/@baylarsadigov/omp-undo-redo/-/omp-undo-redo-${version}.tgz";
     # managed by update-resource
-    hash = "sha512-FbDkcpQOga8ZV+nZnUWIuxUX0HwLiFutyNjtKLfO8pHH8IuRIDSEsW7E5BRxSlelskykZ5PoXfPfMvOJA4VSgQ==";
+    hash = "sha512-1ks8fescO2cqlnQbFJXL9DRUSbriTOKk6IHmxuKe9qrJflXNL7Zg2LCWDZ040t2Jc0f3HQIEoMz+JdWrwSFWKQ==";
   };
 
   dontUnpack = true;
