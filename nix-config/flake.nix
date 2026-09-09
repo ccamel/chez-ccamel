@@ -92,6 +92,7 @@
           shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
           rtk = pkgs.callPackage ./packages/rtk.nix { };
+          apm = pkgs.callPackage ./packages/apm.nix { };
           livediff = pkgs.callPackage ./packages/livediff.nix { };
           devopsToolbox = import ./toolboxes/devops.nix;
           agenticToolbox = import ./toolboxes/agentic.nix;
@@ -107,6 +108,7 @@
               rtk
               livediff
               qmd
+              apm
               ;
             inherit (codexPkgs) codex;
             antigravityCli = codexPkgs.antigravity-cli;

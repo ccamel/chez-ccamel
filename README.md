@@ -103,6 +103,7 @@ Tools for coordination, context, inspection, and efficient terminal output.
 
 | Component | Role |
 | --- | --- |
+| [APM](https://github.com/microsoft/apm) | Dependency manager for AI agent configuration. |
 | [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
 | [Livediff](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
 | [QMD](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |

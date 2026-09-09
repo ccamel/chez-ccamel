@@ -40,6 +40,16 @@
     };
   }
   {
+    package = { apm, ... }: apm;
+    readmeGroup = "Operating tools";
+    documentation = {
+      name = "APM";
+      description = "Dependency manager for AI agent configuration.";
+      url = "https://github.com/microsoft/apm";
+      visibility = "public";
+    };
+  }
+  {
     package = { rtk, ... }: rtk;
     readmeGroup = "Operating tools";
     documentation = {

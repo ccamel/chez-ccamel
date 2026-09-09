@@ -96,6 +96,14 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
                 ("aarch64-darwin", "rtk-aarch64-apple-darwin.tar.gz"),
             ),
         ),
+        "apm": GitHubReleaseResource(
+            repository="microsoft/apm",
+            file=Path("nix-config/packages/apm.nix"),
+            assets=(
+                ("x86_64-linux", "apm-linux-x86_64.tar.gz"),
+                ("aarch64-darwin", "apm-darwin-arm64.tar.gz"),
+            ),
+        ),
         "omp": FlakeInputReleaseResource(
             repository="can1357/oh-my-pi",
             input="omp",
