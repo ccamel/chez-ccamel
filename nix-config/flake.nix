@@ -142,9 +142,17 @@
             ${pkgs.coreutils}/bin/install -m 600 ${ompConfig} "$HOME/.omp/agent/config.yml"
             herdr integration install omp >/dev/null
           '';
+          herdrRestartIfStaleHook = ''
+            case "$(herdr status 2>/dev/null)" in
+              *"restart_needed: yes"*)
+                herdr server stop >/dev/null 2>&1 || true
+                ;;
+            esac
+          '';
           agenticShellHook = ''
             ${herdrShellHook}
             ${ompShellHook}
+            ${herdrRestartIfStaleHook}
           '';
           mkToolbox =
             name: packages: shellHook:
