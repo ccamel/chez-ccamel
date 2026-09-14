@@ -86,6 +86,11 @@ class UpdateResourceTest(unittest.TestCase):
             with self.assertRaisesRegex(UPDATER.UpdateError, "exactly one source hash"):
                 UPDATER.fake_build_hash(Path("package.nix"), "")
 
+    def test_targeted_build_resolves_omp_locally(self) -> None:
+        expression = UPDATER.build_expression(Path("package.nix"))
+        self.assertIn("omp = pkgs.callPackage ./nix-config/packages/omp.nix { };", expression)
+        self.assertNotIn("flake.inputs.omp", expression)
+
     def test_npm_collection_uses_registry_integrity(self) -> None:
         resource = UPDATER.NpmResource("@scope/package", Path("package.nix"))
         with patch.object(UPDATER, "fetch_json", return_value={"version": "2.0.0", "dist": {"integrity": "sha512-registry"}}):
@@ -107,19 +112,6 @@ class UpdateResourceTest(unittest.TestCase):
         self.assertIn('aarch64-darwin = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=";', updated)
         with self.assertRaisesRegex(UPDATER.UpdateError, "ordered"):
             UPDATER.update_qmd_hash(marked(("aarch64-darwin", HASH), ("x86_64-linux", HASH)), "x86_64-linux", HASH)
-
-    def test_omp_release_updates_its_flake_input_and_lock(self) -> None:
-        resource = UPDATER.FlakeInputReleaseResource("can1357/oh-my-pi", "omp", Path("nix-config/flake.nix"))
-        original = '    omp.url = "github:can1357/oh-my-pi/v18.0.11";\n'
-        with patch.object(UPDATER, "latest_release_tag", return_value="v18.1.10"):
-            update = UPDATER.flake_input_release_update(resource)
-        self.assertEqual(update.values, (("tag", "v18.1.10"),))
-        self.assertEqual(UPDATER.update_flake_input(original, resource, "v18.1.10"), '    omp.url = "github:can1357/oh-my-pi/v18.1.10";\n')
-        with patch.object(UPDATER.subprocess, "run") as run:
-            UPDATER.sync_flake_input(resource)
-        run.assert_called_once_with(["nix", "flake", "update", "--flake", "./nix-config", "omp"], check=True, cwd=UPDATER.ROOT, stdout=UPDATER.sys.stdout, stderr=UPDATER.sys.stderr)
-        with self.assertRaisesRegex(UPDATER.UpdateError, "omp input pin, found 0"):
-            UPDATER.update_flake_input("", resource, "v18.1.10")
 
     def test_skills_lint_tools_collects_and_replaces_all_pins(self) -> None:
         resource = UPDATER.SkillsLintToolsResource(Path("lint-skills.yml"))

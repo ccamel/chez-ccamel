@@ -346,7 +346,7 @@ def build_expression(package_file: Path) -> str:
         "arguments = builtins.functionArgs package; "
         "in pkgs.callPackage package ("
         "(pkgs.lib.optionalAttrs (arguments ? omp) { "
-        "omp = flake.inputs.omp.packages.${builtins.currentSystem}.omp; "
+        "omp = pkgs.callPackage ./nix-config/packages/omp.nix { }; "
         "}) // "
         "(pkgs.lib.optionalAttrs (arguments ? herdr) { "
         "herdr = pkgs.callPackage ./nix-config/packages/herdr.nix { }; "
