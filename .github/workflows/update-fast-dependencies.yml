@@ -1,0 +1,64 @@
+name: Update fast dependencies
+
+on:
+  schedule:
+    - cron: "17 4 */2 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: update-fast-dependencies
+  cancel-in-progress: false
+
+jobs:
+  update-and-open-pr:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31
+
+      - name: Refresh fast-moving agentic resources
+        run: |
+          nix shell --inputs-from ./nix-config nixpkgs#just -c just update-resource \
+            omp herdr herd herdr-remote herdr-annotate shepherdr omp-undo-redo ponytail
+
+      - name: Create GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          app-id: ${{ vars.DEPENDENCY_BOT_APP_ID }}
+          private-key: ${{ secrets.DEPENDENCY_BOT_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Create or update fast dependency pull request
+        id: dependency-pr
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          branch: automation/fast-dependency-updates
+          add-paths: |
+            nix-config/packages/omp.nix
+            nix-config/packages/herdr.nix
+            nix-config/packages/herd.nix
+            nix-config/packages/herdr-remote.nix
+            nix-config/packages/herdr-annotate.nix
+            nix-config/packages/shepherdr.nix
+            nix-config/packages/omp-undo-redo.nix
+            nix-config/packages/ponytail.nix
+          delete-branch: true
+          commit-message: ":arrow_up: Update fast dependencies"
+          title: ":arrow_up: Update fast dependencies"
+          body: |
+            Yo, bro!
+
+            Here's the fast-moving agentic dependency refresh. Take it for a spin, give it a once-over, then hit merge when it vibes.
+          assignees: ccamel
+          reviewers: ccamel
