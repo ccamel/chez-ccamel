@@ -1,6 +1,10 @@
 ---
 name: chez-manage-tool
-description: Manage CLI and agentic or DevOps tools in chez-ccamel by choosing the correct Nix or Home Manager integration, wiring documentation metadata, and verifying both supported systems. Use when adding, configuring, moving, or removing a tool in this repository; do not use for version or hash-only updates of resources managed by scripts/update-resource.py.
+description: >
+  Integrate CLI, agentic, and DevOps tools with chez-ccamel's Nix configuration,
+  documentation, and verification conventions. Use when a requested tool must
+  be added, configured, moved, or removed from a host or development shell. Do
+  not use for version-only or hash-only resource updates.
 ---
 
 # Manage a chez-ccamel tool
