@@ -77,6 +77,8 @@ class UpdateResourceTest(unittest.TestCase):
                 UPDATER.manifest_version("owner/repo", REVISION, "package.json")
         with patch.object(UPDATER, "fetch_text", return_value='[package]\nversion = "1.0.0"\n'):
             self.assertEqual(UPDATER.manifest_version("owner/repo", REVISION, "Cargo.toml"), "1.0.0")
+        with patch.object(UPDATER, "fetch_text", return_value='version = "0.4.0"\nmin_herdr_version = "0.8.0"\n'):
+            self.assertEqual(UPDATER.manifest_version("owner/repo", REVISION, "herdr-plugin.toml"), "0.4.0")
 
     def test_fake_source_build_extracts_only_nix_reported_hash(self) -> None:
         result = SimpleNamespace(returncode=1, stdout="", stderr=f"error: hash mismatch\n  got: {HASH}\n")

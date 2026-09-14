@@ -1,38 +1,32 @@
 {
-  bun,
   fetchFromGitHub,
   lib,
-  stdenvNoCC,
-  wl-clipboard,
+  rustPlatform,
 }:
-stdenvNoCC.mkDerivation (finalAttrs: {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "herdr-annotate";
   # managed by update-resource
-  version = "0.3.0-unstable-2026-09-08";
+  version = "0.4.0-unstable-2026-09-10";
 
   src = fetchFromGitHub {
     owner = "plannotator";
     repo = "herdr-annotate";
     # managed by update-resource
-    rev = "bfe0de8af9912b90a8a89a07a58a7b9b0dcfea88";
+    rev = "7c8f5a177b8285dc56efc471ef04f7ab44a2b4b6";
     # managed by update-resource
-    hash = "sha256-+fvhp6goKaYX8WsI0oGeTYkpfX/wnGFkmyCzR0WqdB4=";
+    hash = "sha256-f+/2mDs8d5JICqbwzC7/tIYdLlb8NPJuV00Odp4CMSU=";
   };
 
-  dontBuild = true;
+  cargoRoot = "rust";
+  buildAndTestSubdir = "rust";
+  cargoLock.lockFile = "${finalAttrs.src}/rust/Cargo.lock";
+  cargoBuildFlags = [ "--ignore-rust-version" ];
+  cargoTestFlags = [ "--ignore-rust-version" ];
 
   installPhase = ''
     runHook preInstall
-
     cp -R . "$out"
-    substituteInPlace "$out/herdr-plugin.toml" \
-      --replace-fail '["bun",' '["${bun}/bin/bun",'
-    ${lib.optionalString stdenvNoCC.hostPlatform.isLinux ''
-      substituteInPlace "$out/src/clipboard.ts" \
-        --replace-fail 'command: "wl-paste"' 'command: "${wl-clipboard}/bin/wl-paste"' \
-        --replace-fail 'command: "wl-copy"' 'command: "${wl-clipboard}/bin/wl-copy"'
-    ''}
-
+    install -Dm755 target/*/release/herdr-annotate "$out/bin/herdr-annotate.exe"
     runHook postInstall
   '';
 

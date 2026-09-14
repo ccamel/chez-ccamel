@@ -132,7 +132,7 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
         "herdr-annotate": GitHubSourceResource(
             repository="plannotator/herdr-annotate",
             file=Path("nix-config/packages/herdr-annotate.nix"),
-            branch_manifest="package.json",
+            branch_manifest="herdr-plugin.toml",
         ),
         "shepherdr": GitHubSourceResource(
             repository="afogel/shepherdr",
@@ -275,7 +275,7 @@ def manifest_version(repository: str, revision: str, manifest: str) -> str:
     )
     if manifest == "package.json":
         matches = re.findall(r'"version"\s*:\s*"([^"\\]+)"', contents)
-    elif manifest == "Cargo.toml":
+    elif manifest in {"Cargo.toml", "herdr-plugin.toml"}:
         matches = re.findall(r'^version\s*=\s*"([^"\\]+)"\s*$', contents, flags=re.MULTILINE)
     else:
         raise UpdateError(f"unsupported manifest {manifest!r} for {repository}")
