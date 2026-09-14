@@ -1,4 +1,4 @@
-name: Update weekly dependencies
+name: Update / Weekly dependencies
 
 on:
   schedule:
