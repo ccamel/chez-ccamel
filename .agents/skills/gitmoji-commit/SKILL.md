@@ -1,6 +1,8 @@
 ---
 name: gitmoji-commit
-description: Draft and verify gitmoji-style commit messages that match chez-ccamel's commitlint policy. Use when creating, revising, checking, or explaining a commit message for this repository.
+description: >
+  Draft gitmoji-style commit messages that conform to chez-ccamel's commitlint
+  policy. Use when creating, revising, checking, or explaining a commit message.
 ---
 
 # Write a gitmoji commit message

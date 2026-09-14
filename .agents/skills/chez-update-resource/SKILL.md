@@ -1,6 +1,10 @@
 ---
 name: chez-update-resource
-description: Update the latest chez-ccamel resources managed by scripts/update-resource.py and repair their upstream mappings when release metadata changes. Use for managed resource updates or updater failures; do not use for historical pins or ordinary nixpkgs input updates.
+description: >
+  Update resources managed by `scripts/update-resource.py`, including upstream
+  release mappings and fixed-output hashes. Use when a managed resource needs
+  its latest version, release metadata, or updater behavior repaired. Do not
+  use for historical pins or ordinary nixpkgs input updates.
 ---
 
 # Update a managed chez-ccamel resource
