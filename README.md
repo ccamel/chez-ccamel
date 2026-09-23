@@ -71,6 +71,7 @@ The control plane for agent sessions, tool access, configuration, and observable
 
 | Component | Role |
 | --- | --- |
+| [agtx](https://github.com/fynnfluegge/agtx) | Terminal-native development environment for coding agents. |
 | [HerdR](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
 | [OMP](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
 

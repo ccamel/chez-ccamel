@@ -81,6 +81,7 @@
           };
 
           omp = pkgs.callPackage ./packages/omp.nix { };
+          agtx = pkgs.callPackage ./packages/agtx.nix { };
           qmd = pkgs.callPackage ./packages/qmd.nix {
             upstreamQmd = inputs.qmd.packages.${system}.qmd;
             src = inputs.qmd;
@@ -108,6 +109,7 @@
               livediff
               qmd
               apm
+              agtx
               ;
             inherit (codexPkgs) codex;
             antigravityCli = codexPkgs.antigravity-cli;

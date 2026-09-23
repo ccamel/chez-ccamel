@@ -80,6 +80,19 @@
     };
   }
   {
+    package = { pkgs, ... }: pkgs.tmux;
+  }
+  {
+    package = { agtx, ... }: agtx;
+    readmeGroup = "Harnesses";
+    documentation = {
+      name = "agtx";
+      description = "Terminal-native development environment for coding agents.";
+      url = "https://github.com/fynnfluegge/agtx";
+      visibility = "public";
+    };
+  }
+  {
     package =
       { pkgs, ... }:
       pkgs.vscode-langservers-extracted.overrideAttrs (old: {

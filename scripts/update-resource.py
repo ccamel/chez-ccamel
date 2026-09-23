@@ -97,6 +97,14 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
                 ("aarch64-darwin", "apm-darwin-arm64.tar.gz"),
             ),
         ),
+        "agtx": GitHubReleaseResource(
+            repository="fynnfluegge/agtx",
+            file=Path("nix-config/packages/agtx.nix"),
+            assets=(
+                ("x86_64-linux", "agtx-v{version}-x86_64-linux.tar.gz"),
+                ("aarch64-darwin", "agtx-v{version}-aarch64-darwin.tar.gz"),
+            ),
+        ),
         "omp": GitHubReleaseResource(
             repository="can1357/oh-my-pi",
             file=Path("nix-config/packages/omp.nix"),

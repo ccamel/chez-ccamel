@@ -27,7 +27,7 @@ jobs:
       - name: Refresh fast-moving agentic resources
         run: |
           nix shell --inputs-from ./nix-config nixpkgs#just -c just update-resource \
-            omp herdr herd herdr-remote herdr-annotate shepherdr omp-undo-redo ponytail
+            agtx omp herdr herd herdr-remote herdr-annotate shepherdr omp-undo-redo ponytail
 
       - name: Create GitHub App token
         id: app-token
@@ -45,6 +45,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           branch: automation/fast-dependency-updates
           add-paths: |
+            nix-config/packages/agtx.nix
             nix-config/packages/omp.nix
             nix-config/packages/herdr.nix
             nix-config/packages/herd.nix
