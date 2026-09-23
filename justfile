@@ -8,6 +8,12 @@ default:
 switch host=`hostname -s`:
     case "{{host}}" in forge) sudo nixos-rebuild switch --flake ./nix-config#forge ;; tinymac) sudo darwin-rebuild switch --flake ./nix-config#tinymac ;; *) echo "invalid host '{{host}}'; expected forge or tinymac" >&2; exit 1 ;; esac
 
+
+# Fast-forward from the tracked branch, then apply the selected host configuration.
+pull-switch host=`hostname -s`:
+    git diff --quiet && git diff --cached --quiet || { echo "refusing to pull with tracked local changes" >&2; exit 1; }
+    git pull --ff-only
+    just switch "{{host}}"
 # Check formatting of tracked Nix files.
 check-fmt:
     git ls-files -z -- '*.nix' | while IFS= read -r -d '' file; do if test -f "$file"; then printf '%s\0' "$file"; fi; done | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style -- --check
