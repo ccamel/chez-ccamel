@@ -155,20 +155,23 @@
             ${herdrRestartIfStaleHook}
           '';
           mkToolbox =
-            name: packages: shellHook:
+            name: prompt: packages: shellHook:
             pkgs.mkShell {
               inherit packages;
               shellHook = ''
                 export SHELL="${pkgs.zsh}/bin/zsh"
                 export TOOLBOX_NAME="${name}"
+                export TOOLBOX_PROMPT="${prompt}"
                 ${shellHook}
               '';
             };
         in
         {
-          devops = mkToolbox "devops" devopsPackages "";
-          agentic = mkToolbox "agentic" agenticPackages agenticShellHook;
-          agentic-devops = mkToolbox "agentic-devops" (agenticPackages ++ devopsPackages) agenticShellHook;
+          devops = mkToolbox "devops" "🛠️" devopsPackages "";
+          agentic = mkToolbox "agentic" "🤖" agenticPackages agenticShellHook;
+          agentic-devops = mkToolbox "agentic-devops" "🤖 🛠️" (
+            agenticPackages ++ devopsPackages
+          ) agenticShellHook;
         }
       );
 

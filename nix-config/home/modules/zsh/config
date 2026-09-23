@@ -39,7 +39,20 @@ toolbox() {
       ;;
   esac
 
+  local target
+  case "${TOOLBOX_NAME-}:$1" in
+    agentic:devops|devops:agentic)
+      target=agentic-devops
+      ;;
+    agentic:agentic|devops:devops|agentic-devops:*)
+      return
+      ;;
+    *)
+      target=$1
+      ;;
+  esac
+
   nix develop \
-    "$CHEZ_CCAMEL_ROOT/nix-config#$1" \
+    "$CHEZ_CCAMEL_ROOT/nix-config#$target" \
     --command zsh
 }

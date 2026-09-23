@@ -21,7 +21,7 @@ format = "[$all_status$ahead_behind]($style) "
 style = "bold #FF5555"
 
 # ====================== TOOLBOX ======================
-[env_var.TOOLBOX_NAME]
+[env_var.TOOLBOX_PROMPT]
 format = "via [❄️ $env_value]($style) "
 style = "bold bright-blue"
 
