@@ -12,9 +12,9 @@ rustPlatform.buildRustPackage (finalAttrs: {
     owner = "plannotator";
     repo = "herdr-annotate";
     # managed by update-resource
-    rev = "99002e24525a9ae327450cd83a17b1e86b2ee81f";
+    rev = "d02b0b42cf1955a3b206959659f1833622f213b8";
     # managed by update-resource
-    hash = "sha256-zZVMK3BBNGPunjLur2CcIZH9z/NOkV0JH6e/PCyUezs=";
+    hash = "sha256-ra+iX1QrsaPe0lmbJ+FOxMp2YWP1YsvPUHPoB3HgOqY=";
   };
 
   cargoRoot = "rust";
