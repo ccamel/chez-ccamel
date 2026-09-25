@@ -7,18 +7,18 @@
 }:
 let
   # managed by update-resource
-  version = "18.2.11";
+  version = "18.3.1";
   source =
     {
       x86_64-linux = {
         url = "https://github.com/can1357/oh-my-pi/releases/download/v${version}/omp-linux-x64";
         # managed by update-resource
-        hash = "sha256-l885VXvz2YMn3UyYFDgLfmvLduQRae3ZsP8wQkxzOio=";
+        hash = "sha256-CAbfYCvyu5sgLRUiBLG+9kUOtry/vzHWbjdn0buzs6c=";
       };
       aarch64-darwin = {
         url = "https://github.com/can1357/oh-my-pi/releases/download/v${version}/omp-darwin-arm64";
         # managed by update-resource
-        hash = "sha256-+u/9V2dM/6JT4vEn1y3f5tzYHh65HrXSFIkT5ioBCig=";
+        hash = "sha256-Z7gHqZRUpNjhz5gtznszQ7LC/BSPM+QD2/s/EEmyJXA=";
       };
     }
     .${stdenvNoCC.hostPlatform.system}
