@@ -18,5 +18,8 @@
   home.sessionVariables.CHEZ_CCAMEL_ROOT = "/home/chris/src/mine/chez-ccamel";
 
   xdg.enable = true;
+  xdg.configFile."rebar3/rebar.config".text = ''
+    {ssl_cacerts_path, "/etc/ssl/certs/ca-certificates.crt"}.
+  '';
 
 }
