@@ -23,6 +23,11 @@ check-lua:
     git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#stylua -- --check
     git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#lua51Packages.luacheck --
 
+# Run Python unit tests.
+test-python:
+    python3 -m unittest discover -s scripts/tests -v
+
+
 # Generate README tool tables from curated Nix metadata.
 generate-readme:
     python3 scripts/generate-readme.py
@@ -37,7 +42,7 @@ check-secrets:
     cd nix-config && sops --decrypt secrets/git-corp.yaml > /dev/null
 
 # Run repository checks; secret validation is explicit via check-secrets.
-check: check-fmt check-lua check-readme
+check: check-fmt check-lua test-python check-readme
     cd nix-config && nix flake check --all-systems . && nix run --inputs-from . nixpkgs#statix -- check .
 
 # Format tracked Nix files.
