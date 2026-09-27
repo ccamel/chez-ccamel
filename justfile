@@ -24,7 +24,7 @@ check-lua:
     git ls-files -z -- '*.lua' | xargs -0 nix run --inputs-from ./nix-config nixpkgs#lua51Packages.luacheck --
 
 # Run Python unit tests.
-check-python:
+test-python:
     python3 -m unittest discover -s scripts/tests -v
 
 
@@ -42,7 +42,7 @@ check-secrets:
     cd nix-config && sops --decrypt secrets/git-corp.yaml > /dev/null
 
 # Run repository checks; secret validation is explicit via check-secrets.
-check: check-fmt check-lua check-python check-readme
+check: check-fmt check-lua test-python check-readme
     cd nix-config && nix flake check --all-systems . && nix run --inputs-from . nixpkgs#statix -- check .
 
 # Format tracked Nix files.
