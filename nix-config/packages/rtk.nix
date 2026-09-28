@@ -5,18 +5,18 @@
 }:
 let
   # managed by update-resource
-  version = "0.49.0";
+  version = "0.50.0";
   source =
     {
       x86_64-linux = {
         url = "https://github.com/rtk-ai/rtk/releases/download/v${version}/rtk-x86_64-unknown-linux-musl.tar.gz";
         # managed by update-resource
-        hash = "sha256-cngjHf1+anMKSrf4R7GVvPAiicLVdiKw2rdaZBEQDI8=";
+        hash = "sha256-vCuJArDZx5bILvRfFq4jB+F3V6/spe4VYjWj3HvaX4k=";
       };
       aarch64-darwin = {
         url = "https://github.com/rtk-ai/rtk/releases/download/v${version}/rtk-aarch64-apple-darwin.tar.gz";
         # managed by update-resource
-        hash = "sha256-u7/rq7Imhpk6gNpzGqTV01EW+4riSrsAYI76Ao4TrgE=";
+        hash = "sha256-/lR2GplQJm46eN22aor14GclEWnaMGoojgdR3mPYNv4=";
       };
     }
     .${stdenvNoCC.hostPlatform.system}
