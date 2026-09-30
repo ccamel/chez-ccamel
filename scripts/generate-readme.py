@@ -15,7 +15,9 @@ from typing import Any
 
 
 SECTIONS = ("core", "agentic", "devops")
-FIELDS = frozenset(("name", "description", "url", "visibility"))
+README_SYSTEM = "x86_64-linux"
+
+FIELDS = frozenset(("name", "version", "description", "url", "visibility"))
 GROUP_FIELDS = frozenset(("name", "description", "items"))
 AGENTIC_FIELDS = frozenset(("description", "groups"))
 VISIBILITIES = frozenset(("public", "private"))
@@ -27,7 +29,7 @@ class GenerationError(Exception):
 
 def evaluate_metadata(repository_root: Path) -> Any:
     result = subprocess.run(
-        ["nix", "eval", "--json", "./nix-config#lib.readmeDocumentation"],
+        ["nix", "eval", "--json", f"./nix-config#lib.readmeDocumentation.{README_SYSTEM}"],
         cwd=repository_root,
         capture_output=True,
         text=True,
@@ -53,8 +55,10 @@ def validate_items(section: str, items: Any) -> list[dict[str, str]]:
     for index, item in enumerate(items):
         if not isinstance(item, dict) or set(item) != FIELDS:
             raise GenerationError(f"{section} item {index} must contain exactly {sorted(FIELDS)}")
-        if any(not isinstance(item[field], str) for field in FIELDS):
-            raise GenerationError(f"{section} item {index} fields must all be strings")
+        if any(not isinstance(item[field], str) for field in FIELDS - {"version"}):
+            raise GenerationError(f"{section} item {index} non-version fields must all be strings")
+        if item["version"] is not None and not isinstance(item["version"], str):
+            raise GenerationError(f"{section} item {index} version must be a string or null")
         if item["visibility"] not in VISIBILITIES:
             raise GenerationError(
                 f"{section} item {index} has unsupported visibility {item['visibility']!r}"
@@ -130,7 +134,8 @@ def render_table(
     public_items = (item for item in items if item["visibility"] == "public")
     rows = [f"| {name_heading} | {description_heading} |", "| --- | --- |"]
     for item in sorted(public_items, key=lambda item: item["name"].casefold()):
-        name = escape_table_cell(item["name"]).replace("[", "\\[").replace("]", "\\]")
+        display_name = f"{item['name']} v{item['version']}" if item["version"] else item["name"]
+        name = escape_table_cell(display_name).replace("[", "\\[").replace("]", "\\]")
         url = item["url"].replace("\\", "\\\\").replace(")", "\\)")
         description = escape_table_cell(item["description"])
         rows.append(f"| [{name}]({url}) | {description} |")

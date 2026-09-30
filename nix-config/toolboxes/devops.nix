@@ -47,9 +47,15 @@
   {
     package =
       { pkgs, ... }:
-      pkgs.google-cloud-sdk.withExtraComponents (
+      let
+        inherit (pkgs.google-cloud-sdk) version;
+      in
+      (pkgs.google-cloud-sdk.withExtraComponents (
         with pkgs.google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
-      );
+      )).overrideAttrs
+        {
+          inherit version;
+        };
     documentation = {
       name = "gcloud";
       description = "Google Cloud command-line interface.";
