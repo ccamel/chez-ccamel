@@ -5,18 +5,18 @@
 }:
 let
   # managed by update-resource
-  version = "0.9.1";
+  version = "0.9.3";
   source =
     {
       x86_64-linux = {
         url = "https://github.com/ogulcancelik/herdr/releases/download/v${version}/herdr-linux-x86_64";
         # managed by update-resource
-        hash = "sha256-KgL+0WvrZR7wBuHUPwSPZSyk3FitBTzS1ERQVj1cVLc=";
+        hash = "sha256-GKjcZfHC+khYhDRDVt6hz9kRxvBs9G+njhk/QIf026c=";
       };
       aarch64-darwin = {
         url = "https://github.com/ogulcancelik/herdr/releases/download/v${version}/herdr-macos-aarch64";
         # managed by update-resource
-        hash = "sha256-X8en5636ylb6gKqJ3LAlaTNXJo2rgoW5zi0IojE8id4=";
+        hash = "sha256-UXOj4K5C1dGrfr+l1eYyn3w9I/jho2d8fOMjHaKIQVc=";
       };
     }
     .${stdenvNoCC.hostPlatform.system}
