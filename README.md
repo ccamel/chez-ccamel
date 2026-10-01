@@ -97,6 +97,7 @@ Harness capabilities installed declaratively with the toolbox.
 | [OMP Undo/Redo](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
 | [Ponytail](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
 | [shepherdr](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
+| [System Prompt Switch](https://github.com/plantaeart/system-prompt-switch) | Session-scoped system prompt selection for OMP. |
 
 #### Operating tools
 

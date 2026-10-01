@@ -19,4 +19,14 @@
       visibility = "public";
     };
   }
+  {
+    package = { pkgs, ... }: pkgs.callPackage ../packages/system-prompt-switch.nix { };
+    readmeGroup = "Extensions and integrations";
+    documentation = {
+      name = "System Prompt Switch";
+      description = "Session-scoped system prompt selection for OMP.";
+      url = "https://github.com/plantaeart/system-prompt-switch";
+      visibility = "public";
+    };
+  }
 ]
