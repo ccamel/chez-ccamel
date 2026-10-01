@@ -155,6 +155,10 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
             package="@dietrichgebert/ponytail",
             file=Path("nix-config/packages/ponytail.nix"),
         ),
+        "system-prompt-switch": NpmResource(
+            package="system-prompt-switch",
+            file=Path("nix-config/packages/system-prompt-switch.nix"),
+        ),
         "qmd": QmdResource(file=Path("nix-config/packages/qmd.nix")),
         "skills-lint-tools": SkillsLintToolsResource(file=Path(".github/workflows/lint-skills.yml")),
     }
