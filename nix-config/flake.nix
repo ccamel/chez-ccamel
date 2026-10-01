@@ -44,6 +44,51 @@
         "aarch64-darwin"
       ];
       forEachSystem = nixpkgs.lib.genAttrs supportedSystems;
+      toolboxArgsFor =
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          codexPkgs = import inputs.nixpkgs-codex {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          omp = pkgs.callPackage ./packages/omp.nix { };
+          agtx = pkgs.callPackage ./packages/agtx.nix { };
+          qmd = pkgs.callPackage ./packages/qmd.nix {
+            upstreamQmd = inputs.qmd.packages.${system}.qmd;
+            src = inputs.qmd;
+          };
+          herdr = pkgs.callPackage ./packages/herdr.nix { };
+          herdrAnnotate = pkgs.callPackage ./packages/herdr-annotate.nix { };
+          herdrRemote = pkgs.callPackage ./packages/herdr-remote.nix { };
+          shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
+          herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
+          rtk = pkgs.callPackage ./packages/rtk.nix { };
+          apm = pkgs.callPackage ./packages/apm.nix { };
+          livediff = pkgs.callPackage ./packages/livediff.nix { };
+        in
+        {
+          inherit
+            pkgs
+            omp
+            herdr
+            herdrAnnotate
+            herdrRemote
+            shepherdr
+            herd
+            rtk
+            livediff
+            qmd
+            apm
+            agtx
+            ;
+          inherit (codexPkgs) codex;
+          antigravityCli = codexPkgs.antigravity-cli;
+          githubCopilotCli = codexPkgs.github-copilot-cli;
+        };
     in
     {
       nixosConfigurations.forge = nixpkgs.lib.nixosSystem {
@@ -66,55 +111,25 @@
       };
 
       formatter = forEachSystem (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
-      lib.readmeDocumentation = import ./readme-metadata.nix;
+      lib.readmeDocumentation = forEachSystem (
+        system:
+        let
+          toolboxArgs = toolboxArgsFor system;
+        in
+        import ./readme-metadata.nix {
+          inherit toolboxArgs;
+          inherit (toolboxArgs) pkgs;
+        }
+      );
 
       devShells = forEachSystem (
         system:
         let
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          codexPkgs = import inputs.nixpkgs-codex {
-            inherit system;
-            config.allowUnfree = true;
-          };
-
-          omp = pkgs.callPackage ./packages/omp.nix { };
-          agtx = pkgs.callPackage ./packages/agtx.nix { };
-          qmd = pkgs.callPackage ./packages/qmd.nix {
-            upstreamQmd = inputs.qmd.packages.${system}.qmd;
-            src = inputs.qmd;
-          };
-          herdr = pkgs.callPackage ./packages/herdr.nix { };
-          herdrAnnotate = pkgs.callPackage ./packages/herdr-annotate.nix { };
-          herdrRemote = pkgs.callPackage ./packages/herdr-remote.nix { };
-          shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
-          herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
-          rtk = pkgs.callPackage ./packages/rtk.nix { };
-          apm = pkgs.callPackage ./packages/apm.nix { };
-          livediff = pkgs.callPackage ./packages/livediff.nix { };
+          toolboxArgs = toolboxArgsFor system;
+          inherit (toolboxArgs) pkgs;
+          inherit (toolboxArgs) herdrAnnotate herdrRemote;
           devopsToolbox = import ./toolboxes/devops.nix;
           agenticToolbox = import ./toolboxes/agentic.nix;
-          toolboxArgs = {
-            inherit
-              pkgs
-              omp
-              herdr
-              herdrAnnotate
-              herdrRemote
-              shepherdr
-              herd
-              rtk
-              livediff
-              qmd
-              apm
-              agtx
-              ;
-            inherit (codexPkgs) codex;
-            antigravityCli = codexPkgs.antigravity-cli;
-            githubCopilotCli = codexPkgs.github-copilot-cli;
-          };
           devopsPackages = map (descriptor: descriptor.package toolboxArgs) devopsToolbox;
           agenticPackages = map (descriptor: descriptor.package toolboxArgs) agenticToolbox;
           ompConfig = (pkgs.formats.yaml { }).generate "omp-config.yml" (

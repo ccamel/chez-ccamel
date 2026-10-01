@@ -33,31 +33,31 @@ The terminal is home. These are the essential tools that define my everyday envi
 <!-- BEGIN_GENERATED_CORE -->
 | Tool | Description |
 | --- | --- |
-| [Atuin](https://atuin.sh/) | Searchable shell history. |
-| [bat](https://github.com/sharkdp/bat) | Cat clone with syntax highlighting. |
-| [Btop](https://github.com/aristocratos/btop) | Resource monitor for the terminal. |
-| [curl](https://curl.se/) | Command-line HTTP client. |
-| [direnv](https://direnv.net/) | Directory-scoped environment variables. |
-| [Dust](https://github.com/bootandy/dust) | Intuitive disk usage analyzer. |
-| [ExifTool](https://exiftool.org/) | Command-line toolkit for metadata manipulation. |
-| [eza](https://eza.rocks/) | Modern replacement for ls. |
-| [fd](https://github.com/sharkdp/fd) | Fast, user-friendly file finder. |
-| [fzf](https://github.com/junegunn/fzf) | Fuzzy finder for the command line. |
-| [Ghostty](https://ghostty.org/) | Terminal emulator. |
-| [Git](https://git-scm.com/) | Distributed version control system. |
-| [GitHub CLI](https://cli.github.com/) | GitHub's command-line interface. |
-| [Glow](https://github.com/charmbracelet/glow) | Terminal markdown reader. |
-| [ImageMagick](https://imagemagick.org/) | Command-line toolkit for image manipulation. |
-| [jq](https://jqlang.org/) | Command-line JSON processor. |
-| [lazydocker](https://github.com/jesseduffield/lazydocker) | Terminal UI for Docker. |
-| [Neovim](https://neovim.io/) | Editor built around LazyVim. |
-| [Python](https://www.python.org/) | General-purpose programming language. |
-| [ripgrep](https://github.com/BurntSushi/ripgrep) | Fast recursive text search. |
-| [Starship](https://starship.rs/) | Cross-shell prompt. |
-| [Tig](https://jonas.github.io/tig/) | Text-mode interface for Git. |
-| [yq](https://github.com/mikefarah/yq) | Portable command-line YAML processor. |
-| [zoxide](https://github.com/ajeetdsouza/zoxide) | Smarter directory navigation. |
-| [Zsh](https://www.zsh.org/) | Interactive shell with vi-mode editing. |
+| [Atuin v18.10.0](https://atuin.sh/) | Searchable shell history. |
+| [bat v0.26.1](https://github.com/sharkdp/bat) | Cat clone with syntax highlighting. |
+| [Btop v1.4.5](https://github.com/aristocratos/btop) | Resource monitor for the terminal. |
+| [curl v8.20.0](https://curl.se/) | Command-line HTTP client. |
+| [direnv v2.37.1](https://direnv.net/) | Directory-scoped environment variables. |
+| [Dust v1.2.4](https://github.com/bootandy/dust) | Intuitive disk usage analyzer. |
+| [ExifTool v13.59](https://exiftool.org/) | Command-line toolkit for metadata manipulation. |
+| [eza v0.23.4](https://eza.rocks/) | Modern replacement for ls. |
+| [fd v10.3.0](https://github.com/sharkdp/fd) | Fast, user-friendly file finder. |
+| [fzf v0.67.0](https://github.com/junegunn/fzf) | Fuzzy finder for the command line. |
+| [Ghostty v1.3.1](https://ghostty.org/) | Terminal emulator. |
+| [Git v2.51.2](https://git-scm.com/) | Distributed version control system. |
+| [GitHub CLI v2.93.0](https://cli.github.com/) | GitHub's command-line interface. |
+| [Glow v2.1.1](https://github.com/charmbracelet/glow) | Terminal markdown reader. |
+| [ImageMagick v7.1.2-23](https://imagemagick.org/) | Command-line toolkit for image manipulation. |
+| [jq v1.8.1](https://jqlang.org/) | Command-line JSON processor. |
+| [lazydocker v0.24.2](https://github.com/jesseduffield/lazydocker) | Terminal UI for Docker. |
+| [Neovim v0.11.7](https://neovim.io/) | Editor built around LazyVim. |
+| [Python v3.13.12](https://www.python.org/) | General-purpose programming language. |
+| [ripgrep v15.1.0](https://github.com/BurntSushi/ripgrep) | Fast recursive text search. |
+| [Starship v1.24.2](https://starship.rs/) | Cross-shell prompt. |
+| [Tig v2.6.0](https://jonas.github.io/tig/) | Text-mode interface for Git. |
+| [yq v4.50.1](https://github.com/mikefarah/yq) | Portable command-line YAML processor. |
+| [zoxide v0.9.9](https://github.com/ajeetdsouza/zoxide) | Smarter directory navigation. |
+| [Zsh v5.9](https://www.zsh.org/) | Interactive shell with vi-mode editing. |
 <!-- END_GENERATED_CORE -->
 
 ### Agentic development
@@ -71,9 +71,9 @@ The control plane for agent sessions, tool access, configuration, and observable
 
 | Component | Role |
 | --- | --- |
-| [agtx](https://github.com/fynnfluegge/agtx) | Terminal-native development environment for coding agents. |
-| [HerdR](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
-| [OMP](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
+| [agtx v1.0.6](https://github.com/fynnfluegge/agtx) | Terminal-native development environment for coding agents. |
+| [HerdR v0.9.3](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
+| [OMP v18.4.4](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
 
 #### Coding agents
 
@@ -81,10 +81,10 @@ The interchangeable specialist CLIs run within the wider workflow.
 
 | Component | Role |
 | --- | --- |
-| [Antigravity CLI](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
-| [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding CLI. |
-| [Codex](https://openai.com/codex/) | OpenAI coding agent. |
-| [GitHub Copilot CLI](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
+| [Antigravity CLI v1.2.9](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
+| [Claude Code v2.1.140](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding CLI. |
+| [Codex v0.157.0](https://openai.com/codex/) | OpenAI coding agent. |
+| [GitHub Copilot CLI v1.0.88](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
 
 #### Extensions and integrations
 
@@ -92,12 +92,12 @@ Harness capabilities installed declaratively with the toolbox.
 
 | Component | Role |
 | --- | --- |
-| [HerdR Annotate](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
-| [HerdR Remote](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
-| [OMP Undo/Redo](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
-| [Ponytail](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
-| [shepherdr](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
-| [System Prompt Switch](https://github.com/plantaeart/system-prompt-switch) | Session-scoped system prompt selection for OMP. |
+| [HerdR Annotate v0.8.0-unstable-2026-09-29](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
+| [HerdR Remote v0.8.0](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
+| [OMP Undo/Redo v1.6.4](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
+| [Ponytail v4.10.0](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
+| [shepherdr v0.1.0-unstable-2026-07-24](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
+| [System Prompt Switch v0.9.10](https://github.com/plantaeart/system-prompt-switch) | Session-scoped system prompt selection for OMP. |
 
 #### Operating tools
 
@@ -105,11 +105,11 @@ Tools for coordination, context, inspection, and efficient terminal output.
 
 | Component | Role |
 | --- | --- |
-| [APM](https://github.com/microsoft/apm) | Dependency manager for AI agent configuration. |
+| [APM v0.30.0](https://github.com/microsoft/apm) | Dependency manager for AI agent configuration. |
 | [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
-| [Livediff](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
-| [QMD](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
-| [rtk](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
+| [Livediff v3.3.0](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
+| [QMD v2.8.3](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
+| [rtk v0.50.0](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
 <!-- END_GENERATED_AGENTIC -->
 
 ### DevOps
@@ -119,17 +119,17 @@ Infrastructure and platform engineering.
 <!-- BEGIN_GENERATED_DEVOPS -->
 | Tool | Description |
 | --- | --- |
-| [dnsutils](https://www.isc.org/bind/) | DNS tools like dig and nslookup. |
-| [gcloud](https://cloud.google.com/sdk/gcloud) | Google Cloud command-line interface. |
-| [Helm](https://helm.sh/) | Kubernetes package manager. |
-| [Helmfile](https://helmfile.readthedocs.io/) | Declarative Helm chart deployment tool. |
-| [k9s](https://k9scli.io/) | Terminal UI for Kubernetes. |
-| [kubectl](https://kubernetes.io/docs/reference/kubectl/) | Kubernetes command-line tool. |
-| [Kustomize](https://kustomize.io/) | Kubernetes configuration customization tool. |
-| [Terraform](https://www.terraform.io/) | Infrastructure as code tool. |
-| [Terragrunt](https://terragrunt.gruntwork.io/) | Terraform orchestration and DRY configuration tool. |
-| [Trivy](https://trivy.dev/) | Cloud-native vulnerability and misconfiguration scanner. |
-| [whois](https://github.com/rfc1036/whois) | Client for the WHOIS directory service. |
+| [dnsutils v9.20.23](https://www.isc.org/bind/) | DNS tools like dig and nslookup. |
+| [gcloud v537.0.0](https://cloud.google.com/sdk/gcloud) | Google Cloud command-line interface. |
+| [Helm v3.19.1](https://helm.sh/) | Kubernetes package manager. |
+| [Helmfile v1.1.9](https://helmfile.readthedocs.io/) | Declarative Helm chart deployment tool. |
+| [k9s v0.50.16](https://k9scli.io/) | Terminal UI for Kubernetes. |
+| [kubectl v1.34.3](https://kubernetes.io/docs/reference/kubectl/) | Kubernetes command-line tool. |
+| [Kustomize v5.8.0](https://kustomize.io/) | Kubernetes configuration customization tool. |
+| [Terraform v1.14.0](https://www.terraform.io/) | Infrastructure as code tool. |
+| [Terragrunt v0.93.8](https://terragrunt.gruntwork.io/) | Terraform orchestration and DRY configuration tool. |
+| [Trivy v0.66.0](https://trivy.dev/) | Cloud-native vulnerability and misconfiguration scanner. |
+| [whois v5.6.5](https://github.com/rfc1036/whois) | Client for the WHOIS directory service. |
 <!-- END_GENERATED_DEVOPS -->
 
 ## Bootstrap

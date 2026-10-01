@@ -1,3 +1,5 @@
+{ pkgs, toolboxArgs }:
+
 let
   toolboxes = {
     agentic = import ./toolboxes/agentic.nix;
@@ -6,9 +8,10 @@ let
 
   documentationFor =
     descriptors:
-    map (descriptor: descriptor.documentation) (
-      builtins.filter (descriptor: descriptor ? documentation) descriptors
-    );
+    map (
+      descriptor:
+      descriptor.documentation // { version = (descriptor.package toolboxArgs).version or null; }
+    ) (builtins.filter (descriptor: descriptor ? documentation) descriptors);
 
   documentationForGroup =
     group: descriptors:
@@ -42,13 +45,13 @@ let
 in
 {
   core = builtins.concatLists [
-    (import ./home/modules/cli.readme.nix)
-    (import ./home/modules/git.readme.nix)
-    (import ./home/modules/neovim/readme.nix)
-    (import ./home/modules/zsh/readme.nix)
-    (import ./home/modules/atuin/readme.nix)
-    (import ./home/modules/starship/readme.nix)
-    (import ./home/modules/ghostty/readme.nix)
+    (import ./home/modules/cli.readme.nix { inherit pkgs; })
+    (import ./home/modules/git.readme.nix { inherit pkgs; })
+    (import ./home/modules/neovim/readme.nix { inherit pkgs; })
+    (import ./home/modules/zsh/readme.nix { inherit pkgs; })
+    (import ./home/modules/atuin/readme.nix { inherit pkgs; })
+    (import ./home/modules/starship/readme.nix { inherit pkgs; })
+    (import ./home/modules/ghostty/readme.nix { inherit pkgs; })
   ];
   agentic = {
     description = "My terminal-native playground for building software alongside a small herd of AI agents.";

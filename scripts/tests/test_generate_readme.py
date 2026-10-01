@@ -18,6 +18,7 @@ SPEC.loader.exec_module(GENERATOR)
 def item(name: str, description: str, visibility: str = "public") -> dict[str, str]:
     return {
         "name": name,
+        "version": "1.2.3",
         "description": description,
         "url": f"https://example.invalid/{name}",
         "visibility": visibility,
@@ -68,8 +69,8 @@ class GenerateReadmeTest(unittest.TestCase):
                 (
                     "| Tool | Description |",
                     "| --- | --- |",
-                    "| [Alpha](https://example.invalid/Alpha) | Alpha |",
-                    "| [beta](https://example.invalid/beta) | Beta \\| description |",
+                    "| [Alpha v1.2.3](https://example.invalid/Alpha) | Alpha |",
+                    "| [beta v1.2.3](https://example.invalid/beta) | Beta \\| description |",
                 )
             ),
         )
@@ -97,7 +98,7 @@ class GenerateReadmeTest(unittest.TestCase):
                     "",
                     "| Component | Role |",
                     "| --- | --- |",
-                    "| [Agent](https://example.invalid/Agent) | Agent |",
+                    "| [Agent v1.2.3](https://example.invalid/Agent) | Agent |",
                     "",
                     "#### Extensions",
                     "",
@@ -105,7 +106,7 @@ class GenerateReadmeTest(unittest.TestCase):
                     "",
                     "| Component | Role |",
                     "| --- | --- |",
-                    "| [Extension](https://example.invalid/Extension) | Extension |",
+                    "| [Extension v1.2.3](https://example.invalid/Extension) | Extension |",
                 )
             ),
         )
