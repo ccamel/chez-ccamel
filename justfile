@@ -55,6 +55,7 @@ update:
     just update-input
     just update-resource
     just update-neovim
+    just generate-readme
 
 # Update all flake inputs, or one when specified.
 update-input input='':
@@ -63,6 +64,7 @@ update-input input='':
 # Update every managed resource, or selected resources.
 update-resource *resources:
     python3 scripts/update-resource.py {{resources}}
+    just generate-readme
 
 # Refresh Lazy-managed Neovim plugins without touching user state.
 update-neovim:
