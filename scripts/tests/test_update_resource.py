@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import importlib.util
 from pathlib import Path
 from types import SimpleNamespace
@@ -94,12 +95,36 @@ class UpdateResourceTest(unittest.TestCase):
         self.assertNotIn("flake.inputs.omp", expression)
 
     def test_npm_collection_uses_registry_integrity(self) -> None:
-        resource = UPDATER.NpmResource("@scope/package", Path("package.nix"))
+        resource = UPDATER.NpmExtensionResource("@scope/package", Path("extensions.json"), "package")
         with patch.object(UPDATER, "fetch_json", return_value={"version": "2.0.0", "dist": {"integrity": "sha512-registry"}}):
             self.assertEqual(UPDATER.npm_update(resource).values, (("version", "2.0.0"), ("hash", "sha512-registry")))
         with patch.object(UPDATER, "fetch_json", return_value={"version": "2.0.0", "dist": {}}):
             with self.assertRaisesRegex(UPDATER.UpdateError, "dist.integrity"):
                 UPDATER.npm_update(resource)
+
+    def test_npm_extension_update_changes_only_the_selected_extension(self) -> None:
+        contents = '[{"pname": "one", "version": "1.0.0", "hash": "sha512-one"}, {"pname": "two", "version": "2.0.0", "hash": "sha512-two"}]'
+        resource = UPDATER.NpmExtensionResource("one", Path("extensions.json"), "one")
+
+        updated = UPDATER.update_npm_extension(contents, resource, (("version", "1.1.0"), ("hash", "sha512-next")))
+
+        self.assertEqual(
+            json.loads(updated),
+            [
+                {"pname": "one", "version": "1.1.0", "hash": "sha512-next"},
+                {"pname": "two", "version": "2.0.0", "hash": "sha512-two"},
+            ],
+        )
+
+    def test_fast_resources_include_manifest_extensions(self) -> None:
+        extension = UPDATER.NpmExtensionResource("package", Path("extensions.json"), "extension")
+        resources = {
+            "slow": UPDATER.QmdResource(Path("qmd.nix")),
+            "omp": UPDATER.QmdResource(Path("omp.nix")),
+            "extension": extension,
+        }
+
+        self.assertEqual(UPDATER.fast_resources(resources), ["omp", "extension"])
 
     def test_qmd_updates_only_the_native_hash(self) -> None:
         resource = UPDATER.QmdResource(Path("qmd.nix"))
@@ -152,11 +177,16 @@ class UpdateResourceTest(unittest.TestCase):
         with self.assertRaisesRegex(UPDATER.UpdateError, "version marker"):
             UPDATER.update_marked_values(marked(("hash", HASH), ("version", "1")), (("version", "2"), ("hash", HASH)))
 
-    def test_resource_parser_accepts_empty_and_selected_resources(self) -> None:
+    def test_resource_parser_accepts_empty_selected_and_grouped_resources(self) -> None:
         with patch.object(sys, "argv", ["update-resource.py"]):
             self.assertEqual(UPDATER.parse_args().resources, [])
         with patch.object(sys, "argv", ["update-resource.py", "rtk", "qmd"]):
             self.assertEqual(UPDATER.parse_args().resources, ["rtk", "qmd"])
+        with patch.object(sys, "argv", ["update-resource.py", "--group", "fast"]):
+            self.assertEqual(UPDATER.parse_args().group, "fast")
+        with patch.object(sys, "argv", ["update-resource.py", "rtk", "--group", "fast"]):
+            with self.assertRaises(SystemExit):
+                UPDATER.parse_args()
         with patch.object(sys, "argv", ["update-resource.py", "unknown"]):
             with self.assertRaises(SystemExit):
                 UPDATER.parse_args()
@@ -164,9 +194,18 @@ class UpdateResourceTest(unittest.TestCase):
     def test_argumentless_command_enumerates_every_resource_in_order(self) -> None:
         with patch.object(sys, "argv", ["update-resource.py"]), patch.object(UPDATER, "update_resource", return_value=0) as update_resource:
             self.assertEqual(UPDATER.main(), 0)
-        self.assertEqual([call.args[0] for call in update_resource.call_args_list], list(UPDATER.RESOURCES))
+        self.assertEqual([call.args[0] for call in update_resource.call_args_list], list(UPDATER.managed_resources()))
         self.assertEqual(update_resource.call_args_list[0].args[0], "rtk")
 
+    def test_fast_group_enumerates_fast_resources(self) -> None:
+        with patch.object(sys, "argv", ["update-resource.py", "--group", "fast"]), patch.object(
+            UPDATER, "update_resource", return_value=0
+        ) as update_resource:
+            self.assertEqual(UPDATER.main(), 0)
+        self.assertEqual(
+            [call.args[0] for call in update_resource.call_args_list],
+            UPDATER.fast_resources(UPDATER.managed_resources()),
+        )
 
 if __name__ == "__main__":
     unittest.main()

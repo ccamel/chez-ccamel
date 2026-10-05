@@ -22,6 +22,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent.parent
 MARKER = "# managed by update-resource"
+OMP_NPM_EXTENSIONS_FILE = Path("nix-config/toolboxes/omp-npm-extensions.json")
 SYSTEMS = ("x86_64-linux", "aarch64-darwin")
 
 # Some Nix-managed corporate CA stores predate OpenSSL's strict extension checks;
@@ -55,10 +56,10 @@ class GitHubSourceResource:
 
 
 @dataclass(frozen=True)
-class NpmResource:
+class NpmExtensionResource:
     package: str
     file: Path
-
+    pname: str
 
 @dataclass(frozen=True)
 class QmdResource:
@@ -70,7 +71,7 @@ class SkillsLintToolsResource:
     file: Path
 
 
-Resource = GitHubReleaseResource | FetchUrlResource | GitHubSourceResource | NpmResource | QmdResource | SkillsLintToolsResource
+Resource = GitHubReleaseResource | FetchUrlResource | GitHubSourceResource | NpmExtensionResource | QmdResource | SkillsLintToolsResource
 
 
 @dataclass(frozen=True)
@@ -147,26 +148,63 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
             file=Path("nix-config/packages/shepherdr.nix"),
             branch_manifest="Cargo.toml",
         ),
-        "omp-telegram": NpmResource(
-            package="@tickernelz/omp-telegram",
-            file=Path("nix-config/packages/omp-telegram.nix"),
-        ),
-        "omp-undo-redo": NpmResource(
-            package="@baylarsadigov/omp-undo-redo",
-            file=Path("nix-config/packages/omp-undo-redo.nix"),
-        ),
-        "ponytail": NpmResource(
-            package="@dietrichgebert/ponytail",
-            file=Path("nix-config/packages/ponytail.nix"),
-        ),
-        "system-prompt-switch": NpmResource(
-            package="system-prompt-switch",
-            file=Path("nix-config/packages/system-prompt-switch.nix"),
-        ),
         "qmd": QmdResource(file=Path("nix-config/packages/qmd.nix")),
         "skills-lint-tools": SkillsLintToolsResource(file=Path(".github/workflows/lint-skills.yml")),
     }
 )
+
+
+FAST_STATIC_RESOURCES = frozenset(
+    {
+        "agtx",
+        "omp",
+        "herdr",
+        "herd",
+        "herdr-remote",
+        "herdr-annotate",
+        "shepherdr",
+    }
+)
+
+
+def omp_npm_extension_resources() -> dict[str, NpmExtensionResource]:
+    try:
+        extensions = json.loads((ROOT / OMP_NPM_EXTENSIONS_FILE).read_text())
+    except (OSError, json.JSONDecodeError) as error:
+        raise UpdateError(f"could not read {OMP_NPM_EXTENSIONS_FILE}: {error}") from error
+
+    if not isinstance(extensions, list):
+        raise UpdateError(f"{OMP_NPM_EXTENSIONS_FILE} must contain an array")
+
+    resources = {}
+    for extension in extensions:
+        pname = extension.get("pname") if isinstance(extension, dict) else None
+        package = extension.get("npmPackage") if isinstance(extension, dict) else None
+        if not isinstance(pname, str) or not pname or not isinstance(package, str) or not package:
+            raise UpdateError(
+                f"each {OMP_NPM_EXTENSIONS_FILE} entry needs non-empty pname and npmPackage strings"
+            )
+        if pname in resources:
+            raise UpdateError(f"{OMP_NPM_EXTENSIONS_FILE} has duplicate pname {pname!r}")
+        resources[pname] = NpmExtensionResource(package=package, file=OMP_NPM_EXTENSIONS_FILE, pname=pname)
+    return resources
+
+
+def managed_resources() -> Mapping[str, Resource]:
+    resources = dict(RESOURCES)
+    for pname, resource in omp_npm_extension_resources().items():
+        if pname in resources:
+            raise UpdateError(f"{OMP_NPM_EXTENSIONS_FILE} pname {pname!r} duplicates a managed resource")
+        resources[pname] = resource
+    return MappingProxyType(resources)
+
+
+def fast_resources(resources: Mapping[str, Resource]) -> list[str]:
+    return [
+        name
+        for name, resource in resources.items()
+        if name in FAST_STATIC_RESOURCES or isinstance(resource, NpmExtensionResource)
+    ]
 
 
 def request_url(url: str, description: str) -> Request:
@@ -375,6 +413,23 @@ def build_expression(package_file: Path) -> str:
     )
 
 
+def npm_extension_build_expression(resource: NpmExtensionResource) -> str:
+    return (
+        "let "
+        "flake = builtins.getFlake (toString ./nix-config); "
+        "pkgs = import flake.inputs.nixpkgs { system = builtins.currentSystem; }; "
+        "extensions = builtins.fromJSON (builtins.readFile ./nix-config/toolboxes/omp-npm-extensions.json); "
+        f"extension = builtins.head (builtins.filter (extension: extension.pname == {json.dumps(resource.pname)}) extensions); "
+        "in (pkgs.callPackage ./nix-config/packages/mk-omp-npm-extension.nix { }) (builtins.removeAttrs extension [ \"documentation\" ])"
+    )
+
+
+def resource_build_expression(resource: Resource) -> str:
+    if isinstance(resource, NpmExtensionResource):
+        return npm_extension_build_expression(resource)
+    return build_expression(ROOT / resource.file)
+
+
 def fake_build_hash(package_file: Path, contents: str) -> str:
     with tempfile.TemporaryDirectory(prefix="update-resource-") as temporary_directory:
         candidate = Path(temporary_directory) / package_file.name
@@ -411,7 +466,7 @@ def source_update(resource: GitHubSourceResource) -> ResourceUpdate:
     return ResourceUpdate(values=(("version", version), ("rev", revision), ("hash", resource_hash)), output=(*output, f"Revision: {revision}", f"Hash: {resource_hash}"))
 
 
-def npm_update(resource: NpmResource) -> ResourceUpdate:
+def npm_update(resource: NpmExtensionResource) -> ResourceUpdate:
     payload = fetch_json(
         f"https://registry.npmjs.org/{quote(resource.package, safe='')}/latest",
         f"the latest npm metadata for {resource.package}",
@@ -502,15 +557,39 @@ def collect_update(resource: Resource) -> ResourceUpdate:
         return fetchurl_update(resource)
     if isinstance(resource, GitHubSourceResource):
         return source_update(resource)
-    if isinstance(resource, NpmResource):
+    if isinstance(resource, NpmExtensionResource):
         return npm_update(resource)
     if isinstance(resource, QmdResource):
         return qmd_update(resource)
     return skills_lint_tools_update(resource)
 
 
+def update_npm_extension(
+    contents: str, resource: NpmExtensionResource, values: tuple[tuple[str, str], ...]
+) -> str:
+    try:
+        extensions = json.loads(contents)
+    except json.JSONDecodeError as error:
+        raise UpdateError(f"could not parse {resource.file}: {error}") from error
+
+    pins = dict(values)
+    if set(pins) != {"version", "hash"}:
+        raise UpdateError("npm extension update returned incomplete pin metadata")
+    matches = [
+        extension
+        for extension in extensions
+        if isinstance(extension, dict) and extension.get("pname") == resource.pname
+    ]
+    if len(matches) != 1:
+        raise UpdateError(f"expected exactly one {resource.pname!r} extension in {resource.file}, found {len(matches)}")
+    matches[0].update(pins)
+    return json.dumps(extensions, indent=2) + "\n"
+
+
 def apply_update(resource: Resource, update: ResourceUpdate) -> str:
     contents = (ROOT / resource.file).read_text()
+    if isinstance(resource, NpmExtensionResource):
+        return update_npm_extension(contents, resource, update.values)
     if isinstance(resource, QmdResource):
         return update_qmd_hash(contents, update.values[0][0], update.values[0][1])
     if isinstance(resource, SkillsLintToolsResource):
@@ -523,7 +602,7 @@ def run_post_update_checks(resource: Resource) -> int:
         return 0
     commands = (
         ("formatting", ["just", "fmt"]),
-        ("targeted Nix build", ["nix", "build", "--no-link", "--impure", "--expr", build_expression(ROOT / resource.file)]),
+        ("targeted Nix build", ["nix", "build", "--no-link", "--impure", "--expr", resource_build_expression(resource)]),
     )
     failed = False
 
@@ -544,15 +623,26 @@ def run_post_update_checks(resource: Resource) -> int:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("resources", nargs="*", metavar="resource", help="resource to update")
+    parser.add_argument("--group", choices=("fast",), help="update every resource in a group")
     args = parser.parse_args()
-    unknown = sorted(set(args.resources) - RESOURCES.keys())
+    if args.resources and args.group:
+        parser.error("resources and --group are mutually exclusive")
+    try:
+        resources = managed_resources()
+    except UpdateError as error:
+        parser.error(str(error))
+    unknown = sorted(set(args.resources) - resources.keys())
     if unknown:
         parser.error(f"unknown resource: {', '.join(unknown)}")
     return args
 
 
 def update_resource(name: str) -> int:
-    resource = RESOURCES[name]
+    try:
+        resource = managed_resources()[name]
+    except (KeyError, UpdateError) as error:
+        print(f"update-resource: {error}", file=sys.stderr)
+        return 1
     print(f"Updating {name}...", flush=True)
 
     try:
@@ -573,7 +663,13 @@ def update_resource(name: str) -> int:
 
 def main() -> int:
     args = parse_args()
-    for name in args.resources or RESOURCES:
+    try:
+        resources = managed_resources()
+    except UpdateError as error:
+        print(f"update-resource: {error}", file=sys.stderr)
+        return 1
+    names = args.resources or (fast_resources(resources) if args.group else resources)
+    for name in names:
         if update_resource(name):
             return 1
     return 0
