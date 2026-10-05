@@ -5,7 +5,7 @@
 }:
 let
   # managed by update-resource
-  version = "4.10.0";
+  version = "4.10.3";
 in
 stdenvNoCC.mkDerivation {
   pname = "ponytail";
@@ -14,7 +14,7 @@ stdenvNoCC.mkDerivation {
   src = fetchurl {
     url = "https://registry.npmjs.org/@dietrichgebert/ponytail/-/ponytail-${version}.tgz";
     # managed by update-resource
-    hash = "sha512-O2H+RWO0ojk8D8yz9q1F82ybKTXpYtrBb7mHkQT+/iCtsXndAxJo05KU1hkLPjV203ABq+cj89Th9jFvdnc6Mg==";
+    hash = "sha512-v5w8QH7t9sMbUnzAsAQQ72++hXzs19mm+rkbJIdGQrfaL2RtvxWu2qaGhM54//o+T35gGQxTFaCsApzt0pgp2A==";
   };
 
   dontUnpack = true;

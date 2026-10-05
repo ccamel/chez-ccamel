@@ -73,7 +73,7 @@ The control plane for agent sessions, tool access, configuration, and observable
 | --- | --- |
 | [agtx v1.0.6](https://github.com/fynnfluegge/agtx) | Terminal-native development environment for coding agents. |
 | [HerdR v0.9.3](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
-| [OMP v18.4.4](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
+| [OMP v18.5.0](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
 
 #### Coding agents
 
@@ -95,9 +95,9 @@ Harness capabilities installed declaratively with the toolbox.
 | [HerdR Annotate v0.8.0-unstable-2026-09-29](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
 | [HerdR Remote v0.8.0](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
 | [OMP Undo/Redo v1.6.4](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
-| [Ponytail v4.10.0](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
+| [Ponytail v4.10.3](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
 | [shepherdr v0.1.0-unstable-2026-07-24](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
-| [System Prompt Switch v0.9.10](https://github.com/plantaeart/system-prompt-switch) | Session-scoped system prompt selection for OMP. |
+| [System Prompt Switch v0.10.0](https://github.com/plantaeart/system-prompt-switch) | Session-scoped system prompt selection for OMP. |
 
 #### Operating tools
 

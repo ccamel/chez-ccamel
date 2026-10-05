@@ -27,7 +27,10 @@ jobs:
       - name: Refresh fast-moving agentic resources
         run: |
           nix shell --inputs-from ./nix-config nixpkgs#just -c just update-resource \
-            agtx omp herdr herd herdr-remote herdr-annotate shepherdr omp-undo-redo ponytail
+            agtx omp herdr herd herdr-remote herdr-annotate shepherdr omp-undo-redo ponytail system-prompt-switch
+
+      - name: Regenerate README tool tables
+        run: nix shell --inputs-from ./nix-config nixpkgs#just -c just generate-readme
 
       - name: Create GitHub App token
         id: app-token
@@ -45,6 +48,7 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
           branch: automation/fast-dependency-updates
           add-paths: |
+            README.md
             nix-config/packages/agtx.nix
             nix-config/packages/omp.nix
             nix-config/packages/herdr.nix
@@ -54,7 +58,7 @@ jobs:
             nix-config/packages/shepherdr.nix
             nix-config/packages/omp-undo-redo.nix
             nix-config/packages/ponytail.nix
-          delete-branch: true
+            nix-config/packages/system-prompt-switch.nix
           commit-message: ":arrow_up: Update fast dependencies"
           title: ":arrow_up: Update fast dependencies"
           body: |

@@ -5,7 +5,7 @@
 }:
 let
   # managed by update-resource
-  version = "0.9.10";
+  version = "0.10.0";
 in
 stdenvNoCC.mkDerivation {
   pname = "system-prompt-switch";
@@ -14,7 +14,7 @@ stdenvNoCC.mkDerivation {
   src = fetchurl {
     url = "https://registry.npmjs.org/system-prompt-switch/-/system-prompt-switch-${version}.tgz";
     # managed by update-resource
-    hash = "sha512-7wrww/Z13VbCx6cY4l6k12gMypppr/2XuirnYRNthpbT+eOckkwl/4LCNQAzlajoUxvhgM48uNwUa89GyGERzw==";
+    hash = "sha512-XjrSvClWXYOI+k4PDy9LPjbnGvjb5wKVYwQIkswjIbLtwmsBKHDAoUZlYo8lSbkUYdppri4Lk3Iv4d1DFO3O1w==";
   };
 
   dontUnpack = true;
