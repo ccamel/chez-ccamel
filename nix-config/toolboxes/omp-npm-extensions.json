@@ -1,0 +1,55 @@
+[
+  {
+    "pname": "omp-telegram",
+    "npmPackage": "@tickernelz/omp-telegram",
+    "version": "0.6.16",
+    "hash": "sha512-e3Ji11EcrOMP/AoDviF90iTvhvi8H1c8hwOFqZ79d3FVV5vHLQs7XLVP+VUAeStYABjoOz/UuBmaw48Rkc3GqA==",
+    "description": "Telegram runtime adapter for OMP.",
+    "homepage": "https://github.com/tickernelz/omp-telegram",
+    "license": "mit",
+    "documentation": {
+      "name": "OMP Telegram",
+      "visibility": "public"
+    }
+  },
+  {
+    "pname": "omp-undo-redo",
+    "npmPackage": "@baylarsadigov/omp-undo-redo",
+    "version": "1.6.4",
+    "hash": "sha512-W1Qp8kLkfM5oj1a3KwncxUKAPc8WN+pbPdh67I4gJYj444Vz6zf5tGPebIYTZgsq9m6PsEUKO9w+oWTSdyQljg==",
+    "description": "Undo and redo session navigation for Oh My Pi.",
+    "homepage": "https://github.com/Baylar55/omp-undo-redo",
+    "license": "mit",
+    "documentation": {
+      "name": "OMP Undo/Redo",
+      "description": "Session-navigation history controls for OMP.",
+      "visibility": "public"
+    }
+  },
+  {
+    "pname": "ponytail",
+    "npmPackage": "@dietrichgebert/ponytail",
+    "version": "4.10.3",
+    "hash": "sha512-v5w8QH7t9sMbUnzAsAQQ72++hXzs19mm+rkbJIdGQrfaL2RtvxWu2qaGhM54//o+T35gGQxTFaCsApzt0pgp2A==",
+    "description": "Opinionated minimalism modes and skills for OMP.",
+    "homepage": "https://github.com/DietrichGebert/ponytail",
+    "license": "mit",
+    "documentation": {
+      "name": "Ponytail",
+      "visibility": "public"
+    }
+  },
+  {
+    "pname": "system-prompt-switch",
+    "npmPackage": "system-prompt-switch",
+    "version": "0.10.0",
+    "hash": "sha512-XjrSvClWXYOI+k4PDy9LPjbnGvjb5wKVYwQIkswjIbLtwmsBKHDAoUZlYo8lSbkUYdppri4Lk3Iv4d1DFO3O1w==",
+    "description": "Session-scoped system prompt selection for OMP.",
+    "homepage": "https://github.com/plantaeart/system-prompt-switch",
+    "license": "mit",
+    "documentation": {
+      "name": "System Prompt Switch",
+      "visibility": "public"
+    }
+  }
+]
