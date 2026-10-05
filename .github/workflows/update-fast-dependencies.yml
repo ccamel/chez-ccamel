@@ -27,7 +27,7 @@ jobs:
       - name: Refresh fast-moving agentic resources
         run: |
           nix shell --inputs-from ./nix-config nixpkgs#just -c just update-resource \
-            agtx omp herdr herd herdr-remote herdr-annotate shepherdr omp-undo-redo ponytail system-prompt-switch
+            agtx omp herdr herd herdr-remote herdr-annotate shepherdr omp-telegram omp-undo-redo ponytail system-prompt-switch
 
       - name: Regenerate README tool tables
         run: nix shell --inputs-from ./nix-config nixpkgs#just -c just generate-readme
@@ -56,6 +56,7 @@ jobs:
             nix-config/packages/herdr-remote.nix
             nix-config/packages/herdr-annotate.nix
             nix-config/packages/shepherdr.nix
+            nix-config/packages/omp-telegram.nix
             nix-config/packages/omp-undo-redo.nix
             nix-config/packages/ponytail.nix
             nix-config/packages/system-prompt-switch.nix

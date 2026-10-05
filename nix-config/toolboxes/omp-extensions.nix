@@ -1,5 +1,15 @@
 [
   {
+    package = { pkgs, ... }: pkgs.callPackage ../packages/omp-telegram.nix { };
+    readmeGroup = "Extensions and integrations";
+    documentation = {
+      name = "OMP Telegram";
+      description = "Telegram runtime adapter for OMP.";
+      url = "https://github.com/tickernelz/omp-telegram";
+      visibility = "public";
+    };
+  }
+  {
     package = { pkgs, ... }: pkgs.callPackage ../packages/omp-undo-redo.nix { };
     readmeGroup = "Extensions and integrations";
     documentation = {

@@ -96,6 +96,7 @@ Harness capabilities installed declaratively with the toolbox.
 | --- | --- |
 | [HerdR Annotate v0.8.0-unstable-2026-09-29](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
 | [HerdR Remote v0.8.0](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
+| [OMP Telegram v0.6.16](https://github.com/tickernelz/omp-telegram) | Telegram runtime adapter for OMP. |
 | [OMP Undo/Redo v1.6.4](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
 | [Ponytail v4.10.3](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
 | [shepherdr v0.1.0-unstable-2026-07-24](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |

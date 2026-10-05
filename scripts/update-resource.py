@@ -147,6 +147,10 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
             file=Path("nix-config/packages/shepherdr.nix"),
             branch_manifest="Cargo.toml",
         ),
+        "omp-telegram": NpmResource(
+            package="@tickernelz/omp-telegram",
+            file=Path("nix-config/packages/omp-telegram.nix"),
+        ),
         "omp-undo-redo": NpmResource(
             package="@baylarsadigov/omp-undo-redo",
             file=Path("nix-config/packages/omp-undo-redo.nix"),
