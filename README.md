@@ -83,9 +83,9 @@ The interchangeable specialist CLIs run within the wider workflow.
 
 | Component | Role |
 | --- | --- |
-| [Antigravity CLI v1.2.9](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
+| [Antigravity CLI v1.2.16](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
 | [Claude Code v2.1.140](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding CLI. |
-| [Codex v0.157.0](https://openai.com/codex/) | OpenAI coding agent. |
+| [Codex v0.160.0](https://openai.com/codex/) | OpenAI coding agent. |
 | [GitHub Copilot CLI v1.0.88](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
 
 #### Extensions and integrations
@@ -109,9 +109,9 @@ Tools for coordination, context, inspection, and efficient terminal output.
 | --- | --- |
 | [APM v0.30.0](https://github.com/microsoft/apm) | Dependency manager for AI agent configuration. |
 | [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
-| [Livediff v3.3.0](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
+| [Livediff v3.4.0](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
 | [QMD v2.8.3](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
-| [rtk v0.50.0](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
+| [rtk v0.51.0](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
 <!-- END_GENERATED_AGENTIC -->
 
 ### DevOps
