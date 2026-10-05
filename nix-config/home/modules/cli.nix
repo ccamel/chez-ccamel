@@ -18,6 +18,8 @@
       glow
       imagemagick
       exiftool
+      poppler-utils
+      qpdf
       # Data and scripting
       jq
       yq-go

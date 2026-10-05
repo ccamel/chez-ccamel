@@ -51,7 +51,9 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [jq v1.8.1](https://jqlang.org/) | Command-line JSON processor. |
 | [lazydocker v0.24.2](https://github.com/jesseduffield/lazydocker) | Terminal UI for Docker. |
 | [Neovim v0.11.7](https://neovim.io/) | Editor built around LazyVim. |
+| [poppler-utils v25.10.0](https://poppler.freedesktop.org/) | Command-line utilities for PDF inspection and extraction. |
 | [Python v3.13.12](https://www.python.org/) | General-purpose programming language. |
+| [qpdf v12.2.0](https://qpdf.sourceforge.io/) | Command-line tools for PDF transformation and inspection. |
 | [ripgrep v15.1.0](https://github.com/BurntSushi/ripgrep) | Fast recursive text search. |
 | [Starship v1.24.2](https://starship.rs/) | Cross-shell prompt. |
 | [Tig v2.6.0](https://jonas.github.io/tig/) | Text-mode interface for Git. |

@@ -119,4 +119,18 @@
     url = "https://exiftool.org/";
     visibility = "public";
   }
+  {
+    name = "poppler-utils";
+    inherit (pkgs.poppler-utils) version;
+    description = "Command-line utilities for PDF inspection and extraction.";
+    url = "https://poppler.freedesktop.org/";
+    visibility = "public";
+  }
+  {
+    name = "qpdf";
+    inherit (pkgs.qpdf) version;
+    description = "Command-line tools for PDF transformation and inspection.";
+    url = "https://qpdf.sourceforge.io/";
+    visibility = "public";
+  }
 ]
