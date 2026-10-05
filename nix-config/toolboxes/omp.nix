@@ -32,4 +32,5 @@ in
     "code-reviewer" = "openai-codex/gpt-5.6-sol";
   };
   dev.autoqaConsent = "denied";
+  github.enabled = true;
 }
