@@ -1,0 +1,46 @@
+name: Lint / JSON
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/lint-json.yml
+      - "**/*.json"
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/lint-json.yml
+      - "**/*.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-json:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Lint JSON files
+        run: |
+          sudo apt install -y jsonlint
+
+          find ./ -type f -name "*.json" -not -path "./.git/*" -exec sh -c '
+            failed=0
+            for file do
+              if ! jsonlint-php -q "$file"; then
+                echo "❌ $file"
+                failed=1
+              else
+                echo "✅ $file"
+              fi
+            done
+            exit "$failed"
+          ' sh {} +
