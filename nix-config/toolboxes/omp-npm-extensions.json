@@ -1,18 +1,5 @@
 [
   {
-    "pname": "omp-telegram",
-    "npmPackage": "@tickernelz/omp-telegram",
-    "version": "0.6.16",
-    "hash": "sha512-e3Ji11EcrOMP/AoDviF90iTvhvi8H1c8hwOFqZ79d3FVV5vHLQs7XLVP+VUAeStYABjoOz/UuBmaw48Rkc3GqA==",
-    "description": "Telegram runtime adapter for OMP.",
-    "homepage": "https://github.com/tickernelz/omp-telegram",
-    "license": "mit",
-    "documentation": {
-      "name": "OMP Telegram",
-      "visibility": "public"
-    }
-  },
-  {
     "pname": "omp-undo-redo",
     "npmPackage": "@baylarsadigov/omp-undo-redo",
     "version": "1.6.5",
