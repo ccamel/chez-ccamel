@@ -54,6 +54,13 @@ jobs:
           body: |
             Yo, bro!
 
-            Here's the fast-moving agentic dependency refresh. Take it for a spin, give it a once-over, then hit merge when it vibes.
+            Here's the fast-moving agentic dependency refresh. It will merge automatically after the required status checks pass.
           assignees: ccamel
           reviewers: ccamel
+
+      - name: Enable auto-merge after required checks pass
+        if: steps.dependency-pr.outputs.pull-request-operation == 'created' || steps.dependency-pr.outputs.pull-request-operation == 'updated'
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_NUMBER: ${{ steps.dependency-pr.outputs.pull-request-number }}
+        run: gh pr merge "$PR_NUMBER" --auto --merge
