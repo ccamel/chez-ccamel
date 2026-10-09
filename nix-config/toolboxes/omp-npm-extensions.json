@@ -16,8 +16,8 @@
   {
     "pname": "ponytail",
     "npmPackage": "@dietrichgebert/ponytail",
-    "version": "4.13.0",
-    "hash": "sha512-nwc9f8+eG1izSjsME4E1+2Z64Sdq9HuArP2bnXwtVw6BoofmAk5hXjTEUSSJS3xqU8hOyqGgvJ8pbamz2PLpoA==",
+    "version": "5.1.0",
+    "hash": "sha512-6JQpUc3DwNV2xMPxUuMfRroxYkwj593hM12t1an6xUo5nhTTgpBow1GQzcmVy1PvFocQQN/6A5hq6DahI1UKgQ==",
     "description": "Opinionated minimalism modes and skills for OMP.",
     "homepage": "https://github.com/DietrichGebert/ponytail",
     "license": "mit",
