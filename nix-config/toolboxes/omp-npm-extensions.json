@@ -2,8 +2,8 @@
   {
     "pname": "omp-undo-redo",
     "npmPackage": "@baylarsadigov/omp-undo-redo",
-    "version": "1.6.5",
-    "hash": "sha512-9Lj9C4VkLfsMih28SakvvVTM3YN9xCmJhWqCH+qChQr7KD35xZcEmR52zMX5F8Y+/AVYdemHKsMuqh4vylUisA==",
+    "version": "1.6.6",
+    "hash": "sha512-Q5bIMs4S0CoQgAeJ4GAmX4rXXXQlU13FiKBNsvI+1cByolTW3f7OJORwhRrWUSw1WfApnTw38LfjxWIXuzDGVg==",
     "description": "Undo and redo session navigation for Oh My Pi.",
     "homepage": "https://github.com/Baylar55/omp-undo-redo",
     "license": "mit",
