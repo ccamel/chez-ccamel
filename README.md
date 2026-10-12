@@ -97,6 +97,7 @@ Harness capabilities installed declaratively with the toolbox.
 | [HerdR Annotate v0.9.0-unstable-2026-10-07](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
 | [HerdR Remote v0.8.0](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
 | [OMP Undo/Redo v1.6.6](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
+| [Pi Markdown Export v0.1.0](https://github.com/wassname/pi-md-export) | Export Pi sessions to Markdown files or the system clipboard. |
 | [Ponytail v5.1.0](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
 | [shepherdr v0.1.0-unstable-2026-07-24](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
 | [System Prompt Switch v0.10.0](https://github.com/plantaeart/system-prompt-switch) | Session-scoped system prompt selection for OMP. |

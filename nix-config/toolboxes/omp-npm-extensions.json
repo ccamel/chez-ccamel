@@ -38,5 +38,18 @@
       "name": "System Prompt Switch",
       "visibility": "public"
     }
+  },
+  {
+    "pname": "pi-md-export",
+    "npmPackage": "@wassname2/pi-md-export",
+    "version": "0.1.0",
+    "hash": "sha512-+Qaw9utTjhh+rKC/TCNmZVo6puwOlS/qPolnU5baro4ZMQFr7Z5UWb3/7XJbrQ4uUEah+tbOPtGRlAfWAGXNlw==",
+    "description": "Export Pi sessions to Markdown files or the system clipboard.",
+    "homepage": "https://github.com/wassname/pi-md-export",
+    "license": "mit",
+    "documentation": {
+      "name": "Pi Markdown Export",
+      "visibility": "public"
+    }
   }
 ]
