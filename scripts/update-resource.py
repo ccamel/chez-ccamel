@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
 from urllib.error import HTTPError, URLError
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -209,7 +209,9 @@ def fast_resources(resources: Mapping[str, Resource]) -> list[str]:
 
 def request_url(url: str, description: str) -> Request:
     headers = {"User-Agent": "chez-ccamel-update-resource"}
-    if token := os.environ.get("GITHUB_TOKEN"):
+    parsed_url = urlsplit(url)
+    token = os.environ.get("GITHUB_TOKEN")
+    if token and parsed_url.scheme == "https" and parsed_url.hostname == "api.github.com":
         headers["Authorization"] = f"Bearer {token}"
     return Request(url, headers=headers)
 

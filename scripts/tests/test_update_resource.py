@@ -35,6 +35,14 @@ def skills_workflow() -> str:
 
 
 class UpdateResourceTest(unittest.TestCase):
+    def test_github_token_is_only_sent_to_github_api(self) -> None:
+        with patch.dict(UPDATER.os.environ, {"GITHUB_TOKEN": "secret"}):
+            github_request = UPDATER.request_url("https://api.github.com/repos/owner/repo", "GitHub API")
+            npm_request = UPDATER.request_url("https://registry.npmjs.org/package/latest", "npm metadata")
+
+        self.assertEqual(github_request.get_header("Authorization"), "Bearer secret")
+        self.assertIsNone(npm_request.get_header("Authorization"))
+
     def test_release_collection_requires_expected_assets(self) -> None:
         resource = UPDATER.GitHubReleaseResource("owner/repo", Path("package.nix"), (("x86_64-linux", "linux-{version}"), ("aarch64-darwin", "darwin-{version}")))
         with patch.object(UPDATER, "latest_release", return_value=("v1.2.3", {"linux-1.2.3", "darwin-1.2.3"})), patch.object(UPDATER, "prefetch_hash", side_effect=(HASH, HASH)):

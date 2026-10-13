@@ -25,6 +25,8 @@ jobs:
         uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31
 
       - name: Refresh fast-moving agentic resources
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: nix shell --inputs-from ./nix-config nixpkgs#just -c just update-resource --group fast
 
       - name: Regenerate README tool tables
