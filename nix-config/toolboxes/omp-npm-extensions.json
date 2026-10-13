@@ -2,8 +2,8 @@
   {
     "pname": "omp-undo-redo",
     "npmPackage": "@baylarsadigov/omp-undo-redo",
-    "version": "1.6.6",
-    "hash": "sha512-Q5bIMs4S0CoQgAeJ4GAmX4rXXXQlU13FiKBNsvI+1cByolTW3f7OJORwhRrWUSw1WfApnTw38LfjxWIXuzDGVg==",
+    "version": "1.7.0",
+    "hash": "sha512-ueZZ5+ksp+WlAO6K+MT0H32i9KTfNU4YalDLDFFsM2pN3L5bfdQj1Wm0udpiuj3WHFjaSj3PVgCIWlcPvwiIsQ==",
     "description": "Undo and redo session navigation for Oh My Pi.",
     "homepage": "https://github.com/Baylar55/omp-undo-redo",
     "license": "mit",
@@ -16,8 +16,8 @@
   {
     "pname": "ponytail",
     "npmPackage": "@dietrichgebert/ponytail",
-    "version": "5.1.0",
-    "hash": "sha512-6JQpUc3DwNV2xMPxUuMfRroxYkwj593hM12t1an6xUo5nhTTgpBow1GQzcmVy1PvFocQQN/6A5hq6DahI1UKgQ==",
+    "version": "5.2.0",
+    "hash": "sha512-7jhVaF8PjQux0NCDLRfWMm49lp332FxlkgUGMUwt4+VvJHiJeBgEsdBFuwPXxxTIerBv4pEa390eeQ88C8DMxQ==",
     "description": "Opinionated minimalism modes and skills for OMP.",
     "homepage": "https://github.com/DietrichGebert/ponytail",
     "license": "mit",
