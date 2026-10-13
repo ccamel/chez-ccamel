@@ -1,0 +1,26 @@
+name: Dependabot / Auto-merge minor and patch
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  automerge:
+    if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'ccamel/chez-ccamel'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2.5.0
+
+      - name: Enable automerge for minor and patch updates
+        if: steps.metadata.outputs.update-type == 'version-update:semver-minor' || steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr merge --auto --merge "$PR_URL"

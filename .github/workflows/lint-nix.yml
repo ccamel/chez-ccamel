@@ -8,7 +8,7 @@ on:
       - "nix-config/flake.lock"
       - "nix-config/secrets/**/*.yaml"
       - "nix-config/.sops.yaml"
-      - .github/workflows/lint-nix.yml
+      - .github/workflows/**
   pull_request:
     branches: [main]
     paths:
@@ -16,7 +16,7 @@ on:
       - "nix-config/flake.lock"
       - "nix-config/secrets/**/*.yaml"
       - "nix-config/.sops.yaml"
-      - .github/workflows/lint-nix.yml
+      - .github/workflows/**
 jobs:
   lint-nix:
     runs-on: ubuntu-22.04

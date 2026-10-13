@@ -9,7 +9,7 @@ on:
       - "nix-config/flake.lock"
       - "nix-config/secrets/**/*.yaml"
       - "nix-config/.sops.yaml"
-      - .github/workflows/build-nix.yml
+      - .github/workflows/**
   pull_request:
     branches: [main]
     paths:
@@ -18,7 +18,7 @@ on:
       - "nix-config/flake.lock"
       - "nix-config/secrets/**/*.yaml"
       - "nix-config/.sops.yaml"
-      - .github/workflows/build-nix.yml
+      - .github/workflows/**
 
 permissions:
   contents: read
