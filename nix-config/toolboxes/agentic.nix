@@ -139,6 +139,16 @@
     };
   }
   {
+    package = { herdrRadar, ... }: herdrRadar;
+    readmeGroup = "Extensions and integrations";
+    documentation = {
+      name = "HerdR Radar";
+      description = "Vendor logos, agent status, and workspace grouping in the HerdR sidebar.";
+      url = "https://github.com/hhdebb/herdr-radar";
+      visibility = "public";
+    };
+  }
+  {
     package = { herdrRemote, ... }: herdrRemote;
     readmeGroup = "Extensions and integrations";
     documentation = {

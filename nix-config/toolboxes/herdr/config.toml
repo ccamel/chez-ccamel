@@ -24,3 +24,5 @@ key = "prefix+m"
 type = "plugin_action"
 command = "annotate.manage"
 description = "manage annotations"
+
+[ui]

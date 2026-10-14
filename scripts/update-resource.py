@@ -138,6 +138,10 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
             repository="dcolinmorgan/herdr-remote",
             file=Path("nix-config/packages/herdr-remote.nix"),
         ),
+        "herdr-radar": GitHubSourceResource(
+            repository="hhdebb/herdr-radar",
+            file=Path("nix-config/packages/herdr-radar.nix"),
+        ),
         "herdr-annotate": GitHubSourceResource(
             repository="plannotator/herdr-annotate",
             file=Path("nix-config/packages/herdr-annotate.nix"),
@@ -162,6 +166,7 @@ FAST_STATIC_RESOURCES = frozenset(
         "herd",
         "herdr-remote",
         "herdr-annotate",
+        "herdr-radar",
         "shepherdr",
     }
 )

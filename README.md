@@ -95,6 +95,7 @@ Harness capabilities installed declaratively with the toolbox.
 | Component | Role |
 | --- | --- |
 | [HerdR Annotate v0.9.1-unstable-2026-10-12](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
+| [HerdR Radar v1.4.4](https://github.com/hhdebb/herdr-radar) | Vendor logos, agent status, and workspace grouping in the HerdR sidebar. |
 | [HerdR Remote v0.8.0](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
 | [OMP Undo/Redo v1.7.0](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
 | [Pi Markdown Export v0.1.0](https://github.com/wassname/pi-md-export) | Export Pi sessions to Markdown files or the system clipboard. |

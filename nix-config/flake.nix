@@ -63,6 +63,7 @@
           };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           herdrAnnotate = pkgs.callPackage ./packages/herdr-annotate.nix { };
+          herdrRadar = pkgs.callPackage ./packages/herdr-radar.nix { };
           herdrRemote = pkgs.callPackage ./packages/herdr-remote.nix { };
           shepherdr = pkgs.callPackage ./packages/shepherdr.nix { };
           herd = pkgs.callPackage ./packages/herd.nix { inherit herdr omp; };
@@ -76,6 +77,7 @@
             omp
             herdr
             herdrAnnotate
+            herdrRadar
             herdrRemote
             shepherdr
             herd
@@ -127,7 +129,7 @@
         let
           toolboxArgs = toolboxArgsFor system;
           inherit (toolboxArgs) pkgs;
-          inherit (toolboxArgs) herdrAnnotate herdrRemote;
+          inherit (toolboxArgs) herdrAnnotate herdrRadar herdrRemote;
           devopsToolbox = import ./toolboxes/devops.nix;
           agenticToolbox = import ./toolboxes/agentic.nix;
           devopsPackages = map (descriptor: descriptor.package toolboxArgs) devopsToolbox;
@@ -153,6 +155,12 @@
             ${pkgs.coreutils}/bin/cp -R ${herdrRemote} "$dataHome/herdr/plugins/herdr-remote"
             ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/herdr-remote"
             herdr plugin link "$dataHome/herdr/plugins/herdr-remote" --enabled >/dev/null
+            ${pkgs.coreutils}/bin/rm -rf "$dataHome/herdr/plugins/herdr-radar"
+            ${pkgs.coreutils}/bin/cp -R ${herdrRadar} "$dataHome/herdr/plugins/herdr-radar"
+            ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/herdr-radar"
+            herdr plugin link "$dataHome/herdr/plugins/herdr-radar" --enabled >/dev/null
+            herdr plugin action invoke configure --plugin hhdebb.herdr-radar >/dev/null 2>&1 || true
+            herdr plugin action invoke state-start --plugin hhdebb.herdr-radar >/dev/null 2>&1 || true
           '';
           ompShellHook = ''
             ${pkgs.coreutils}/bin/mkdir -p "$HOME/.omp/agent/extensions"
