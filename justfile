@@ -4,17 +4,37 @@ default:
     @just --list
 
 
-# Switch the selected host configuration.
-switch host=`hostname -s`:
-    case "{{host}}" in forge) sudo nixos-rebuild switch --flake ./nix-config#forge ;; tinymac) sudo darwin-rebuild switch --flake ./nix-config#tinymac ;; *) echo "invalid host '{{host}}'; expected forge or tinymac" >&2; exit 1 ;; esac
+# Switch the selected host configuration (--pull, --gc, forge, tinymac).
+switch *args:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    host="$(hostname -s)"
+    do_pull=false
+    do_gc=false
+    for arg in {{args}}; do
+        case "$arg" in
+            --pull) do_pull=true ;;
+            --gc) do_gc=true ;;
+            forge|tinymac) host="$arg" ;;
+            *) echo "invalid switch argument '$arg'; expected --pull, --gc, forge, or tinymac" >&2; exit 1 ;;
+        esac
+    done
+    if [ "$do_pull" = true ]; then
+        test "$(git branch --show-current)" = "main" || { echo "switch --pull only allowed on main branch" >&2; exit 1; }
+        git diff --quiet && git diff --cached --quiet || { echo "refusing to pull with tracked local changes" >&2; exit 1; }
+    fi
+    if [ "$do_gc" = true ]; then
+        nix store gc
+    fi
+    if [ "$do_pull" = true ]; then
+        git pull --ff-only origin main
+    fi
+    case "$host" in
+        forge) sudo nixos-rebuild switch --flake ./nix-config#forge ;;
+        tinymac) sudo darwin-rebuild switch --flake ./nix-config#tinymac ;;
+        *) echo "invalid host '$host'; expected forge or tinymac" >&2; exit 1 ;;
+    esac
 
-
-# Fast-forward main from origin, then apply the selected host configuration.
-pull-switch host=`hostname -s`:
-    test "$(git branch --show-current)" = "main" || { echo "pull-switch only allowed on main branch" >&2; exit 1; }
-    git diff --quiet && git diff --cached --quiet || { echo "refusing to pull with tracked local changes" >&2; exit 1; }
-    git pull --ff-only origin main
-    just switch "{{host}}"
 # Check formatting of tracked Nix files.
 check-fmt:
     git ls-files -z -- '*.nix' | while IFS= read -r -d '' file; do if test -f "$file"; then printf '%s\0' "$file"; fi; done | xargs -0 nix run --inputs-from ./nix-config nixpkgs#nixfmt-rfc-style -- --check
