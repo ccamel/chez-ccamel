@@ -140,7 +140,9 @@
           herdrShellHook = ''
             configHome="''${XDG_CONFIG_HOME:-$HOME/.config}"
             dataHome="''${XDG_DATA_HOME:-$HOME/.local/share}"
-            ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/config.toml} "$configHome/herdr/config.toml"
+            if [ ! -e "$configHome/herdr/config.toml" ]; then
+              ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/config.toml} "$configHome/herdr/config.toml"
+            fi
             ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/herdr-plugin.toml} "$dataHome/herdr/plugins/shepherdr/herdr-plugin.toml"
             ${pkgs.coreutils}/bin/rm -rf "$dataHome/herdr/plugins/annotate"
             ${pkgs.coreutils}/bin/mkdir -p "$dataHome/herdr/plugins"
