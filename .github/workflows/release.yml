@@ -56,9 +56,10 @@ jobs:
           TAG: ${{ steps.prepare.outputs.tag }}
           PREVIOUS: ${{ steps.prepare.outputs.previous }}
         run: |
+          python3 scripts/generate-release-notes.py "$PREVIOUS" "$GITHUB_SHA" "$GITHUB_REPOSITORY" \
+            > "$RUNNER_TEMP/release-notes.md"
           gh release create "$TAG" \
             --target "$GITHUB_SHA" \
             --title "$TAG" \
-            --generate-notes \
-            --notes-start-tag "$PREVIOUS" \
+            --notes-file "$RUNNER_TEMP/release-notes.md" \
             --latest
