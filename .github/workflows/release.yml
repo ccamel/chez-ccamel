@@ -1,0 +1,64 @@
+name: Release
+
+on:
+  schedule:
+    - cron: "17 4 * * 5"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Check out release commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Prepare release
+        id: prepare
+        shell: bash
+        run: |
+          previous=$(git for-each-ref --count=1 --sort=-version:refname \
+            --format='%(refname:short)' 'refs/tags/v[0-9]*.[0-9]*.[0-9]*')
+          previous=${previous:-last-dotfiles}
+          git merge-base --is-ancestor "$previous" HEAD
+
+          if [ "$(git rev-parse "$previous^{commit}")" = "$(git rev-parse HEAD)" ]; then
+            echo "No new commits since $previous; skipping release."
+            exit 0
+          fi
+
+          tag=$(date -u +v%Y.%-m.%-d)
+          if git show-ref --verify --quiet "refs/tags/$tag"; then
+            echo "::error::Release tag $tag already exists; only one release per UTC day is supported."
+            exit 1
+          fi
+
+          printf 'tag=%s\nprevious=%s\n' "$tag" "$previous" >> "$GITHUB_OUTPUT"
+
+      - name: Publish GitHub release
+        if: steps.prepare.outputs.tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.prepare.outputs.tag }}
+          PREVIOUS: ${{ steps.prepare.outputs.previous }}
+        run: |
+          gh release create "$TAG" \
+            --target "$GITHUB_SHA" \
+            --title "$TAG" \
+            --generate-notes \
+            --notes-start-tag "$PREVIOUS" \
+            --latest
