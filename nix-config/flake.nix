@@ -143,6 +143,9 @@
             if [ ! -e "$configHome/herdr/config.toml" ]; then
               ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/config.toml} "$configHome/herdr/config.toml"
             fi
+            if ! ${pkgs.gnugrep}/bin/grep -Eq '^[[:space:]]*\[ui([[:space:]]|\]|[.])' "$configHome/herdr/config.toml"; then
+              printf '\n[ui]\n' >> "$configHome/herdr/config.toml"
+            fi
             ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/herdr-plugin.toml} "$dataHome/herdr/plugins/shepherdr/herdr-plugin.toml"
             ${pkgs.coreutils}/bin/rm -rf "$dataHome/herdr/plugins/annotate"
             ${pkgs.coreutils}/bin/mkdir -p "$dataHome/herdr/plugins"
