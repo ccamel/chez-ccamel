@@ -8,8 +8,28 @@ return {
     },
   },
   {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
+    keys = {
+      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Git diff" },
+      { "<leader>gD", "<cmd>DiffviewFileHistory %<cr>", desc = "Git file history" },
+    },
+    opts = {
+      view = {
+        default = { layout = "diff2_horizontal" },
+        file_history = { layout = "diff2_horizontal" },
+        merge_tool = { layout = "diff3_horizontal" },
+      },
+    },
+  },
+
+  {
     "NeogitOrg/neogit",
-    dependencies = { "folke/snacks.nvim" },
+    dependencies = { "folke/snacks.nvim", "sindrets/diffview.nvim" },
+    opts = {
+      diff_viewer = "diffview",
+      integrations = { diffview = true },
+    },
     cmd = "Neogit",
     keys = {
       { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git status" },

@@ -73,6 +73,7 @@ The curated plugins behind my opinionated [Neovim](https://neovim.io/) setup, bu
 | bufferline.nvim | main | `655133c` |
 | catppuccin | main | `edefef7` |
 | conform.nvim | master | `016802d` |
+| diffview.nvim | main | `4516612` |
 | flash.nvim | main | `5f0f270` |
 | friendly-snippets | main | `b4d01b0` |
 | gitsigns.nvim | main | `fd78092` |
