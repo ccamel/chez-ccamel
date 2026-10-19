@@ -125,7 +125,7 @@ The control plane for agent sessions, tool access, configuration, and observable
 | --- | --- |
 | [agtx v1.0.6](https://github.com/fynnfluegge/agtx) | Terminal-native development environment for coding agents. |
 | [HerdR v0.9.5](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
-| [OMP v18.11.3](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
+| [OMP v18.12.2](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
 
 #### Coding agents
 
@@ -145,10 +145,10 @@ Harness capabilities installed declaratively with the toolbox.
 | Component | Role |
 | --- | --- |
 | [HerdR Annotate v0.9.1-unstable-2026-10-15](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
-| [HerdR Radar v1.4.5](https://github.com/hhdebb/herdr-radar) | Vendor logos, agent status, and workspace grouping in the HerdR sidebar. |
+| [HerdR Radar v1.4.8](https://github.com/hhdebb/herdr-radar) | Vendor logos, agent status, and workspace grouping in the HerdR sidebar. |
 | [HerdR Remote v0.8.1](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
 | [OMP Undo/Redo v1.7.0](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
-| [Pi Markdown Export v0.1.0](https://github.com/wassname/pi-md-export) | Export Pi sessions to Markdown files or the system clipboard. |
+| [Pi Markdown Export v0.1.1](https://github.com/wassname/pi-md-export) | Export Pi sessions to Markdown files or the system clipboard. |
 | [Ponytail v5.3.2](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
 | [shepherdr v0.1.0-unstable-2026-07-24](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
 | [System Prompt Switch v0.10.0](https://github.com/plantaeart/system-prompt-switch) | Session-scoped system prompt selection for OMP. |

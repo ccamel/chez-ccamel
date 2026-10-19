@@ -7,15 +7,15 @@
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "herdr-radar";
   # managed by update-resource
-  version = "1.4.5";
+  version = "1.4.8";
 
   src = fetchFromGitHub {
     owner = "hhdebb";
     repo = "herdr-radar";
     # managed by update-resource
-    rev = "ae46869a0a40f675a333342510c915dbc155ae6a";
+    rev = "17551e90ba4da614144dc60ab560e282db51364a";
     # managed by update-resource
-    hash = "sha256-TFQ3ryEU41FOJ0Wz+VIKv19xumjGWAeytLn4/JrbmD8=";
+    hash = "sha256-vf8A7G94aC7zfjZ9KW944lzqwNssS3HS6DmRk/bQ+8o=";
   };
 
   dontBuild = true;
