@@ -8,6 +8,14 @@ return {
     },
   },
   {
+    "NeogitOrg/neogit",
+    dependencies = { "folke/snacks.nvim" },
+    cmd = "Neogit",
+    keys = {
+      { "<leader>gg", "<cmd>Neogit<cr>", desc = "Git status" },
+    },
+  },
+  {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown" },
     opts = {
