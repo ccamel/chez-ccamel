@@ -75,29 +75,29 @@ The curated plugins behind my opinionated Neovim setup, built around LazyVim.
 | conform.nvim | master | `016802d` |
 | flash.nvim | main | `5f0f270` |
 | friendly-snippets | main | `b4d01b0` |
-| gitsigns.nvim | main | `851a051` |
-| grug-far.nvim | main | `11595bf` |
+| gitsigns.nvim | main | `fd78092` |
+| grug-far.nvim | main | `bbde8ef` |
 | lazy.nvim | main | `85c7ff3` |
 | lazydev.nvim | main | `ff2cbcb` |
 | LazyVim | main | `9997009` |
 | lualine.nvim | master | `221ce6b` |
-| mason-lspconfig.nvim | main | `b329899` |
+| mason-lspconfig.nvim | main | `00b5473` |
 | mason.nvim | main | `2a6940a` |
-| mini.ai | main | `c2c4278` |
-| mini.icons | main | `f642e3b` |
-| mini.pairs | main | `b1c5a72` |
+| mini.ai | main | `d0c4987` |
+| mini.icons | main | `f916635` |
+| mini.pairs | main | `03eb1f0` |
 | neogit | master | `a654981` |
 | noice.nvim | main | `7bfd942` |
 | nui.nvim | main | `10fc361` |
-| nvim-lint | master | `3d55c8f` |
-| nvim-lspconfig | master | `5c6eecf` |
+| nvim-lint | master | `f6230a5` |
+| nvim-lspconfig | master | `45a3a44` |
 | nvim-treesitter | main | `7caec27` |
 | nvim-treesitter-textobjects | main | `5c7b026` |
 | nvim-ts-autotag | main | `d7220b5` |
 | onedark.nvim | master | `df4792a` |
 | persistence.nvim | main | `b20b2a7` |
 | plenary.nvim | master | `74b06c6` |
-| render-markdown.nvim | main | `640a3ec` |
+| render-markdown.nvim | main | `8e87953` |
 | snacks.nvim | main | `882c996` |
 | todo-comments.nvim | main | `31e3c38` |
 | tokyonight.nvim | main | `cdc07ac` |
@@ -133,10 +133,10 @@ The interchangeable specialist CLIs run within the wider workflow.
 
 | Component | Role |
 | --- | --- |
-| [Antigravity CLI v1.2.16](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
+| [Antigravity CLI v1.3.5](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
 | [Claude Code v2.1.140](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding CLI. |
-| [Codex v0.160.0](https://openai.com/codex/) | OpenAI coding agent. |
-| [GitHub Copilot CLI v1.0.88](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
+| [Codex v0.162.1](https://openai.com/codex/) | OpenAI coding agent. |
+| [GitHub Copilot CLI v1.0.91](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
 
 #### Extensions and integrations
 
@@ -163,7 +163,7 @@ Tools for coordination, context, inspection, and efficient terminal output.
 | [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
 | [Livediff v3.4.0](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
 | [QMD v2.8.3](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
-| [rtk v0.51.0](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
+| [rtk v1.0.1](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
 <!-- END_GENERATED_AGENTIC -->
 
 ### DevOps
