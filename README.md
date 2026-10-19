@@ -108,6 +108,12 @@ The curated plugins behind my opinionated Neovim setup, built around LazyVim.
 
 ### Agentic development
 
+```console
+~ > toolbox agentic
+~ via ❄️ 🤖
+>
+```
+
 <!-- BEGIN_GENERATED_AGENTIC -->
 My terminal-native playground for building software alongside a small herd of AI agents.
 
@@ -163,6 +169,12 @@ Tools for coordination, context, inspection, and efficient terminal output.
 ### DevOps
 
 Infrastructure and platform engineering.
+
+```console
+~ > toolbox devops
+~ via ❄️ 🛠️
+>
+```
 
 <!-- BEGIN_GENERATED_DEVOPS -->
 | Tool | Description |
