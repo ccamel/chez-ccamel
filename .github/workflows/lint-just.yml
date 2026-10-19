@@ -1,0 +1,42 @@
+name: Lint / Just
+
+on:
+  workflow_call:
+
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/lint-just.yml
+      - nix-config/flake.lock
+      - nix-config/flake.nix
+      - justfile
+
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/lint-just.yml
+      - nix-config/flake.lock
+      - nix-config/flake.nix
+      - justfile
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lint-just-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-just:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Nix
+        uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
+
+      - name: Check justfile formatting
+        run: nix run --inputs-from ./nix-config nixpkgs#just -- --unstable --fmt --check

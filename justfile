@@ -1,8 +1,8 @@
 set shell := ["bash", "-euo", "pipefail", "-c"]
+
 # Show available recipes without changing the system.
 default:
     @just --list
-
 
 # Switch the selected host configuration (--pull, --gc, forge, tinymac).
 switch *args:
@@ -11,7 +11,7 @@ switch *args:
     host="$(hostname -s)"
     do_pull=false
     do_gc=false
-    for arg in {{args}}; do
+    for arg in {{ args }}; do
         case "$arg" in
             --pull) do_pull=true ;;
             --gc) do_gc=true ;;
@@ -48,7 +48,6 @@ check-lua:
 test-python:
     python3 -m unittest discover -s scripts/tests -v
 
-
 # Generate README tool tables from curated Nix metadata.
 generate-readme:
     python3 scripts/generate-readme.py
@@ -80,23 +79,24 @@ update:
 
 # Update all flake inputs, or one when specified.
 update-input input='':
-    if test -n "{{input}}"; then nix flake update --flake ./nix-config "{{input}}"; else nix flake update --flake ./nix-config; fi
+    if test -n "{{ input }}"; then nix flake update --flake ./nix-config "{{ input }}"; else nix flake update --flake ./nix-config; fi
 
 # Update every managed resource, or selected resources.
 update-resource *resources:
-    python3 scripts/update-resource.py {{resources}}
+    python3 scripts/update-resource.py {{ resources }}
     just generate-readme
 
 # Refresh Lazy-managed Neovim plugins without touching user state.
 update-neovim:
     tmp="$(mktemp -d)"; trap 'rm -rf "$tmp"' EXIT; mkdir -p "$tmp/config" "$tmp/data"; cp -R nix-config/home/modules/neovim/config "$tmp/config/nvim"; XDG_CONFIG_HOME="$tmp/config" XDG_DATA_HOME="$tmp/data" nix run --inputs-from ./nix-config nixpkgs#neovim -- --headless "+Lazy! sync" +qa; cp "$tmp/config/nvim/lazy-lock.json" nix-config/home/modules/neovim/config/lazy-lock.json
+
 # Show resolved flake metadata.
 metadata:
     nix flake metadata ./nix-config
 
 # Edit one supported secret.
 edit-secret secret:
-    case "{{secret}}" in git-mine.yaml) cd nix-config && sops secrets/git-mine.yaml ;; git-corp.yaml) cd nix-config && sops secrets/git-corp.yaml ;; *) echo "invalid secret '{{secret}}'; expected git-mine.yaml or git-corp.yaml" >&2; exit 1 ;; esac
+    case "{{ secret }}" in git-mine.yaml) cd nix-config && sops secrets/git-mine.yaml ;; git-corp.yaml) cd nix-config && sops secrets/git-corp.yaml ;; *) echo "invalid secret '{{ secret }}'; expected git-mine.yaml or git-corp.yaml" >&2; exit 1 ;; esac
 
 # Remove ignored build artifacts.
 clean:
