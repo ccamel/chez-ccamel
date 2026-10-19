@@ -70,6 +70,7 @@
           rtk = pkgs.callPackage ./packages/rtk.nix { };
           apm = pkgs.callPackage ./packages/apm.nix { };
           livediff = pkgs.callPackage ./packages/livediff.nix { };
+          kdbx = pkgs.callPackage ./packages/kdbx.nix { };
         in
         {
           inherit
@@ -83,6 +84,7 @@
             herd
             rtk
             livediff
+            kdbx
             qmd
             apm
             agtx
@@ -95,7 +97,10 @@
     {
       nixosConfigurations.forge = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          inherit (toolboxArgsFor "x86_64-linux") kdbx;
+        };
         modules = [
           inputs.nixos-wsl.nixosModules.default
           inputs.home-manager.nixosModules.home-manager
@@ -105,7 +110,10 @@
 
       darwinConfigurations.tinymac = inputs.nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = { inherit inputs; };
+        specialArgs = {
+          inherit inputs;
+          inherit (toolboxArgsFor "aarch64-darwin") kdbx;
+        };
         modules = [
           inputs.home-manager.darwinModules.home-manager
           ./hosts/tinymac/darwin.nix
@@ -120,7 +128,7 @@
         in
         import ./readme-metadata.nix {
           inherit toolboxArgs;
-          inherit (toolboxArgs) pkgs;
+          inherit (toolboxArgs) pkgs kdbx;
         }
       );
 

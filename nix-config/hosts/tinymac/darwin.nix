@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  kdbx,
+  pkgs,
+  ...
+}:
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
 
@@ -41,7 +46,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs kdbx; };
     backupFileExtension = "hm-pre-nix";
     sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
     users.chris = {

@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  kdbx,
+  pkgs,
+  ...
+}:
 {
   wsl = {
     enable = true;
@@ -63,7 +68,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs kdbx; };
     sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
     users.chris = {
       imports = [ ./home.nix ];

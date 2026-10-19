@@ -49,6 +49,7 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [Glow v2.1.1](https://github.com/charmbracelet/glow) | Terminal markdown reader. |
 | [ImageMagick v7.1.2-23](https://imagemagick.org/) | Command-line toolkit for image manipulation. |
 | [jq v1.8.1](https://jqlang.org/) | Command-line JSON processor. |
+| [kdbx v0.13.0](https://github.com/daxartio/kdbx) | Terminal password manager for KDBX databases. |
 | [lazydocker v0.24.2](https://github.com/jesseduffield/lazydocker) | Terminal UI for Docker. |
 | [Neovim v0.11.7](https://neovim.io/) | Editor built around LazyVim. |
 | [poppler-utils v25.10.0](https://poppler.freedesktop.org/) | Command-line utilities for PDF inspection and extraction. |

@@ -1,4 +1,8 @@
-{ pkgs, toolboxArgs }:
+{
+  kdbx,
+  pkgs,
+  toolboxArgs,
+}:
 
 let
   toolboxes = {
@@ -45,7 +49,7 @@ let
 in
 {
   core = builtins.concatLists [
-    (import ./home/modules/cli.readme.nix { inherit pkgs; })
+    (import ./home/modules/cli.readme.nix { inherit pkgs kdbx; })
     (import ./home/modules/git.readme.nix { inherit pkgs; })
     (import ./home/modules/neovim/readme.nix { inherit pkgs; })
     (import ./home/modules/zsh/readme.nix { inherit pkgs; })

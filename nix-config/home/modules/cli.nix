@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  kdbx,
+  pkgs,
+  ...
+}:
 {
   home = {
     # HerdR's embedded terminal does not apply bold ANSI colours as bright variants.
@@ -40,6 +45,7 @@
       age
       gnupg
       sops
+      kdbx
     ];
   };
 

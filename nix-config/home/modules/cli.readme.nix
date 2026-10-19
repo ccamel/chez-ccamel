@@ -1,4 +1,4 @@
-{ pkgs }:
+{ kdbx, pkgs }:
 [
   {
     name = "direnv";
@@ -131,6 +131,13 @@
     inherit (pkgs.qpdf) version;
     description = "Command-line tools for PDF transformation and inspection.";
     url = "https://qpdf.sourceforge.io/";
+    visibility = "public";
+  }
+  {
+    name = "kdbx";
+    inherit (kdbx) version;
+    description = "Terminal password manager for KDBX databases.";
+    url = "https://github.com/daxartio/kdbx";
     visibility = "public";
   }
 ]
