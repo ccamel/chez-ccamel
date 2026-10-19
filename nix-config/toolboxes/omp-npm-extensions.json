@@ -42,8 +42,8 @@
   {
     "pname": "pi-md-export",
     "npmPackage": "@wassname2/pi-md-export",
-    "version": "0.1.0",
-    "hash": "sha512-+Qaw9utTjhh+rKC/TCNmZVo6puwOlS/qPolnU5baro4ZMQFr7Z5UWb3/7XJbrQ4uUEah+tbOPtGRlAfWAGXNlw==",
+    "version": "0.1.1",
+    "hash": "sha512-LBsKRAzKfLt9dNPPsEvuAA7BPQ8SH73+HD3LUxrzDoo+Qo9aPYvsh04Ym3v5GIZXsND72q6WxCPxTrIPogGd9Q==",
     "description": "Export Pi sessions to Markdown files or the system clipboard.",
     "homepage": "https://github.com/wassname/pi-md-export",
     "license": "mit",
