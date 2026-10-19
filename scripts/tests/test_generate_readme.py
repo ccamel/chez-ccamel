@@ -42,11 +42,21 @@ def metadata() -> dict[str, Any]:
     }
 
 
+def neovim_plugins() -> dict[str, dict[str, str]]:
+    return {
+        "zeta.nvim": {"branch": "main", "commit": "1234567890abcdef"},
+        "Alpha.nvim": {"branch": "stable", "commit": "abcdef1234567890"},
+    }
+
 def readme_fixture() -> str:
     return """manual prefix
 <!-- BEGIN_GENERATED_CORE -->
 old core
 <!-- END_GENERATED_CORE -->
+<!-- BEGIN_GENERATED_NEOVIM_PLUGINS -->
+old Neovim plugins
+<!-- END_GENERATED_NEOVIM_PLUGINS -->
+
 manual middle
 <!-- BEGIN_GENERATED_AGENTIC -->
 old agentic
@@ -75,6 +85,23 @@ class GenerateReadmeTest(unittest.TestCase):
             ),
         )
         self.assertNotIn("Hidden", table)
+
+    def test_render_neovim_plugins_sorts_and_shortens_commits(self) -> None:
+        self.assertEqual(
+            GENERATOR.render_neovim_plugins(neovim_plugins()),
+            "\n".join(
+                (
+                    "| Plugin | Branch | Commit |",
+                    "| --- | --- | --- |",
+                    "| Alpha.nvim | stable | `abcdef1` |",
+                    "| zeta.nvim | main | `1234567` |",
+                )
+            ),
+        )
+
+    def test_rejects_neovim_plugin_without_commit(self) -> None:
+        with self.assertRaisesRegex(GENERATOR.GenerationError, "exactly"):
+            GENERATOR.render_neovim_plugins({"broken.nvim": {"branch": "main"}})
 
     def test_render_tables_groups_agentic_components(self) -> None:
         grouped_metadata = metadata()
@@ -119,7 +146,12 @@ class GenerateReadmeTest(unittest.TestCase):
             GENERATOR.render_tables(grouped_metadata)
 
     def test_replacement_preserves_all_manual_text(self) -> None:
-        tables = {"core": "core table", "agentic": "agentic table", "devops": "devops table"}
+        tables = {
+            "core": "core table",
+            "neovim_plugins": "Neovim plugin table",
+            "agentic": "agentic table",
+            "devops": "devops table",
+        }
 
         self.assertEqual(
             GENERATOR.replace_generated_sections(readme_fixture(), tables),
@@ -127,6 +159,10 @@ class GenerateReadmeTest(unittest.TestCase):
 <!-- BEGIN_GENERATED_CORE -->
 core table
 <!-- END_GENERATED_CORE -->
+<!-- BEGIN_GENERATED_NEOVIM_PLUGINS -->
+Neovim plugin table
+<!-- END_GENERATED_NEOVIM_PLUGINS -->
+
 manual middle
 <!-- BEGIN_GENERATED_AGENTIC -->
 agentic table
@@ -143,20 +179,22 @@ manual suffix
         with self.assertRaisesRegex(GENERATOR.GenerationError, "devops markers"):
             GENERATOR.replace_generated_sections(
                 readme_fixture().replace("<!-- END_GENERATED_DEVOPS -->\n", ""),
-                {"core": "core", "agentic": "agentic", "devops": "devops"},
+                {"core": "core", "neovim_plugins": "plugins", "agentic": "agentic", "devops": "devops"},
             )
 
     def test_rejects_duplicated_marker(self) -> None:
         with self.assertRaisesRegex(GENERATOR.GenerationError, "core markers"):
             GENERATOR.replace_generated_sections(
                 readme_fixture() + "<!-- BEGIN_GENERATED_CORE -->\n",
-                {"core": "core", "agentic": "agentic", "devops": "devops"},
+                {"core": "core", "neovim_plugins": "plugins", "agentic": "agentic", "devops": "devops"},
             )
 
     def test_rejects_reversed_markers(self) -> None:
         reversed_markers = """<!-- BEGIN_GENERATED_CORE -->
-<!-- BEGIN_GENERATED_AGENTIC -->
+<!-- BEGIN_GENERATED_NEOVIM_PLUGINS -->
 <!-- END_GENERATED_CORE -->
+<!-- END_GENERATED_NEOVIM_PLUGINS -->
+<!-- BEGIN_GENERATED_AGENTIC -->
 <!-- END_GENERATED_AGENTIC -->
 <!-- BEGIN_GENERATED_DEVOPS -->
 <!-- END_GENERATED_DEVOPS -->
@@ -164,7 +202,7 @@ manual suffix
         with self.assertRaisesRegex(GENERATOR.GenerationError, "wrong order"):
             GENERATOR.replace_generated_sections(
                 reversed_markers,
-                {"core": "core", "agentic": "agentic", "devops": "devops"},
+                {"core": "core", "neovim_plugins": "plugins", "agentic": "agentic", "devops": "devops"},
             )
 
     def test_check_mode_rejects_stale_temporary_readme(self) -> None:
@@ -174,11 +212,12 @@ manual suffix
             original = readme_fixture()
             readme_path.write_text(original, encoding="utf-8")
 
-            with patch.object(GENERATOR, "evaluate_metadata", return_value=metadata()):
+            with patch.object(GENERATOR, "evaluate_metadata", return_value=metadata()), patch.object(
+                GENERATOR, "evaluate_neovim_plugins", return_value=neovim_plugins()
+            ):
                 self.assertFalse(GENERATOR.generate_readme(repository_root, check=True))
 
             self.assertEqual(readme_path.read_text(encoding="utf-8"), original)
-
 
 if __name__ == "__main__":
     unittest.main()

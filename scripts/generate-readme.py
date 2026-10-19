@@ -14,12 +14,14 @@ from pathlib import Path
 from typing import Any
 
 
-SECTIONS = ("core", "agentic", "devops")
+SECTIONS = ("core", "neovim_plugins", "agentic", "devops")
 README_SYSTEM = "x86_64-linux"
+NEOVIM_LOCKFILE = Path("nix-config/home/modules/neovim/config/lazy-lock.json")
 
 FIELDS = frozenset(("name", "version", "description", "url", "visibility"))
 GROUP_FIELDS = frozenset(("name", "description", "items"))
 AGENTIC_FIELDS = frozenset(("description", "groups"))
+NEOVIM_PLUGIN_FIELDS = frozenset(("branch", "commit"))
 VISIBILITIES = frozenset(("public", "private"))
 
 
@@ -43,6 +45,24 @@ def evaluate_metadata(repository_root: Path) -> Any:
         return json.loads(result.stdout)
     except json.JSONDecodeError as error:
         raise GenerationError(f"Nix evaluation did not return valid JSON: {error}") from error
+
+def evaluate_neovim_plugins(repository_root: Path) -> Any:
+    try:
+        return json.loads((repository_root / NEOVIM_LOCKFILE).read_text(encoding="utf-8"))
+    except json.JSONDecodeError as error:
+        raise GenerationError(f"Neovim plugin lockfile is not valid JSON: {error}") from error
+
+
+def validate_neovim_plugins(plugins: Any) -> dict[str, dict[str, str]]:
+    if not isinstance(plugins, dict) or not plugins:
+        raise GenerationError("Neovim plugin lockfile must contain at least one plugin")
+
+    for name, plugin in plugins.items():
+        if not isinstance(name, str) or not isinstance(plugin, dict) or set(plugin) != NEOVIM_PLUGIN_FIELDS:
+            raise GenerationError(f"Neovim plugin {name!r} must contain exactly {sorted(NEOVIM_PLUGIN_FIELDS)}")
+        if any(not isinstance(value, str) or not value for value in plugin.values()):
+            raise GenerationError(f"Neovim plugin {name!r} branch and commit must be non-empty strings")
+    return plugins
 
 
 def validate_items(section: str, items: Any) -> list[dict[str, str]]:
@@ -108,7 +128,7 @@ def validate_agentic_section(metadata: Any) -> dict[str, Any]:
 
 
 def validate_metadata(metadata: Any) -> dict[str, Any]:
-    if not isinstance(metadata, dict) or set(metadata) != set(SECTIONS):
+    if not isinstance(metadata, dict) or set(metadata) != {"core", "agentic", "devops"}:
         raise GenerationError("metadata must contain only core, agentic, and devops sections")
 
     return {
@@ -139,6 +159,12 @@ def render_table(
         url = item["url"].replace("\\", "\\\\").replace(")", "\\)")
         description = escape_table_cell(item["description"])
         rows.append(f"| [{name}]({url}) | {description} |")
+    return "\n".join(rows)
+
+def render_neovim_plugins(plugins: Any) -> str:
+    rows = ["| Plugin | Branch | Commit |", "| --- | --- | --- |"]
+    for name, plugin in sorted(validate_neovim_plugins(plugins).items(), key=lambda item: item[0].casefold()):
+        rows.append(f"| {escape_table_cell(name)} | {escape_table_cell(plugin['branch'])} | `{plugin['commit'][:7]}` |")
     return "\n".join(rows)
 
 
@@ -213,7 +239,9 @@ def write_readme(path: Path, content: str) -> None:
 def generate_readme(repository_root: Path, check: bool) -> bool:
     readme_path = repository_root / "README.md"
     original = readme_path.read_text(encoding="utf-8")
-    updated = replace_generated_sections(original, render_tables(evaluate_metadata(repository_root)))
+    tables = render_tables(evaluate_metadata(repository_root))
+    tables["neovim_plugins"] = render_neovim_plugins(evaluate_neovim_plugins(repository_root))
+    updated = replace_generated_sections(original, tables)
     if updated == original:
         return True
     if check:

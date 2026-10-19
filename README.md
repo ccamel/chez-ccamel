@@ -62,6 +62,50 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [Zsh v5.9](https://www.zsh.org/) | Interactive shell with vi-mode editing. |
 <!-- END_GENERATED_CORE -->
 
+#### Neovim plugins
+
+The curated plugins behind my opinionated Neovim setup, built around LazyVim.
+
+<!-- BEGIN_GENERATED_NEOVIM_PLUGINS -->
+| Plugin | Branch | Commit |
+| --- | --- | --- |
+| blink.cmp | main | `78336bc` |
+| bufferline.nvim | main | `655133c` |
+| catppuccin | main | `edefef7` |
+| conform.nvim | master | `016802d` |
+| flash.nvim | main | `5f0f270` |
+| friendly-snippets | main | `b4d01b0` |
+| gitsigns.nvim | main | `851a051` |
+| grug-far.nvim | main | `11595bf` |
+| lazy.nvim | main | `85c7ff3` |
+| lazydev.nvim | main | `ff2cbcb` |
+| LazyVim | main | `9997009` |
+| lualine.nvim | master | `221ce6b` |
+| mason-lspconfig.nvim | main | `b329899` |
+| mason.nvim | main | `2a6940a` |
+| mini.ai | main | `c2c4278` |
+| mini.icons | main | `f642e3b` |
+| mini.pairs | main | `b1c5a72` |
+| neogit | master | `a654981` |
+| noice.nvim | main | `7bfd942` |
+| nui.nvim | main | `10fc361` |
+| nvim-lint | master | `3d55c8f` |
+| nvim-lspconfig | master | `5c6eecf` |
+| nvim-treesitter | main | `7caec27` |
+| nvim-treesitter-textobjects | main | `5c7b026` |
+| nvim-ts-autotag | main | `d7220b5` |
+| onedark.nvim | master | `df4792a` |
+| persistence.nvim | main | `b20b2a7` |
+| plenary.nvim | master | `74b06c6` |
+| render-markdown.nvim | main | `640a3ec` |
+| snacks.nvim | main | `882c996` |
+| todo-comments.nvim | main | `31e3c38` |
+| tokyonight.nvim | main | `cdc07ac` |
+| trouble.nvim | main | `bd67efe` |
+| ts-comments.nvim | main | `a59d609` |
+| which-key.nvim | main | `3aab214` |
+<!-- END_GENERATED_NEOVIM_PLUGINS -->
+
 ### Agentic development
 
 <!-- BEGIN_GENERATED_AGENTIC -->
