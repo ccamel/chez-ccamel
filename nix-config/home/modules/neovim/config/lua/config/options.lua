@@ -10,8 +10,22 @@ if vim.fn.has("wsl") == 1 then
   vim.g.clipboard = {
     name = "WSL",
     copy = {
-      ["+"] = { "clip.exe" },
-      ["*"] = { "clip.exe" },
+      ["+"] = {
+        "powershell.exe",
+        "-NoProfile",
+        "-NoLogo",
+        "-Command",
+        "$reader = [IO.StreamReader]::new([Console]::OpenStandardInput(), "
+          .. "[Text.UTF8Encoding]::new($false)); Set-Clipboard -Value $reader.ReadToEnd()",
+      },
+      ["*"] = {
+        "powershell.exe",
+        "-NoProfile",
+        "-NoLogo",
+        "-Command",
+        "$reader = [IO.StreamReader]::new([Console]::OpenStandardInput(), "
+          .. "[Text.UTF8Encoding]::new($false)); Set-Clipboard -Value $reader.ReadToEnd()",
+      },
     },
     paste = {
       ["+"] = {
