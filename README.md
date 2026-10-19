@@ -64,7 +64,7 @@ The terminal is home. These are the essential tools that define my everyday envi
 
 #### Neovim plugins
 
-The curated plugins behind my opinionated Neovim setup, built around LazyVim.
+The curated plugins behind my opinionated [Neovim](https://neovim.io/) setup, built around [LazyVim](https://www.lazyvim.org/).
 
 <!-- BEGIN_GENERATED_NEOVIM_PLUGINS -->
 | Plugin | Branch | Commit |
