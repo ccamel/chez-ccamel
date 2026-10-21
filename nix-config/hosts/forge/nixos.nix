@@ -44,15 +44,6 @@
     zsh.enable = true;
     nix-ld.enable = true;
 
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-      settings = {
-        default-cache-ttl-ssh = 3600;
-        max-cache-ttl-ssh = 3600;
-      };
-      pinentryPackage = pkgs.pinentry-tty;
-    };
   };
 
   users.users.chris = {
