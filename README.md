@@ -70,10 +70,12 @@ The curated plugins behind my opinionated [Neovim](https://neovim.io/) setup, bu
 <!-- BEGIN_GENERATED_NEOVIM_PLUGINS -->
 | Plugin | Branch | Commit |
 | --- | --- | --- |
+| blink-copilot | main | `7ad8209` |
 | blink.cmp | main | `78336bc` |
 | bufferline.nvim | main | `655133c` |
 | catppuccin | main | `edefef7` |
 | conform.nvim | master | `016802d` |
+| copilot.lua | master | `9d23575` |
 | diffview.nvim | main | `4516612` |
 | flash.nvim | main | `5f0f270` |
 | friendly-snippets | main | `b4d01b0` |
