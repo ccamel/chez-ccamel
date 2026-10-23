@@ -62,6 +62,7 @@
             src = inputs.qmd;
           };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
+          herdrBar = pkgs.callPackage ./packages/herdr-bar.nix { };
           herdrAnnotate = pkgs.callPackage ./packages/herdr-annotate.nix { };
           herdrRadar = pkgs.callPackage ./packages/herdr-radar.nix { };
           herdrRemote = pkgs.callPackage ./packages/herdr-remote.nix { };
@@ -78,6 +79,7 @@
             omp
             herdr
             herdrAnnotate
+            herdrBar
             herdrRadar
             herdrRemote
             shepherdr
@@ -137,7 +139,12 @@
         let
           toolboxArgs = toolboxArgsFor system;
           inherit (toolboxArgs) pkgs;
-          inherit (toolboxArgs) herdrAnnotate herdrRadar herdrRemote;
+          inherit (toolboxArgs)
+            herdrAnnotate
+            herdrBar
+            herdrRadar
+            herdrRemote
+            ;
           devopsToolbox = import ./toolboxes/devops.nix;
           agenticToolbox = import ./toolboxes/agentic.nix;
           devopsPackages = map (descriptor: descriptor.package toolboxArgs) devopsToolbox;
@@ -150,6 +157,9 @@
             dataHome="''${XDG_DATA_HOME:-$HOME/.local/share}"
             if [ ! -e "$configHome/herdr/config.toml" ]; then
               ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/config.toml} "$configHome/herdr/config.toml"
+            fi
+            if ! ${pkgs.gnugrep}/bin/grep -Eq '^[[:space:]]*command[[:space:]]*=[[:space:]]*"herdr-bar\.open"[[:space:]]*$' "$configHome/herdr/config.toml"; then
+              printf '\n[[keys.command]]\nkey = "prefix+k"\ntype = "plugin_action"\ncommand = "herdr-bar.open"\ndescription = "command bar"\n' >> "$configHome/herdr/config.toml"
             fi
             if ! ${pkgs.gnugrep}/bin/grep -Eq '^[[:space:]]*\[ui([[:space:]]|\]|[.])' "$configHome/herdr/config.toml"; then
               printf '\n[ui]\n' >> "$configHome/herdr/config.toml"
@@ -174,6 +184,11 @@
             herdr plugin link "$dataHome/herdr/plugins/herdr-radar" --enabled >/dev/null
             herdr plugin action invoke configure --plugin hhdebb.herdr-radar >/dev/null 2>&1 || true
             herdr plugin action invoke state-start --plugin hhdebb.herdr-radar >/dev/null 2>&1 || true
+            ${pkgs.coreutils}/bin/rm -rf "$dataHome/herdr/plugins/herdr-bar"
+            ${pkgs.coreutils}/bin/cp -R ${herdrBar} "$dataHome/herdr/plugins/herdr-bar"
+            ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/herdr-bar"
+            herdr plugin link "$dataHome/herdr/plugins/herdr-bar" --enabled >/dev/null
+            herdr plugin action invoke start-titles --plugin herdr-bar >/dev/null 2>&1 || true
           '';
           ompShellHook = ''
             ${pkgs.coreutils}/bin/mkdir -p "$HOME/.omp/agent/extensions"

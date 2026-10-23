@@ -149,6 +149,7 @@ Harness capabilities installed declaratively with the toolbox.
 | Component | Role |
 | --- | --- |
 | [HerdR Annotate v0.9.1-unstable-2026-10-15](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
+| [HerdR Bar v0.11.0](https://github.com/jeffarese/herdr-bar) | Cmd+K command bar, agent icons, fuzzy search, and automatic tab titles for HerdR. |
 | [HerdR Radar v1.4.9](https://github.com/hhdebb/herdr-radar) | Vendor logos, agent status, and workspace grouping in the HerdR sidebar. |
 | [HerdR Remote v0.8.1](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
 | [OMP Undo/Redo v1.8.0](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |

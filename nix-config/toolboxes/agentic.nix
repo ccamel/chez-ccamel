@@ -139,6 +139,16 @@
     };
   }
   {
+    package = { herdrBar, ... }: herdrBar;
+    readmeGroup = "Extensions and integrations";
+    documentation = {
+      name = "HerdR Bar";
+      description = "Cmd+K command bar, agent icons, fuzzy search, and automatic tab titles for HerdR.";
+      url = "https://github.com/jeffarese/herdr-bar";
+      visibility = "public";
+    };
+  }
+  {
     package = { herdrRadar, ... }: herdrRadar;
     readmeGroup = "Extensions and integrations";
     documentation = {

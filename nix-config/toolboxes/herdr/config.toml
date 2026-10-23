@@ -25,4 +25,10 @@ type = "plugin_action"
 command = "annotate.manage"
 description = "manage annotations"
 
+[[keys.command]]
+key = "prefix+k"
+type = "plugin_action"
+command = "herdr-bar.open"
+description = "command bar"
+
 [ui]
