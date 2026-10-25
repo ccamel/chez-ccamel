@@ -1,0 +1,41 @@
+name: Social / Thank dependencies
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/social-thank-dependencies.yml
+      - nix-config/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  social-thank-dependencies:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Give thanks!
+        env:
+          GH_TOKEN: ${{ secrets.STAR_TOKEN }}
+        run: |
+          set -o pipefail
+          {
+            jq -r '.nodes[] | .locked? | select(.type == "github") | [.owner, .repo] | join("/")' nix-config/flake.lock
+            git grep -hEo 'https://github\.com/[[:alnum:]_.-]+/[[:alnum:]_.-]+|github:[[:alnum:]_.-]+/[[:alnum:]_.-]+' -- nix-config || true
+            git grep -hEo '"[[:alnum:]_.-]+/[[:alnum:]_.-]+"' -- nix-config/home/modules/neovim/config/lua || true
+          } | tr -d '"' | sed -E -e 's#https://github\.com/##' -e 's#github:##' -e 's/\.git$//' | sort -u |
+            while IFS= read -r repository; do
+              gh api --method PUT "/user/starred/$repository"
+              printf 'Starred %s\n' "$repository"
+            done
