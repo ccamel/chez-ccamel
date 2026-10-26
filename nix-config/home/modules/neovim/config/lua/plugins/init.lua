@@ -5,6 +5,52 @@ return {
       dashboard = {
         enabled = false,
       },
+      image = {
+        enabled = vim.env.TERM_PROGRAM == "ghostty",
+      },
+    },
+  },
+  {
+    "3rd/image.nvim",
+    build = false,
+    cond = function()
+      return vim.env.WT_SESSION ~= nil and vim.env.TERM_PROGRAM ~= "herdr"
+    end,
+    opts = {
+      backend = "sixel",
+      processor = "magick_cli",
+      integrations = {
+        markdown = {
+          only_render_image_at_cursor = true,
+          only_render_image_at_cursor_mode = "popup",
+        },
+      },
+    },
+  },
+  {
+    "hmdfrds/focal.nvim",
+    cond = function()
+      return vim.env.TERM_PROGRAM == "herdr"
+    end,
+    config = function(_, opts)
+      local focal = require("focal")
+      focal.register_source({
+        filetype = "markdown",
+        get_path = function()
+          local target = vim.fn.expand("<cfile>")
+          if target == "" or target:find("://", 1, true) then
+            return nil
+          end
+
+          -- shortcut: local Markdown links only; use a Markdown parser if remote images are needed.
+          local path = target:sub(1, 1) == "/" and target or vim.fn.expand("%:p:h") .. "/" .. target
+          return vim.fn.filereadable(path) == 1 and path or nil
+        end,
+      })
+      focal.setup(opts)
+    end,
+    opts = {
+      backend = "chafa",
     },
   },
   {

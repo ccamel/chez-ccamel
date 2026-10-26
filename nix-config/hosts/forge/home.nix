@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ../../home/common.nix
@@ -14,6 +14,8 @@
     homeDirectory = "/home/chris";
     stateVersion = "25.11";
   };
+
+  home.packages = [ pkgs.chafa ];
 
   home.sessionVariables.CHEZ_CCAMEL_ROOT = "/home/chris/src/mine/chez-ccamel";
 

@@ -78,9 +78,11 @@ The curated plugins behind my opinionated [Neovim](https://neovim.io/) setup, bu
 | copilot.lua | master | `9d23575` |
 | diffview.nvim | main | `4516612` |
 | flash.nvim | main | `5f0f270` |
+| focal.nvim | main | `25c946b` |
 | friendly-snippets | main | `b4d01b0` |
 | gitsigns.nvim | main | `fd78092` |
 | grug-far.nvim | main | `bbde8ef` |
+| image.nvim | master | `365e2ac` |
 | lazy.nvim | main | `85c7ff3` |
 | lazydev.nvim | main | `ff2cbcb` |
 | LazyVim | main | `9997009` |
