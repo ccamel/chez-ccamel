@@ -151,6 +151,10 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
             repository="jeffarese/herdr-bar",
             file=Path("nix-config/packages/herdr-bar.nix"),
         ),
+        "herdr-shell-progress": GitHubSourceResource(
+            repository="bayoudhi/herdr-shell-progress",
+            file=Path("nix-config/packages/herdr-shell-progress.nix"),
+        ),
         "shepherdr": GitHubSourceResource(
             repository="afogel/shepherdr",
             file=Path("nix-config/packages/shepherdr.nix"),
@@ -173,6 +177,7 @@ FAST_STATIC_RESOURCES = frozenset(
         "herdr-radar",
         "shepherdr",
         "herdr-bar",
+        "herdr-shell-progress",
     }
 )
 

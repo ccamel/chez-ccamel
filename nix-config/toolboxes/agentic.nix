@@ -149,6 +149,16 @@
     };
   }
   {
+    package = { herdrShellProgress, ... }: herdrShellProgress;
+    readmeGroup = "Extensions and integrations";
+    documentation = {
+      name = "HerdR Shell Progress";
+      description = "Show live progress for slow shell commands in the HerdR sidebar.";
+      url = "https://github.com/bayoudhi/herdr-shell-progress";
+      visibility = "public";
+    };
+  }
+  {
     package = { herdrRadar, ... }: herdrRadar;
     readmeGroup = "Extensions and integrations";
     documentation = {

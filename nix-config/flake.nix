@@ -63,6 +63,7 @@
           };
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           herdrBar = pkgs.callPackage ./packages/herdr-bar.nix { };
+          herdrShellProgress = pkgs.callPackage ./packages/herdr-shell-progress.nix { };
           herdrAnnotate = pkgs.callPackage ./packages/herdr-annotate.nix { };
           herdrRadar = pkgs.callPackage ./packages/herdr-radar.nix { };
           herdrRemote = pkgs.callPackage ./packages/herdr-remote.nix { };
@@ -81,6 +82,7 @@
             herdrAnnotate
             herdrBar
             herdrRadar
+            herdrShellProgress
             herdrRemote
             shepherdr
             herd
@@ -143,6 +145,7 @@
             herdrAnnotate
             herdrBar
             herdrRadar
+            herdrShellProgress
             herdrRemote
             ;
           devopsToolbox = import ./toolboxes/devops.nix;
@@ -189,6 +192,10 @@
             ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/herdr-bar"
             herdr plugin link "$dataHome/herdr/plugins/herdr-bar" --enabled >/dev/null
             herdr plugin action invoke start-titles --plugin herdr-bar >/dev/null 2>&1 || true
+            ${pkgs.coreutils}/bin/rm -rf "$dataHome/herdr/plugins/herdr-shell-progress"
+            ${pkgs.coreutils}/bin/cp -R ${herdrShellProgress} "$dataHome/herdr/plugins/herdr-shell-progress"
+            ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/herdr-shell-progress"
+            herdr plugin link "$dataHome/herdr/plugins/herdr-shell-progress" --enabled >/dev/null
           '';
           ompShellHook = ''
             ${pkgs.coreutils}/bin/mkdir -p "$HOME/.omp/agent/extensions"
