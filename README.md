@@ -75,28 +75,28 @@ The curated plugins behind my opinionated [Neovim](https://neovim.io/) setup, bu
 | bufferline.nvim | main | `655133c` |
 | catppuccin | main | `edefef7` |
 | conform.nvim | master | `016802d` |
-| copilot.lua | master | `9d23575` |
+| copilot.lua | master | `82607bb` |
 | diffview.nvim | main | `4516612` |
 | flash.nvim | main | `5f0f270` |
 | focal.nvim | main | `25c946b` |
 | friendly-snippets | main | `b4d01b0` |
-| gitsigns.nvim | main | `fd78092` |
-| grug-far.nvim | main | `bbde8ef` |
+| gitsigns.nvim | main | `d4854fa` |
+| grug-far.nvim | main | `91b7e58` |
 | image.nvim | master | `365e2ac` |
 | lazy.nvim | main | `85c7ff3` |
 | lazydev.nvim | main | `ff2cbcb` |
 | LazyVim | main | `9997009` |
 | lualine.nvim | master | `221ce6b` |
-| mason-lspconfig.nvim | main | `00b5473` |
+| mason-lspconfig.nvim | main | `a338f44` |
 | mason.nvim | main | `2a6940a` |
 | mini.ai | main | `d0c4987` |
-| mini.icons | main | `f916635` |
+| mini.icons | main | `eab3e69` |
 | mini.pairs | main | `03eb1f0` |
-| neogit | master | `a654981` |
+| neogit | master | `832a2db` |
 | noice.nvim | main | `7bfd942` |
 | nui.nvim | main | `10fc361` |
 | nvim-lint | master | `f6230a5` |
-| nvim-lspconfig | master | `45a3a44` |
+| nvim-lspconfig | master | `77b7432` |
 | nvim-treesitter | main | `7caec27` |
 | nvim-treesitter-textobjects | main | `5c7b026` |
 | nvim-ts-autotag | main | `d7220b5` |
@@ -139,10 +139,10 @@ The interchangeable specialist CLIs run within the wider workflow.
 
 | Component | Role |
 | --- | --- |
-| [Antigravity CLI v1.3.5](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
+| [Antigravity CLI v1.4.1](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
 | [Claude Code v2.1.140](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding CLI. |
-| [Codex v0.162.1](https://openai.com/codex/) | OpenAI coding agent. |
-| [GitHub Copilot CLI v1.0.91](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
+| [Codex v0.164.0](https://openai.com/codex/) | OpenAI coding agent. |
+| [GitHub Copilot CLI v1.0.98](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
 
 #### Extensions and integrations
 
@@ -171,7 +171,7 @@ Tools for coordination, context, inspection, and efficient terminal output.
 | [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
 | [Livediff v3.4.0](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
 | [QMD v2.8.3](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
-| [rtk v1.0.1](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
+| [rtk v1.1.0](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
 <!-- END_GENERATED_AGENTIC -->
 
 ### DevOps
