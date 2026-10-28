@@ -80,6 +80,7 @@ The curated plugins behind my opinionated [Neovim](https://neovim.io/) setup, bu
 | flash.nvim | main | `5f0f270` |
 | focal.nvim | main | `25c946b` |
 | friendly-snippets | main | `b4d01b0` |
+| git-conflict.nvim | main | `4bbfdd9` |
 | gitsigns.nvim | main | `d4854fa` |
 | grug-far.nvim | main | `91b7e58` |
 | image.nvim | master | `365e2ac` |

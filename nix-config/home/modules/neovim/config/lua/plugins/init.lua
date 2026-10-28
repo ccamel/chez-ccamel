@@ -119,4 +119,13 @@ return {
         :map("<leader>um")
     end,
   },
+  {
+    "akinsho/git-conflict.nvim",
+    version = "*",
+    opts = {
+      default_mappings = true,
+      disable_diagnostics = true,
+      list_opener = "copen",
+    },
+  },
 }
