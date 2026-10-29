@@ -203,21 +203,10 @@ Infrastructure and platform engineering.
 
 ## Bootstrap
 
-Clone the repository using an ephemeral Git shell:
-
 ```sh
 mkdir -p ~/src/mine
 cd ~/src/mine
-
-nix shell nixpkgs#git \
-  --command git clone https://github.com/ccamel/chez-ccamel.git
+git clone https://github.com/ccamel/chez-ccamel.git
+cd chez-ccamel
+just switch
 ```
-
-Apply the system configuration:
-
-```sh
-sudo nixos-rebuild switch \
-  --flake ~/src/mine/chez-ccamel/nix-config#forge
-```
-
-That's it.
