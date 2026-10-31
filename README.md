@@ -132,7 +132,7 @@ The control plane for agent sessions, tool access, configuration, and observable
 | --- | --- |
 | [agtx v1.0.6](https://github.com/fynnfluegge/agtx) | Terminal-native development environment for coding agents. |
 | [HerdR v0.9.5](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
-| [OMP v18.13.3](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
+| [OMP v18.14.1](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
 
 #### Coding agents
 
@@ -151,7 +151,7 @@ Harness capabilities installed declaratively with the toolbox.
 
 | Component | Role |
 | --- | --- |
-| [HerdR Annotate v0.9.8-unstable-2026-10-28](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
+| [HerdR Annotate v0.9.9-unstable-2026-10-29](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
 | [HerdR Bar v0.13.0](https://github.com/jeffarese/herdr-bar) | Cmd+K command bar, agent icons, fuzzy search, and automatic tab titles for HerdR. |
 | [HerdR Radar v1.5.0](https://github.com/hhdebb/herdr-radar) | Vendor logos, agent status, and workspace grouping in the HerdR sidebar. |
 | [HerdR Remote v0.8.1](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
