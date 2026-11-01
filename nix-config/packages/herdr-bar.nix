@@ -6,15 +6,15 @@
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "herdr-bar";
   # managed by update-resource
-  version = "0.13.0";
+  version = "0.14.0";
 
   src = fetchFromGitHub {
     owner = "jeffarese";
     repo = "herdr-bar";
     # managed by update-resource
-    rev = "a88c7b06c7a0f354d6120d465b0caa56fbde3fbf";
+    rev = "d642f7964231b86e82e1ac7f3a390fd5baa03e98";
     # managed by update-resource
-    hash = "sha256-KX1uB47XJdvjF02Q27bywKJ+TCkKvMpz7QPUHgGGeoA=";
+    hash = "sha256-7ybX/DwOZkI7yr0U6fszlerx5/96mGO9DtLXoA4DuHs=";
   };
 
   cargoLock.lockFile = "${finalAttrs.src}/Cargo.lock";
