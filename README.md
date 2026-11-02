@@ -75,29 +75,29 @@ The curated plugins behind my opinionated [Neovim](https://neovim.io/) setup, bu
 | bufferline.nvim | main | `655133c` |
 | catppuccin | main | `edefef7` |
 | conform.nvim | master | `016802d` |
-| copilot.lua | master | `82607bb` |
+| copilot.lua | master | `20ffcd5` |
 | diffview.nvim | main | `4516612` |
 | flash.nvim | main | `5f0f270` |
 | focal.nvim | main | `25c946b` |
-| friendly-snippets | main | `b4d01b0` |
+| friendly-snippets | main | `b2ea5c4` |
 | git-conflict.nvim | main | `4bbfdd9` |
-| gitsigns.nvim | main | `d4854fa` |
+| gitsigns.nvim | main | `1e9d0fb` |
 | grug-far.nvim | main | `91b7e58` |
 | image.nvim | master | `365e2ac` |
 | lazy.nvim | main | `85c7ff3` |
 | lazydev.nvim | main | `ff2cbcb` |
 | LazyVim | main | `9997009` |
 | lualine.nvim | master | `221ce6b` |
-| mason-lspconfig.nvim | main | `a338f44` |
+| mason-lspconfig.nvim | main | `cd6c64d` |
 | mason.nvim | main | `2a6940a` |
-| mini.ai | main | `d0c4987` |
+| mini.ai | main | `a4f5648` |
 | mini.icons | main | `eab3e69` |
 | mini.pairs | main | `03eb1f0` |
-| neogit | master | `832a2db` |
+| neogit | master | `697ad3e` |
 | noice.nvim | main | `7bfd942` |
 | nui.nvim | main | `10fc361` |
-| nvim-lint | master | `f6230a5` |
-| nvim-lspconfig | master | `77b7432` |
+| nvim-lint | master | `52107ce` |
+| nvim-lspconfig | master | `d8d2fda` |
 | nvim-treesitter | main | `7caec27` |
 | nvim-treesitter-textobjects | main | `5c7b026` |
 | nvim-ts-autotag | main | `d7220b5` |
@@ -140,10 +140,10 @@ The interchangeable specialist CLIs run within the wider workflow.
 
 | Component | Role |
 | --- | --- |
-| [Antigravity CLI v1.4.1](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
+| [Antigravity CLI v1.4.8](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
 | [Claude Code v2.1.140](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding CLI. |
-| [Codex v0.164.0](https://openai.com/codex/) | OpenAI coding agent. |
-| [GitHub Copilot CLI v1.0.98](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
+| [Codex v0.166.0](https://openai.com/codex/) | OpenAI coding agent. |
+| [GitHub Copilot CLI v1.0.105](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
 
 #### Extensions and integrations
 
