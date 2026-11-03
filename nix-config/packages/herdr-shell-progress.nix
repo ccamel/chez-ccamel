@@ -6,15 +6,15 @@
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "herdr-shell-progress";
   # managed by update-resource
-  version = "0.4.0";
+  version = "0.5.2";
 
   src = fetchFromGitHub {
     owner = "bayoudhi";
     repo = "herdr-shell-progress";
     # managed by update-resource
-    rev = "0e30b18deef1b7089212569f9b06ec43bd62bae1";
+    rev = "681168ca4befe2be24c6fc2e28585fd265ca5bd1";
     # managed by update-resource
-    hash = "sha256-dki4e5PXDzbSvplZM/57ZBAXOzglyerrGZYB4snAfJY=";
+    hash = "sha256-40FECfvJn6w9lwp+tERZJKMNW0sMK5Ms9RrUTpxqFDU=";
   };
 
   cargoLock.lockFile = "${finalAttrs.src}/Cargo.lock";
