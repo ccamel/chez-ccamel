@@ -132,7 +132,7 @@ The control plane for agent sessions, tool access, configuration, and observable
 | --- | --- |
 | [agtx v1.0.6](https://github.com/fynnfluegge/agtx) | Terminal-native development environment for coding agents. |
 | [HerdR v0.9.5](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
-| [OMP v18.16.0](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
+| [OMP v18.18.0](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
 
 #### Coding agents
 
@@ -160,7 +160,7 @@ Harness capabilities installed declaratively with the toolbox.
 | [Pi Markdown Export v0.1.1](https://github.com/wassname/pi-md-export) | Export Pi sessions to Markdown files or the system clipboard. |
 | [Ponytail v5.3.3](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
 | [shepherdr v0.1.0-unstable-2026-07-24](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
-| [System Prompt Switch v0.13.1](https://github.com/plantaeart/system-prompt-switch) | Session-scoped system prompt selection for OMP. |
+| [System Prompt Switch v0.13.2](https://github.com/plantaeart/system-prompt-switch) | Session-scoped system prompt selection for OMP. |
 
 #### Operating tools
 
