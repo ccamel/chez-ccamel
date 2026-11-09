@@ -33,4 +33,5 @@ in
   };
   dev.autoqaConsent = "denied";
   github.enabled = true;
+  systemPromptSwitch.promptOnStartup = false;
 }
