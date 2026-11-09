@@ -7,6 +7,9 @@ pane_history = false
 name = "vesper"
 auto_switch = false
 
+[theme.custom]
+panel_bg = "reset"
+
 [[keys.command]]
 key = "prefix+a"
 type = "plugin_action"
@@ -32,3 +35,5 @@ command = "herdr-bar.open"
 description = "command bar"
 
 [ui]
+prompt_new_tab_name = false
+hide_tab_bar_when_single_tab = true
