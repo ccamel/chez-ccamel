@@ -158,15 +158,7 @@
           herdrShellHook = ''
             configHome="''${XDG_CONFIG_HOME:-$HOME/.config}"
             dataHome="''${XDG_DATA_HOME:-$HOME/.local/share}"
-            if [ ! -e "$configHome/herdr/config.toml" ]; then
-              ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/config.toml} "$configHome/herdr/config.toml"
-            fi
-            if ! ${pkgs.gnugrep}/bin/grep -Eq '^[[:space:]]*command[[:space:]]*=[[:space:]]*"herdr-bar\.open"[[:space:]]*$' "$configHome/herdr/config.toml"; then
-              printf '\n[[keys.command]]\nkey = "prefix+k"\ntype = "plugin_action"\ncommand = "herdr-bar.open"\ndescription = "command bar"\n' >> "$configHome/herdr/config.toml"
-            fi
-            if ! ${pkgs.gnugrep}/bin/grep -Eq '^[[:space:]]*\[ui([[:space:]]|\]|[.])' "$configHome/herdr/config.toml"; then
-              printf '\n[ui]\n' >> "$configHome/herdr/config.toml"
-            fi
+            ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/config.toml} "$configHome/herdr/config.toml"
             ${pkgs.coreutils}/bin/install -Dm600 ${./toolboxes/herdr/herdr-plugin.toml} "$dataHome/herdr/plugins/shepherdr/herdr-plugin.toml"
             ${pkgs.coreutils}/bin/rm -rf "$dataHome/herdr/plugins/annotate"
             ${pkgs.coreutils}/bin/mkdir -p "$dataHome/herdr/plugins"
@@ -196,6 +188,7 @@
             ${pkgs.coreutils}/bin/cp -R ${herdrShellProgress} "$dataHome/herdr/plugins/herdr-shell-progress"
             ${pkgs.coreutils}/bin/chmod -R u+w "$dataHome/herdr/plugins/herdr-shell-progress"
             herdr plugin link "$dataHome/herdr/plugins/herdr-shell-progress" --enabled >/dev/null
+            herdr server reload-config >/dev/null 2>&1 || true
           '';
           ompShellHook = ''
             ${pkgs.coreutils}/bin/mkdir -p "$HOME/.omp/agent/extensions"
