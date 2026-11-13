@@ -29,8 +29,8 @@
   {
     "pname": "system-prompt-switch",
     "npmPackage": "system-prompt-switch",
-    "version": "0.13.2",
-    "hash": "sha512-WUpc4JHMsdf7Wx9GFfhXq9nwpaETPsRaVdjRyXQj/eilDHFqHSRu9eR8mtI+Mm5HdTK/i8mSjAg0SrPpUEhm1g==",
+    "version": "0.13.3",
+    "hash": "sha512-68X1gFW4ZAymW4MB0kuJJHaEArcbg1KMvwK6gGEXz/ZqNz+mVeatIQdORtAxfWuxv1BbCQJ7H7e6j0SbLhYPVg==",
     "description": "Session-scoped system prompt selection for OMP.",
     "homepage": "https://github.com/plantaeart/system-prompt-switch",
     "license": "mit",
