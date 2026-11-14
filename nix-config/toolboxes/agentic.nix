@@ -119,6 +119,16 @@
     };
   }
   {
+    package = { ollama, ... }: ollama;
+    readmeGroup = "Operating tools";
+    documentation = {
+      name = "Ollama";
+      description = "Run local large language models.";
+      url = "https://ollama.com/";
+      visibility = "public";
+    };
+  }
+  {
     package = { herdr, ... }: herdr;
     readmeGroup = "Harnesses";
     documentation = {

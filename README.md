@@ -171,6 +171,7 @@ Tools for coordination, context, inspection, and efficient terminal output.
 | [APM v0.30.0](https://github.com/microsoft/apm) | Dependency manager for AI agent configuration. |
 | [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
 | [Livediff v3.4.0](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
+| [Ollama v0.40.11](https://ollama.com/) | Run local large language models. |
 | [QMD v2.8.3](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
 | [rtk v1.1.0](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
 <!-- END_GENERATED_AGENTIC -->

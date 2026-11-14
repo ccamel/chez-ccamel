@@ -93,7 +93,7 @@
             apm
             agtx
             ;
-          inherit (codexPkgs) codex;
+          inherit (codexPkgs) codex ollama;
           antigravityCli = codexPkgs.antigravity-cli;
           githubCopilotCli = codexPkgs.github-copilot-cli;
         };
