@@ -30,23 +30,7 @@
       NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt";
       REQUESTS_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
       CURL_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
-      PYTHONPATH = "/etc/python";
     };
-
-    # shortcut: relaxes Python 3.13+ VERIFY_X509_STRICT for Zscaler root CA lacking critical Basic Constraints, remove when corporate CA is reissued compliant with RFC 5280
-    etc."python/sitecustomize.py".text = ''
-      import ssl
-
-      if hasattr(ssl, "VERIFY_X509_STRICT"):
-          _orig_get = ssl.SSLContext.verify_flags.__get__
-          _orig_set = ssl.SSLContext.verify_flags.__set__
-
-          def _set(self, val):
-              val &= ~ssl.VERIFY_X509_STRICT
-              return _orig_set(self, val)
-
-          ssl.SSLContext.verify_flags = property(_orig_get, _set)
-    '';
   };
 
   nix.settings.experimental-features = [
