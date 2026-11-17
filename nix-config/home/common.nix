@@ -1,5 +1,6 @@
 { ... }:
 {
+  home.sessionVariables.PONYTAIL_DEFAULT_MODE = "off";
   imports = [
     ./modules/cli.nix
     ./modules/git.nix
