@@ -1,4 +1,8 @@
-{ kdbx, pkgs }:
+{
+  kdbx,
+  lig,
+  pkgs,
+}:
 [
   {
     name = "direnv";
@@ -12,6 +16,13 @@
     inherit (pkgs.fzf) version;
     description = "Fuzzy finder for the command line.";
     url = "https://github.com/junegunn/fzf";
+    visibility = "public";
+  }
+  {
+    name = "Lig";
+    inherit (lig) version;
+    description = "IDE-style autocomplete for the terminal.";
+    url = "https://github.com/KevenGoncalves/lig";
     visibility = "public";
   }
   {

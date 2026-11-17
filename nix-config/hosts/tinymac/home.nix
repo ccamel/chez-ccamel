@@ -1,4 +1,9 @@
-{ config, inputs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../../home/common.nix
@@ -19,6 +24,15 @@
   xdg.enable = true;
 
   home.packages = [ config.programs.home-manager.package ];
+
+  # portable-pty starts test processes in HOME, which is absent in the Nix sandbox.
+  programs.lig.package =
+    inputs.lig.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs
+      (old: {
+        preCheck = (old.preCheck or "") + ''
+          export HOME="$TMPDIR"
+        '';
+      });
 
   home.file.".gitconfig".source = config.xdg.configFile."git/config".source;
 

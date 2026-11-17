@@ -1,10 +1,13 @@
 {
   config,
+  inputs,
   kdbx,
   pkgs,
   ...
 }:
 {
+  imports = [ inputs.lig.homeModules.default ];
+
   home = {
     # HerdR's embedded terminal does not apply bold ANSI colours as bright variants.
     sessionVariables.EZA_COLORS = "di=94";
@@ -74,6 +77,19 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+    };
+    lig = {
+      enable = true;
+      enableZshIntegration = true;
+      settings = {
+        behavior.history = false;
+        ui = {
+          theme = "gruvbox";
+          border = "rounded";
+          icons = "auto";
+          height = 8;
+        };
+      };
     };
 
     zoxide = {

@@ -5,6 +5,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-codex.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     qmd.url = "github:tobi/qmd";
+    lig = {
+      url = "github:KevenGoncalves/lig";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
@@ -61,6 +65,7 @@
             upstreamQmd = inputs.qmd.packages.${system}.qmd;
             src = inputs.qmd;
           };
+          lig = inputs.lig.packages.${system}.default;
           herdr = pkgs.callPackage ./packages/herdr.nix { };
           herdrBar = pkgs.callPackage ./packages/herdr-bar.nix { };
           herdrShellProgress = pkgs.callPackage ./packages/herdr-shell-progress.nix { };
@@ -90,6 +95,7 @@
             livediff
             kdbx
             qmd
+            lig
             apm
             agtx
             ;

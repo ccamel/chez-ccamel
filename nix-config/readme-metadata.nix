@@ -49,7 +49,10 @@ let
 in
 {
   core = builtins.concatLists [
-    (import ./home/modules/cli.readme.nix { inherit pkgs kdbx; })
+    (import ./home/modules/cli.readme.nix {
+      inherit pkgs kdbx;
+      inherit (toolboxArgs) lig;
+    })
     (import ./home/modules/git.readme.nix { inherit pkgs; })
     (import ./home/modules/neovim/readme.nix { inherit pkgs; })
     (import ./home/modules/zsh/readme.nix { inherit pkgs; })
