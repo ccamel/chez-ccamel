@@ -27,6 +27,13 @@
       ignoreDups = true;
       expireDuplicatesFirst = true;
     };
+    envExtra = ''
+      # Lig re-execs Zsh without -c, dropping commands from OMP's !/!! PTYs.
+      # Keep it for terminal prompts, not shells started to execute a command.
+      if [[ -o interactive && -v ZSH_EXECUTION_STRING ]]; then
+        export LIG_DISABLE=1
+      fi
+    '';
     initContent = builtins.readFile ./config;
   };
 }
