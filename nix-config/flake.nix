@@ -102,6 +102,7 @@
           inherit (codexPkgs) codex ollama;
           antigravityCli = codexPkgs.antigravity-cli;
           githubCopilotCli = codexPkgs.github-copilot-cli;
+          huggingFaceCli = codexPkgs.python3Packages.huggingface-hub;
         };
     in
     {

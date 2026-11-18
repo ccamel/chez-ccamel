@@ -129,6 +129,16 @@
     };
   }
   {
+    package = { huggingFaceCli, ... }: huggingFaceCli;
+    readmeGroup = "Operating tools";
+    documentation = {
+      name = "Hugging Face CLI";
+      description = "Manage Hugging Face Hub models, datasets, Spaces, authentication, and downloads.";
+      url = "https://huggingface.co/docs/huggingface_hub/guides/cli";
+      visibility = "public";
+    };
+  }
+  {
     package = { herdr, ... }: herdr;
     readmeGroup = "Harnesses";
     documentation = {
