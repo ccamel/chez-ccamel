@@ -1,9 +1,42 @@
 { pkgs }:
 let
   extensions = import ./omp-extensions.nix;
+  # HerdR's OMP integration v10 leaves its lifecycle authority active on exit.
+  # Lig keeps the outer foreground group alive, so clear that authority explicitly.
+  herdrRelease = pkgs.writeText "herdr-omp-release.ts" ''
+    import net from "node:net";
+    import type { ExtensionAPI } from "@oh-my-pi/pi-coding-agent";
+
+    export default function (pi: ExtensionAPI) {
+      const { HERDR_ENV, HERDR_PANE_ID, HERDR_SOCKET_PATH, OMPCODE } = process.env;
+      if (HERDR_ENV !== "1" || !HERDR_PANE_ID || !HERDR_SOCKET_PATH || OMPCODE === "1") return;
+
+      pi.on("session_shutdown", async (_event, ctx) => {
+        if (!ctx.hasUI) return;
+        await new Promise<void>((resolve) => {
+          const socket = net.createConnection(HERDR_SOCKET_PATH);
+          socket.setTimeout(1000, () => socket.destroy());
+          socket.once("error", () => socket.destroy());
+          socket.once("data", () => socket.destroy());
+          socket.once("close", () => resolve());
+          socket.once("connect", () => socket.write(JSON.stringify({
+            id: "omp-shutdown",
+            method: "pane.clear_agent_authority",
+            params: {
+              pane_id: HERDR_PANE_ID,
+              source: "herdr:omp",
+              seq: Date.now() * 1000,
+            },
+          }) + "\n"));
+        });
+      });
+    }
+  '';
 in
 {
-  extensions = map (extension: "${extension.package { inherit pkgs; }}") extensions;
+  extensions = map (extension: "${extension.package { inherit pkgs; }}") extensions ++ [
+    "${herdrRelease}"
+  ];
   symbolPreset = "nerd";
   theme.dark = "titanium";
   setupVersion = 2;

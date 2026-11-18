@@ -27,12 +27,6 @@
       ignoreDups = true;
       expireDuplicatesFirst = true;
     };
-    envExtra = ''
-      # Disable lig inside Herdr: lig wraps the shell in an inner PTY, which blinds Herdr process and agent tracking.
-      if [[ -n "''${HERDR_ENV-}" || "''${TERM_PROGRAM-}" == "herdr" ]]; then
-        export LIG_DISABLE=1
-      fi
-    '';
     initContent = builtins.readFile ./config;
   };
 }

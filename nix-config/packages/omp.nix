@@ -37,7 +37,8 @@ stdenvNoCC.mkDerivation {
   # update. `autoPatchelfHook` rewrites the ELF and corrupts bun's embedded
   # bundle trailer, so only the dynamic-linker path is fixed via a wrapper
   # that execs the untouched binary through the correct `ld.so`; glibc's own
-  # loader already finds libc/libm/libpthread/libdl next to itself.
+  # loader already finds libc/libm/libpthread/libdl next to itself. Preserve
+  # argv[0] so Lig's process mirror exposes omp, not ld.so, to HerdR.
   nativeBuildInputs = lib.optionals stdenvNoCC.hostPlatform.isLinux [ makeWrapper ];
 
   installPhase =
@@ -45,7 +46,7 @@ stdenvNoCC.mkDerivation {
       ''
         runHook preInstall
         install -Dm755 "$src" "$out/libexec/omp"
-        makeWrapper "${glibc}/lib/ld-linux-x86-64.so.2" "$out/bin/omp" --add-flags "$out/libexec/omp"
+        makeWrapper "${glibc}/lib/ld-linux-x86-64.so.2" "$out/bin/omp" --argv0 omp --add-flags "$out/libexec/omp"
         runHook postInstall
       ''
     else
