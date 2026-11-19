@@ -23,6 +23,7 @@
       eza
       tree
       file
+      _7zz
       glow
       imagemagick
       exiftool

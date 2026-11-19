@@ -33,6 +33,7 @@ The terminal is home. These are the essential tools that define my everyday envi
 <!-- BEGIN_GENERATED_CORE -->
 | Tool | Description |
 | --- | --- |
+| [7-Zip v25.01](https://7-zip.org/) | Command-line utility for creating and extracting archives. |
 | [Atuin v18.10.0](https://atuin.sh/) | Searchable shell history. |
 | [bat v0.26.1](https://github.com/sharkdp/bat) | Cat clone with syntax highlighting. |
 | [Btop v1.4.5](https://github.com/aristocratos/btop) | Resource monitor for the terminal. |

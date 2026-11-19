@@ -145,6 +145,13 @@
     visibility = "public";
   }
   {
+    name = "7-Zip";
+    inherit (pkgs._7zz) version;
+    description = "Command-line utility for creating and extracting archives.";
+    url = "https://7-zip.org/";
+    visibility = "public";
+  }
+  {
     name = "kdbx";
     inherit (kdbx) version;
     description = "Terminal password manager for KDBX databases.";
