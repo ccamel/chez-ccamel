@@ -152,6 +152,13 @@
     visibility = "public";
   }
   {
+    name = "zip";
+    inherit (pkgs.zip) version;
+    description = "Command-line utility for creating ZIP archives.";
+    url = "https://infozip.sourceforge.net/";
+    visibility = "public";
+  }
+  {
     name = "kdbx";
     inherit (kdbx) version;
     description = "Terminal password manager for KDBX databases.";

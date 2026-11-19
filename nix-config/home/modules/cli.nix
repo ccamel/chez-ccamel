@@ -24,6 +24,7 @@
       tree
       file
       _7zz
+      zip
       glow
       imagemagick
       exiftool
