@@ -2,6 +2,7 @@
   kdbx,
   lig,
   pkgs,
+  witr,
 }:
 [
   {
@@ -44,6 +45,13 @@
     inherit (pkgs.btop) version;
     description = "Resource monitor for the terminal.";
     url = "https://github.com/aristocratos/btop";
+    visibility = "public";
+  }
+  {
+    name = "witr";
+    inherit (witr) version;
+    description = "Trace processes and ports back to what started them.";
+    url = "https://github.com/pranshuparmar/witr";
     visibility = "public";
   }
   {

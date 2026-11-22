@@ -99,7 +99,7 @@
             apm
             agtx
             ;
-          inherit (codexPkgs) codex ollama;
+          inherit (codexPkgs) codex ollama witr;
           antigravityCli = codexPkgs.antigravity-cli;
           githubCopilotCli = codexPkgs.github-copilot-cli;
           huggingFaceCli = codexPkgs.python3Packages.huggingface-hub;

@@ -60,6 +60,7 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [ripgrep v15.1.0](https://github.com/BurntSushi/ripgrep) | Fast recursive text search. |
 | [Starship v1.24.2](https://starship.rs/) | Cross-shell prompt. |
 | [Tig v2.6.0](https://jonas.github.io/tig/) | Text-mode interface for Git. |
+| [witr v0.3.4](https://github.com/pranshuparmar/witr) | Trace processes and ports back to what started them. |
 | [yq v4.50.1](https://github.com/mikefarah/yq) | Portable command-line YAML processor. |
 | [zip v3.0](https://infozip.sourceforge.net/) | Command-line utility for creating ZIP archives. |
 | [zoxide v0.9.9](https://github.com/ajeetdsouza/zoxide) | Smarter directory navigation. |

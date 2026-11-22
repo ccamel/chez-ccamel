@@ -43,6 +43,7 @@
       btop
       dust
       procs
+      inputs.nixpkgs-codex.legacyPackages.${pkgs.stdenv.hostPlatform.system}.witr
       which
       just
       lazydocker
