@@ -79,36 +79,36 @@ The curated plugins behind my opinionated [Neovim](https://neovim.io/) setup, bu
 | bufferline.nvim | main | `655133c` |
 | catppuccin | main | `edefef7` |
 | conform.nvim | master | `016802d` |
-| copilot.lua | master | `3547efb` |
+| copilot.lua | master | `d1570dd` |
 | diffview.nvim | main | `4516612` |
 | flash.nvim | main | `5f0f270` |
 | focal.nvim | main | `25c946b` |
 | friendly-snippets | main | `7a1c9f7` |
 | git-conflict.nvim | main | `4bbfdd9` |
-| gitsigns.nvim | main | `dc7698f` |
+| gitsigns.nvim | main | `c0862d3` |
 | grug-far.nvim | main | `91b7e58` |
 | image.nvim | master | `365e2ac` |
 | lazy.nvim | main | `85c7ff3` |
 | lazydev.nvim | main | `ff2cbcb` |
 | LazyVim | main | `0fa4a84` |
 | lualine.nvim | master | `221ce6b` |
-| mason-lspconfig.nvim | main | `97ccf96` |
+| mason-lspconfig.nvim | main | `761d376` |
 | mason.nvim | main | `2a6940a` |
-| mini.ai | main | `c2e6e88` |
-| mini.icons | main | `fc90b39` |
-| mini.pairs | main | `eea81af` |
-| neogit | master | `aa99b44` |
+| mini.ai | main | `813d10a` |
+| mini.icons | main | `5d58117` |
+| mini.pairs | main | `e332261` |
+| neogit | master | `17929b7` |
 | noice.nvim | main | `7bfd942` |
 | nui.nvim | main | `10fc361` |
-| nvim-lint | master | `52107ce` |
-| nvim-lspconfig | master | `6e72b89` |
+| nvim-lint | master | `6bf29b9` |
+| nvim-lspconfig | master | `7d22e67` |
 | nvim-treesitter | main | `7caec27` |
 | nvim-treesitter-textobjects | main | `5c7b026` |
 | nvim-ts-autotag | main | `d7220b5` |
 | onedark.nvim | master | `df4792a` |
 | persistence.nvim | main | `b20b2a7` |
 | plenary.nvim | master | `74b06c6` |
-| render-markdown.nvim | main | `8801162` |
+| render-markdown.nvim | main | `a67f826` |
 | snacks.nvim | main | `882c996` |
 | todo-comments.nvim | main | `31e3c38` |
 | tokyonight.nvim | main | `cdc07ac` |
@@ -144,9 +144,9 @@ The interchangeable specialist CLIs run within the wider workflow.
 
 | Component | Role |
 | --- | --- |
-| [Antigravity CLI v1.5.6](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
+| [Antigravity CLI v1.5.13](https://antigravity.google/product/antigravity-cli) | Google's terminal-native agentic coding CLI. |
 | [Claude Code v2.1.140](https://docs.anthropic.com/en/docs/claude-code/overview) | Anthropic's agentic coding CLI. |
-| [Codex v0.169.0](https://openai.com/codex/) | OpenAI coding agent. |
+| [Codex v0.171.0](https://openai.com/codex/) | OpenAI coding agent. |
 | [GitHub Copilot CLI v1.0.108](https://github.com/github/copilot-cli) | GitHub Copilot coding agent. |
 
 #### Extensions and integrations
@@ -176,9 +176,9 @@ Tools for coordination, context, inspection, and efficient terminal output.
 | [Herd](https://gist.github.com/ccamel/46a021372c326f31fdb3b5a55b238214) | Coordinate multiple AI coding agents. |
 | [Hugging Face CLI v2.4.0](https://huggingface.co/docs/huggingface_hub/guides/cli) | Manage Hugging Face Hub models, datasets, Spaces, authentication, and downloads. |
 | [Livediff v3.4.0](https://github.com/SoCkEt7/Livediff) | Watch file diffs live in the terminal. |
-| [Ollama v0.40.16](https://ollama.com/) | Run local large language models. |
-| [QMD v2.8.3](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
-| [rtk v1.2.0](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
+| [Ollama v0.40.17](https://ollama.com/) | Run local large language models. |
+| [QMD v2.9.0](https://github.com/tobi/qmd) | On-device search engine for markdown notes, meeting transcripts, and knowledge bases. |
+| [rtk v1.2.1](https://github.com/rtk-ai/rtk) | Command-output optimizer. |
 <!-- END_GENERATED_AGENTIC -->
 
 ### DevOps
