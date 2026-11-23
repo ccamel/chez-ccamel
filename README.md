@@ -136,7 +136,7 @@ The control plane for agent sessions, tool access, configuration, and observable
 | --- | --- |
 | [agtx v1.0.6](https://github.com/fynnfluegge/agtx) | Terminal-native development environment for coding agents. |
 | [HerdR v0.9.5](https://github.com/ogulcancelik/herdr) | Terminal-native multiplexer for AI coding agents. |
-| [OMP v19.0.1](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
+| [OMP v19.1.0](https://github.com/can1357/oh-my-pi) | Terminal-first AI coding agent. |
 
 #### Coding agents
 
@@ -155,12 +155,12 @@ Harness capabilities installed declaratively with the toolbox.
 
 | Component | Role |
 | --- | --- |
-| [HerdR Annotate v0.10.0-unstable-2026-11-15](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
+| [HerdR Annotate v0.10.0-unstable-2026-11-22](https://github.com/plannotator/herdr-annotate) | Annotate terminal selections and copy them as agent context. |
 | [HerdR Bar v0.14.0](https://github.com/jeffarese/herdr-bar) | Cmd+K command bar, agent icons, fuzzy search, and automatic tab titles for HerdR. |
 | [HerdR Radar v1.5.2](https://github.com/hhdebb/herdr-radar) | Vendor logos, agent status, and workspace grouping in the HerdR sidebar. |
 | [HerdR Remote v0.8.1](https://github.com/dcolinmorgan/herdr-remote) | Monitor and approve HerdR agents from a phone, menu bar, or Telegram. |
 | [HerdR Shell Progress v0.5.2](https://github.com/bayoudhi/herdr-shell-progress) | Show live progress for slow shell commands in the HerdR sidebar. |
-| [OMP Undo/Redo v1.8.0](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
+| [OMP Undo/Redo v1.8.1](https://github.com/Baylar55/omp-undo-redo) | Session-navigation history controls for OMP. |
 | [Pi Markdown Export v0.1.1](https://github.com/wassname/pi-md-export) | Export Pi sessions to Markdown files or the system clipboard. |
 | [Ponytail v5.3.3](https://github.com/DietrichGebert/ponytail) | Opinionated minimalism modes and skills for OMP. |
 | [shepherdr v0.1.0-unstable-2026-07-24](https://github.com/afogel/shepherdr) | Herdr plugin for auditable delegated coding agents. |
