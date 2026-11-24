@@ -62,11 +62,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795433530,
-        "narHash": "sha256-V6ocK87IBqt1pjC1qOpBZUdcVgwdutII8ixIfB1IgdY=",
+        "lastModified": 1795446094,
+        "narHash": "sha256-sywbtqpx2VdZF3YfRKxLlZIFVJ3uFbpi3J8HAeOjCo4=",
         "owner": "KevenGoncalves",
         "repo": "lig",
-        "rev": "7b8a4c8a59b849512f32d586531bc1be5146c600",
+        "rev": "194f51ed46002b3fefaec90979d7ce39e8556cea",
         "type": "github"
       },
       "original": {

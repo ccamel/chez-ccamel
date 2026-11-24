@@ -52,7 +52,7 @@ The terminal is home. These are the essential tools that define my everyday envi
 | [jq v1.8.1](https://jqlang.org/) | Command-line JSON processor. |
 | [kdbx v0.13.0](https://github.com/daxartio/kdbx) | Terminal password manager for KDBX databases. |
 | [lazydocker v0.24.2](https://github.com/jesseduffield/lazydocker) | Terminal UI for Docker. |
-| [Lig v1.4.0](https://github.com/KevenGoncalves/lig) | IDE-style autocomplete for the terminal. |
+| [Lig v1.4.1](https://github.com/KevenGoncalves/lig) | IDE-style autocomplete for the terminal. |
 | [Neovim v0.11.7](https://neovim.io/) | Editor built around LazyVim. |
 | [poppler-utils v25.10.0](https://poppler.freedesktop.org/) | Command-line utilities for PDF inspection and extraction. |
 | [Python v3.13.12](https://www.python.org/) | General-purpose programming language. |
