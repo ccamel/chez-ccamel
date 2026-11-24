@@ -56,7 +56,6 @@ in
     (import ./home/modules/git.readme.nix { inherit pkgs; })
     (import ./home/modules/neovim/readme.nix { inherit pkgs; })
     (import ./home/modules/zsh/readme.nix { inherit pkgs; })
-    (import ./home/modules/atuin/readme.nix { inherit pkgs; })
     (import ./home/modules/starship/readme.nix { inherit pkgs; })
     (import ./home/modules/ghostty/readme.nix { inherit pkgs; })
   ];

@@ -18,11 +18,6 @@ take() {
 bindkey '^[[1;5D' backward-word
 bindkey '^[[1;5C' forward-word
 
-zvm_atuin_bindings() {
-  bindkey -M viins '^R' atuin-search-viins
-  bindkey -M vicmd '^R' atuin-search-vicmd
-}
-zvm_after_init_commands+=(zvm_atuin_bindings)
 if [[ -r "${XDG_DATA_HOME:-$HOME/.local/share}/herdr/plugins/herdr-shell-progress/shell/init.zsh" ]]; then
   source "${XDG_DATA_HOME:-$HOME/.local/share}/herdr/plugins/herdr-shell-progress/shell/init.zsh"
 fi

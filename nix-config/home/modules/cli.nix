@@ -85,7 +85,6 @@
       enable = true;
       enableZshIntegration = true;
       settings = {
-        behavior.history = false;
         ui = {
           theme = "gruvbox";
           border = "rounded";
