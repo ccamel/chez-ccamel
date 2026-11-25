@@ -6,15 +6,15 @@
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "herdr-annotate";
   # managed by update-resource
-  version = "0.10.0-unstable-2026-11-22";
+  version = "0.11.7-unstable-2026-11-24";
 
   src = fetchFromGitHub {
     owner = "plannotator";
     repo = "herdr-annotate";
     # managed by update-resource
-    rev = "cb0a8e6225e33f4662096cb450e2c1e18b244b07";
+    rev = "58e819b0ba4ce7dcf230ccb1335e1474ec055d79";
     # managed by update-resource
-    hash = "sha256-ZwycScmORsRaq3WpSptK5oz3/9a3sR691MLRGNoIXvA=";
+    hash = "sha256-+PxsMHLWQ0/WUtq0CHfpkf8bvbd55MPnqIEKwg+328Y=";
   };
 
   cargoRoot = "rust";
