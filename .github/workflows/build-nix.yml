@@ -32,12 +32,12 @@ jobs:
         include:
           - runner: ubuntu-22.04
             name: forge
-            target: .#nixosConfigurations.forge.config.system.build.toplevel
+            timeout: 10
           - runner: macos-15
             name: tinymac
-            target: .#darwinConfigurations.tinymac.config.system.build.toplevel
+            timeout: 12
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 10
+    timeout-minutes: ${{ matrix.timeout }}
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -47,10 +47,7 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31
 
+      # Each native checks.<system> output is the host toplevel, so this also builds it.
       - name: Check ${{ matrix.name }} flake
         working-directory: nix-config
         run: nix flake check .
-
-      - name: Build ${{ matrix.name }} system
-        working-directory: nix-config
-        run: nix build ${{ matrix.target }}
