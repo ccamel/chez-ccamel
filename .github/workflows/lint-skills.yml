@@ -7,11 +7,17 @@ on:
     paths:
       - '.github/workflows/lint-skills.yml'
       - '.agents/skills/**'
+      - 'justfile'
+      - 'nix-config/flake.nix'
+      - 'nix-config/flake.lock'
   pull_request:
     branches: [main]
     paths:
       - '.github/workflows/lint-skills.yml'
       - '.agents/skills/**'
+      - 'justfile'
+      - 'nix-config/flake.nix'
+      - 'nix-config/flake.lock'
 
 permissions:
   contents: read
@@ -29,24 +35,8 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install uv
-        uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d # v10.4.0
-        with:
-          uv-version: '0.12.9'
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@3138316df39ed29be04236d7ffc686fa525866aa # v23
 
-      - name: Set up Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v4
-        with:
-          node-version: '24.20.0'
-
-      - name: Install skills-ref tool
-        run: uv tool install git+https://github.com/agentskills/agentskills.git@69ef37e9424c0a7ea9dd2293b559e43ec8176379#subdirectory=skills-ref
-
-      - name: Validate skills with skills-ref
-        run: |
-          for dir in .agents/skills/*/; do
-            skills-ref validate "$dir"
-          done
-
-      - name: Validate skills with skill-check
-        run: npx skill-check@1.2.0 check --no-security-scan .agents/skills
+      - name: Validate skills
+        run: nix run --inputs-from ./nix-config nixpkgs#just -- check-skills

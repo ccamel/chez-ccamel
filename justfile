@@ -1,5 +1,8 @@
 set shell := ["bash", "-euo", "pipefail", "-c"]
 
+skills_ref := "69ef37e9424c0a7ea9dd2293b559e43ec8176379"
+skill_check := "1.2.0"
+
 # Show available recipes without changing the system.
 default:
     @just --list
@@ -48,6 +51,10 @@ check-lua:
 test-python:
     python3 -m unittest discover -s scripts/tests -v
 
+# Validate agent skills with the same tools as CI.
+check-skills:
+    nix shell --inputs-from ./nix-config nixpkgs#uv nixpkgs#nodejs_24 nixpkgs#python3 nixpkgs#git --command bash -euo pipefail -c 'for dir in .agents/skills/*/; do uvx --from "git+https://github.com/agentskills/agentskills.git@{{ skills_ref }}#subdirectory=skills-ref" skills-ref validate "$dir"; done; npx --yes skill-check@{{ skill_check }} check --no-security-scan .agents/skills'
+
 # Generate README tool tables from curated Nix metadata.
 generate-readme:
     python3 scripts/generate-readme.py
@@ -62,7 +69,7 @@ check-secrets:
     cd nix-config && sops --decrypt secrets/git-corp.yaml > /dev/null
 
 # Run repository checks; secret validation is explicit via check-secrets.
-check: check-fmt check-lua test-python check-readme
+check: check-fmt check-lua test-python check-readme check-skills
     cd nix-config && nix flake check --all-systems . && nix run --inputs-from . nixpkgs#statix -- check .
 
 # Format tracked Nix files.

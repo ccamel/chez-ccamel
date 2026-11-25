@@ -26,12 +26,10 @@ def marked(*assignments: tuple[str, str]) -> str:
     return "".join(f'{UPDATER.MARKER}\n{name} = "{value}";\n' for name, value in assignments)
 
 
-def skills_workflow() -> str:
-    return """          uv-version: '0.1.0'
-          node-version: '24.0.0'
-        run: uv tool install git+https://github.com/agentskills/agentskills.git@aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa#subdirectory=skills-ref
-        run: npx skill-check@1.0.0 check --no-security-scan .agents/skills
-"""
+def skills_justfile() -> str:
+    return f'''skills_ref := "{'b' * 40}"
+skill_check := "1.0.0"
+'''
 
 
 class UpdateResourceTest(unittest.TestCase):
@@ -149,35 +147,30 @@ class UpdateResourceTest(unittest.TestCase):
             UPDATER.update_qmd_hash(marked(("aarch64-darwin", HASH), ("x86_64-linux", HASH)), "x86_64-linux", HASH)
 
     def test_skills_lint_tools_collects_and_replaces_all_pins(self) -> None:
-        resource = UPDATER.SkillsLintToolsResource(Path("lint-skills.yml"))
-        node_index = [{"version": "v24.2.1"}, {"version": "v24.10.0"}, {"version": "v25.0.0"}, {"version": "v24.11.0-rc.1"}]
-        with patch.object(UPDATER, "latest_release_tag", return_value="0.9.0"), patch.object(UPDATER, "github_commit", return_value=(REVISION, "2026-01-01")), patch.object(UPDATER, "fetch_json", side_effect=(node_index, {"version": "2.3.4"})):
+        resource = UPDATER.SkillsLintToolsResource(Path("justfile"))
+        with patch.object(UPDATER, "github_commit", return_value=(REVISION, "2026-01-01")), patch.object(UPDATER, "fetch_json", return_value={"version": "2.3.4"}):
             update = UPDATER.skills_lint_tools_update(resource)
-        updated = UPDATER.update_skills_lint_tools(skills_workflow(), update.values)
-        self.assertIn("uv-version: '0.9.0'", updated)
-        self.assertIn("node-version: '24.10.0'", updated)
-        self.assertIn(f"agentskills.git@{REVISION}", updated)
-        self.assertIn("skill-check@2.3.4", updated)
+        updated = UPDATER.update_skills_lint_tools(skills_justfile(), update.values)
+        self.assertIn(f'skills_ref := "{REVISION}"', updated)
+        self.assertIn('skill_check := "2.3.4"', updated)
 
     def test_skills_lint_tools_rejects_malformed_sources_and_pin_counts(self) -> None:
-        resource = UPDATER.SkillsLintToolsResource(Path("lint-skills.yml"))
-        with patch.object(UPDATER, "latest_release_tag", return_value="0.9.0"), patch.object(UPDATER, "fetch_json", return_value=[]):
-            with self.assertRaisesRegex(UPDATER.UpdateError, "no stable v24"):
+        resource = UPDATER.SkillsLintToolsResource(Path("justfile"))
+        with patch.object(UPDATER, "github_commit", return_value=(REVISION, "2026-01-01")), patch.object(UPDATER, "fetch_json", return_value={}):
+            with self.assertRaisesRegex(UPDATER.UpdateError, "must include a string version"):
                 UPDATER.skills_lint_tools_update(resource)
-        values = (("uv-version", "0.9.0"), ("node-version", "24.10.0"), ("skills-ref", REVISION), ("skill-check", "2.3.4"))
+        values = (("skills-ref", REVISION), ("skill-check", "2.3.4"))
         pins = {
-            "uv-version": "          uv-version: '0.1.0'\n",
-            "node-version": "          node-version: '24.0.0'\n",
-            "skills-ref": f"        run: uv tool install git+https://github.com/agentskills/agentskills.git@{REVISION}#subdirectory=skills-ref\n",
-            "skill-check": "        run: npx skill-check@1.0.0 check --no-security-scan .agents/skills\n",
+            "skills-ref": f'skills_ref := "{"b" * 40}"\n',
+            "skill-check": 'skill_check := "1.0.0"\n',
         }
         for name, pin in pins.items():
             with self.subTest(name=name, count=0):
                 with self.assertRaisesRegex(UPDATER.UpdateError, f"{name} pin, found 0"):
-                    UPDATER.update_skills_lint_tools(skills_workflow().replace(pin, ""), values)
+                    UPDATER.update_skills_lint_tools(skills_justfile().replace(pin, ""), values)
             with self.subTest(name=name, count=2):
                 with self.assertRaisesRegex(UPDATER.UpdateError, f"{name} pin, found 2"):
-                    UPDATER.update_skills_lint_tools(skills_workflow() + pin, values)
+                    UPDATER.update_skills_lint_tools(skills_justfile() + pin, values)
 
     def test_markers_require_exact_count_and_order(self) -> None:
         with self.assertRaisesRegex(UPDATER.UpdateError, "exactly 2"):

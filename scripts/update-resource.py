@@ -161,7 +161,7 @@ RESOURCES: Mapping[str, Resource] = MappingProxyType(
             branch_manifest="Cargo.toml",
         ),
         "qmd": QmdResource(file=Path("nix-config/packages/qmd.nix")),
-        "skills-lint-tools": SkillsLintToolsResource(file=Path(".github/workflows/lint-skills.yml")),
+        "skills-lint-tools": SkillsLintToolsResource(file=Path("justfile")),
     }
 )
 
@@ -528,43 +528,28 @@ def replace_once(contents: str, pattern: str, replacement: str, description: str
 
 
 def skills_lint_tools_update(_resource: SkillsLintToolsResource) -> ResourceUpdate:
-    uv_tag = latest_release_tag("astral-sh/uv")
-    node_payload = fetch_json("https://nodejs.org/dist/index.json", "the Node.js release index")
-    if not isinstance(node_payload, list):
-        raise UpdateError("Node.js release index has an invalid response")
-    node_versions = []
-    for entry in node_payload:
-        version = entry.get("version") if isinstance(entry, dict) else None
-        match = re.fullmatch(r"v24\.(\d+)\.(\d+)", version) if isinstance(version, str) else None
-        if match:
-            node_versions.append(((int(match.group(1)), int(match.group(2))), version.removeprefix("v")))
-    if not node_versions:
-        raise UpdateError("Node.js release index has no stable v24 release")
-    node_version = max(node_versions)[1]
     skills_revision, _ = github_commit("agentskills/agentskills", "main")
     skill_payload = fetch_json("https://registry.npmjs.org/skill-check/latest", "the latest npm metadata for skill-check")
     skill_version = skill_payload.get("version") if isinstance(skill_payload, dict) else None
     if not isinstance(skill_version, str) or not skill_version:
         raise UpdateError("latest npm metadata for skill-check must include a string version")
     return ResourceUpdate(
-        values=(("uv-version", uv_tag.removeprefix("v")), ("node-version", node_version), ("skills-ref", skills_revision), ("skill-check", skill_version)),
-        output=(f"uv: {uv_tag}", f"Node.js: {node_version}", f"skills-ref: {skills_revision}", f"skill-check: {skill_version}"),
+        values=(("skills-ref", skills_revision), ("skill-check", skill_version)),
+        output=(f"skills-ref: {skills_revision}", f"skill-check: {skill_version}"),
     )
 
 
 def update_skills_lint_tools(contents: str, values: tuple[tuple[str, str], ...]) -> str:
     pins = dict(values)
-    if set(pins) != {"uv-version", "node-version", "skills-ref", "skill-check"}:
+    if set(pins) != {"skills-ref", "skill-check"}:
         raise UpdateError("skills-lint-tools returned incomplete pin metadata")
-    contents = replace_once(contents, r"^          uv-version: '[^']+'$", f"          uv-version: '{pins['uv-version']}'", "uv-version")
-    contents = replace_once(contents, r"^          node-version: '[^']+'$", f"          node-version: '{pins['node-version']}'", "node-version")
     contents = replace_once(
         contents,
-        r"^        run: uv tool install git\+https://github\.com/agentskills/agentskills\.git@[0-9a-f]{40}#subdirectory=skills-ref$",
-        f"        run: uv tool install git+https://github.com/agentskills/agentskills.git@{pins['skills-ref']}#subdirectory=skills-ref",
+        r'^skills_ref := "[0-9a-f]{40}"$',
+        f'skills_ref := "{pins["skills-ref"]}"',
         "skills-ref",
     )
-    return replace_once(contents, r"^        run: npx skill-check@[0-9][^ ]* check --no-security-scan \.agents/skills$", f"        run: npx skill-check@{pins['skill-check']} check --no-security-scan .agents/skills", "skill-check")
+    return replace_once(contents, r'^skill_check := "[0-9][^"]*"$', f'skill_check := "{pins["skill-check"]}"', "skill-check")
 
 
 def collect_update(resource: Resource) -> ResourceUpdate:
