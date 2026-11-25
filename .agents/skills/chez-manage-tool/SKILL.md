@@ -32,7 +32,7 @@ Core public tools require an exact `{ name, description, url, visibility }` entr
 
 User-facing toolbox entries carry the same `documentation` attribute. Support-only packages may omit it, as `terraform-ls` and `tflint` do.
 
-Never hand-edit README rows between generated markers. Run `just generate-readme`, then verify with `just check-readme`.
+Do not hand-edit `README.md` unless explicitly requested. Generate tool tables with `just generate-readme`, then verify with `just check-readme`.
 
 ## Verification
 
