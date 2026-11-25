@@ -38,6 +38,7 @@ in
     "${herdrRelease}"
   ];
   symbolPreset = "nerd";
+  statusLine.preset = "nerd";
   theme.dark = "titanium";
   setupVersion = 2;
   modelRoles = {
